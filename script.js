@@ -1,55 +1,27 @@
 
-// Begrüssung in der Konsole
+// ==========================================
+// AETHER - MAIN JAVASCRIPT
+// ==========================================
 
-console.log("Willkommen auf meiner Website!");
 
-// Aktuelles Jahr im Footer anzeigen
-
-const footer = document.querySelector("footer p");
-
-footer.textContent =
-    `© ${new Date().getFullYear()} Tomás. Alle Rechte vorbehalten.`;
-
-// PROJECT ANIMATION
-
-const projectCards = document.querySelectorAll(".project-card");
-
-const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach((entry) => {
-
-        if (entry.isIntersecting) {
-
-            entry.target.classList.add("visible");
-
-            observer.unobserve(entry.target);
-        }
-
-    });
-
-}, {
-    threshold: 0.2
-});
-
-projectCards.forEach((card) => {
-    observer.observe(card);// BEGRÜSSUNG IN DER KONSOLE
+// WELCOME MESSAGE
 
 console.log("Willkommen auf meiner Website!");
 
 
-// AKTUELLES JAHR IM FOOTER
+// FOOTER YEAR
 
 const footer = document.querySelector("footer p");
 
 if (footer) {
-
     footer.textContent =
         `© ${new Date().getFullYear()} Tomás. Alle Rechte vorbehalten.`;
-
 }
 
 
+// ==========================================
 // PROJECT ANIMATION
+// ==========================================
 
 const projectCards = document.querySelectorAll(".project-card");
 
@@ -60,11 +32,8 @@ if ("IntersectionObserver" in window) {
         entries.forEach((entry) => {
 
             if (entry.isIntersecting) {
-
                 entry.target.classList.add("visible");
-
                 observer.unobserve(entry.target);
-
             }
 
         });
@@ -73,25 +42,22 @@ if ("IntersectionObserver" in window) {
         threshold: 0.2
     });
 
-
     projectCards.forEach((card) => {
-
         observer.observe(card);
-
     });
 
 } else {
 
     projectCards.forEach((card) => {
-
         card.classList.add("visible");
-
     });
 
 }
 
 
+// ==========================================
 // DYNAMIC TEXT
+// ==========================================
 
 const words = [
     "Informatik.",
@@ -122,17 +88,14 @@ if (dynamicText) {
 
     }, 2500);
 
-} else {
-
-    console.error("Element dynamic-text wurde nicht gefunden!");
-
 }
 
 
-// CONTACT FORM
+// ==========================================
+// CONTACT FORM - EMAILJS
+// ==========================================
 
 const contactForm = document.getElementById("contact-form");
-
 const formStatus = document.getElementById("form-status");
 
 if (contactForm && formStatus) {
@@ -140,32 +103,21 @@ if (contactForm && formStatus) {
     contactForm.addEventListener("submit", (event) => {
 
         event.preventDefault();
+
         const websiteField = document.getElementById("website");
 
-if (websiteField && websiteField.value !== "") {
-    return;
-}
+        // Honeypot protection
+        if (websiteField && websiteField.value !== "") {
+            return;
+        }
 
-        formStatus.textContent =
-            "Das Formular ist noch nicht mit einem E-Mail-Dienst verbunden.";
+        if (typeof emailjs === "undefined") {
 
-    });
+            formStatus.textContent =
+                "E-Mail-Dienst momentan nicht verfügbar.";
 
-}
-});// CONTACT FORM - EMAILJS
-
-emailjs.init({
-    publicKey: "3qUOXSf77BxsqjaLI"
-});
-
-const contactForm = document.getElementById("contact-form");
-const formStatus = document.getElementById("form-status");
-
-if (contactForm && formStatus) {
-
-    contactForm.addEventListener("submit", (event) => {
-
-        event.preventDefault();
+            return;
+        }
 
         formStatus.textContent = "Nachricht wird gesendet...";
 
@@ -192,50 +144,134 @@ if (contactForm && formStatus) {
 
         .catch((error) => {
 
-    console.error("EmailJS Fehler:", error);
-    console.log("Status:", error.status);
-    console.log("Text:", error.text);
+            console.error("EmailJS Fehler:", error);
 
-    formStatus.textContent =
-        "Fehler beim Senden. Bitte versuche es erneut.";
+            formStatus.textContent =
+                "Fehler beim Senden. Bitte versuche es erneut.";
 
-});
+        });
 
     });
 
 }
 
-// DYNAMIC TEXT
 
-const words = [
-    "Informatik.",
-    "Technologie.",
-    "Programmierung.",
-    "Kreativität."
-];
+// ==========================================
+// COOKIE CONSENT - GOOGLE ANALYTICS
+// ==========================================
 
-const dynamicText = document.getElementById("dynamic-text");
+const cookieBanner = document.getElementById("cookie-banner");
 
-let currentIndex = 0;
+const acceptCookies = document.getElementById("accept-cookies");
+const rejectCookies = document.getElementById("reject-cookies");
 
-if (dynamicText) {
+const GA_MEASUREMENT_ID = "G-02JWNYGVFS";
 
-    setInterval(() => {
 
-        dynamicText.classList.add("fade");
+// Load Google Analytics only after consent
 
-        setTimeout(() => {
+function activateGoogleAnalytics() {
 
-            currentIndex = (currentIndex + 1) % words.length;
+    if (window.googleAnalyticsLoaded) {
+        return;
+    }
 
-            dynamicText.textContent = words[currentIndex];
+    window.googleAnalyticsLoaded = true;
 
-            dynamicText.classList.remove("fade");
+    window.dataLayer = window.dataLayer || [];
 
-        }, 400);
+    function gtag() {
+        window.dataLayer.push(arguments);
+    }
 
-    }, 2500);
+    window.gtag = gtag;
+
+    // Set consent before configuring Analytics
+    gtag("consent", "default", {
+        analytics_storage: "denied"
+    });
+
+    gtag("consent", "update", {
+        analytics_storage: "granted"
+    });
+
+    gtag("js", new Date());
+
+    gtag("config", GA_MEASUREMENT_ID);
+
+    // Load Google tag
+    const script = document.createElement("script");
+
+    script.async = true;
+
+    script.src =
+        "https://www.googletagmanager.com/gtag/js?id=" +
+        GA_MEASUREMENT_ID;
+
+    document.head.appendChild(script);
+
+}
+
+
+// Hide cookie banner
+
+function hideCookieBanner() {
+
+    if (cookieBanner) {
+        cookieBanner.hidden = true;
+    }
+
+}
+
+
+// Show banner if no choice has been saved
+
+const savedConsent = localStorage.getItem("aether_cookie_consent");
+
+if (savedConsent === "accepted") {
+
+    activateGoogleAnalytics();
+
+} else if (savedConsent === "rejected") {
+
+    // Analytics remains disabled
 
 } else {
-    console.error("Element dynamic-text wurde nicht gefunden!");
+
+    if (cookieBanner) {
+        cookieBanner.hidden = false;
+    }
+
+}
+
+
+// ACCEPT COOKIES
+
+if (acceptCookies) {
+
+    acceptCookies.addEventListener("click", () => {
+
+        localStorage.setItem("aether_cookie_consent", "accepted");
+
+        activateGoogleAnalytics();
+
+        hideCookieBanner();
+
+    });
+
+}
+
+
+// REJECT COOKIES
+
+if (rejectCookies) {
+
+    rejectCookies.addEventListener("click", () => {
+
+        localStorage.setItem("aether_cookie_consent", "rejected");
+
+        hideCookieBanner();
+
+    });
+
 }
