@@ -5,3 +5,4 @@ tomas.github.io/
 ├── script.js
 │
 └── images/
+└── preview.png
