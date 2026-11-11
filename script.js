@@ -105,6 +105,7 @@ const contactForm = document.getElementById("contact-form");
 const formStatus = document.getElementById("form-status");
 console.log("Formulario:", contactForm);
 console.log("Estado:", formStatus);
+console.log("JavaScript funciona");
 if (contactForm && formStatus) {
 
     contactForm.addEventListener("submit", (event) => {
