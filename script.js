@@ -94,9 +94,13 @@ if (dynamicText) {
 // ==========================================
 // CONTACT FORM - EMAILJS
 // ==========================================
-emailjs.init({
-    publicKey: "3qUOXSf77BxsqjaLI"
-});
+if (typeof emailjs !== "undefined") {
+    emailjs.init({
+        publicKey: "3qUOXSf77BxsqjaLI"
+    });
+} else {
+    console.error("EmailJS no se ha cargado.");
+}
 const contactForm = document.getElementById("contact-form");
 const formStatus = document.getElementById("form-status");
 
