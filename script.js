@@ -9,7 +9,9 @@
 console.log("Willkommen auf meiner Website!");
 
 
+// ==========================================
 // FOOTER YEAR
+// ==========================================
 
 const footer = document.querySelector("footer p");
 
@@ -94,74 +96,136 @@ if (dynamicText) {
 // ==========================================
 // CONTACT FORM - EMAILJS
 // ==========================================
+
+// Initialize EmailJS
+
 if (typeof emailjs !== "undefined") {
+
     emailjs.init({
         publicKey: "3qUOXSf77BxsqjaLI"
     });
+
 } else {
-    console.error("EmailJS no se ha cargado.");
+
+    console.error("EmailJS konnte nicht geladen werden.");
+
 }
-const contactForm = document.getElementById("contact-form");
-const formStatus = document.getElementById("form-status");
-console.log("Formulario:", contactForm);
-console.log("Estado:", formStatus);
-console.log("JavaScript funciona");
-if (contactForm && formStatus) {
 
-    contactForm.addEventListener("submit", (event) => {
 
-        event.preventDefault();
+// Listen for form submissions in capture phase
 
-        const websiteField = document.getElementById("website");
+document.addEventListener("submit", function (event) {
 
-        // Honeypot protection
-        if (websiteField && websiteField.value !== "") {
-            return;
-        }
+    const form = event.target;
 
-        if (typeof emailjs === "undefined") {
+    if (!form || form.id !== "contact-form") {
+        return;
+    }
 
+    // Prevent page reload immediately
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    console.log("AETHER: Contact form submitted.");
+
+    const formStatus = document.getElementById("form-status");
+
+    const websiteField = document.getElementById("website");
+
+    // Honeypot protection
+
+    if (websiteField && websiteField.value !== "") {
+        return;
+    }
+
+    // Check EmailJS
+
+    if (typeof emailjs === "undefined") {
+
+        if (formStatus) {
             formStatus.textContent =
                 "E-Mail-Dienst momentan nicht verfügbar.";
-
-            return;
         }
 
+        return;
+    }
+
+    // Get form fields
+
+    const name = form.querySelector('[name="name"]');
+    const email = form.querySelector('[name="email"]');
+    const message = form.querySelector('[name="message"]');
+
+    if (!name || !email || !message) {
+
+        console.error("AETHER: Contact form fields are missing.");
+
+        if (formStatus) {
+            formStatus.textContent =
+                "Formularfehler. Bitte versuche es erneut.";
+        }
+
+        return;
+    }
+
+    const submitButton = form.querySelector('[type="submit"]');
+
+    if (submitButton) {
+        submitButton.disabled = true;
+    }
+
+    if (formStatus) {
         formStatus.textContent = "Nachricht wird gesendet...";
+    }
 
-        const templateParams = {
-            name: document.getElementById("name").value,
-            email: document.getElementById("email").value,
-            message: document.getElementById("message").value
-        };
+    const templateParams = {
+        name: name.value,
+        email: email.value,
+        message: message.value
+    };
 
-        emailjs.send(
-            "service_cbwu036",
-            "template_tvw5s13",
-            templateParams
-        )
+    // Send email
 
-        .then(() => {
+    emailjs.send(
+        "service_cbwu036",
+        "template_tvw5s13",
+        templateParams
+    )
 
+    .then(() => {
+
+        console.log("AETHER: Email sent successfully.");
+
+        if (formStatus) {
             formStatus.textContent =
                 "Nachricht erfolgreich gesendet!";
+        }
 
-            contactForm.reset();
+        form.reset();
 
-        })
+    })
 
-        .catch((error) => {
+    .catch((error) => {
 
-            console.error("EmailJS Fehler:", error);
+        console.error("AETHER EmailJS Fehler:", error);
 
+        if (formStatus) {
             formStatus.textContent =
                 "Fehler beim Senden. Bitte versuche es erneut.";
+        }
 
-        });
+    })
+
+    .finally(() => {
+
+        if (submitButton) {
+            submitButton.disabled = false;
+        }
 
     });
 
-}
+}, true);
 
 
 // ==========================================
@@ -171,12 +235,13 @@ if (contactForm && formStatus) {
 const cookieBanner = document.getElementById("cookie-banner");
 
 const acceptCookies = document.getElementById("accept-cookies");
+
 const rejectCookies = document.getElementById("reject-cookies");
 
 const GA_MEASUREMENT_ID = "G-02JWNYGVFS";
 
 
-// Load Google Analytics only after consent
+// Load Google Analytics
 
 function activateGoogleAnalytics() {
 
@@ -194,7 +259,6 @@ function activateGoogleAnalytics() {
 
     window.gtag = gtag;
 
-    // Set consent before configuring Analytics
     gtag("consent", "default", {
         analytics_storage: "denied"
     });
@@ -207,7 +271,6 @@ function activateGoogleAnalytics() {
 
     gtag("config", GA_MEASUREMENT_ID);
 
-    // Load Google tag
     const script = document.createElement("script");
 
     script.async = true;
@@ -232,19 +295,28 @@ function hideCookieBanner() {
 }
 
 
-// Show banner if no choice has been saved
+// Read saved consent safely
 
-const savedConsent = localStorage.getItem("aether_cookie_consent");
+let savedConsent = null;
+
+try {
+
+    savedConsent = localStorage.getItem("aether_cookie_consent");
+
+} catch (error) {
+
+    console.error("Cookie storage unavailable:", error);
+
+}
+
+
+// Apply saved consent
 
 if (savedConsent === "accepted") {
 
     activateGoogleAnalytics();
 
-} else if (savedConsent === "rejected") {
-
-    // Analytics remains disabled
-
-} else {
+} else if (savedConsent !== "rejected") {
 
     if (cookieBanner) {
         cookieBanner.hidden = false;
@@ -253,13 +325,17 @@ if (savedConsent === "accepted") {
 }
 
 
-// ACCEPT COOKIES
+// Accept cookies
 
 if (acceptCookies) {
 
     acceptCookies.addEventListener("click", () => {
 
-        localStorage.setItem("aether_cookie_consent", "accepted");
+        try {
+            localStorage.setItem("aether_cookie_consent", "accepted");
+        } catch (error) {
+            console.error(error);
+        }
 
         activateGoogleAnalytics();
 
@@ -270,16 +346,25 @@ if (acceptCookies) {
 }
 
 
-// REJECT COOKIES
+// Reject cookies
 
 if (rejectCookies) {
 
     rejectCookies.addEventListener("click", () => {
 
-        localStorage.setItem("aether_cookie_consent", "rejected");
+        try {
+            localStorage.setItem("aether_cookie_consent", "rejected");
+        } catch (error) {
+            console.error(error);
+        }
 
         hideCookieBanner();
 
     });
 
 }
+
+
+// ==========================================
+// END OF AETHER JAVASCRIPT
+// ==========================================
