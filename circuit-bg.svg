@@ -1,99 +1,165 @@
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
   <defs>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
+    <linearGradient id="trace" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0750bb"/>
+      <stop offset=".5" stop-color="#35aaff"/>
+      <stop offset="1" stop-color="#0750bb"/>
+    </linearGradient>
+
+    <linearGradient id="chip" x2="0" y2="1">
+      <stop stop-color="#102746"/>
+      <stop offset="1" stop-color="#050d19"/>
+    </linearGradient>
+
+    <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
 
-    <linearGradient id="trace" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1264ff"/>
-      <stop offset="50%" stop-color="#54c5ff"/>
-      <stop offset="100%" stop-color="#1264ff"/>
-    </linearGradient>
+    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
   </defs>
 
-  <!-- Circuitos principales -->
+  <!-- Fondo de profundidad -->
+  <g fill="none" stroke="#1675d5" opacity=".12" stroke-width="1">
+    <path d="M0 80H300V160H420 M1920 90H1620V170H1500"/>
+    <path d="M0 1000H300V920H420 M1920 990H1620V910H1500"/>
+    <path d="M500 0V100H600V170 M1420 0V100H1320V170"/>
+    <path d="M500 1080V980H600V910 M1420 1080V980H1320V910"/>
+  </g>
+
+  <!-- Pistas principales -->
   <g fill="none" stroke="url(#trace)" stroke-width="2.5"
-     stroke-linecap="round" stroke-linejoin="round" opacity=".8">
+     stroke-linecap="round" stroke-linejoin="round" opacity=".65">
 
-    <path d="M0 100 H180 V180 H300 V260 H450 V340 H570"/>
-    <path d="M180 180 V100 H260 V40"/>
-    <path d="M300 260 H380 V210 H460"/>
-    <path d="M450 340 V420 H540 V470 H650"/>
+    <path id="p1" d="M0 150H180V230H340V310H510V390H650"/>
+    <path id="p2" d="M0 240H100V300H230V380H390"/>
+    <path id="p3" d="M0 420H180V480H310V550H470"/>
+    <path id="p4" d="M0 850H170V770H330V690H500V620H650"/>
 
-    <path d="M1600 100 H1420 V180 H1300 V260 H1150 V340 H1030"/>
-    <path d="M1420 180 V100 H1340 V40"/>
-    <path d="M1300 260 H1220 V210 H1140"/>
-    <path d="M1150 340 V420 H1060 V470 H950"/>
+    <path id="p5" d="M1920 150H1740V230H1580V310H1410V390H1270"/>
+    <path id="p6" d="M1920 240H1820V300H1690V380H1530"/>
+    <path id="p7" d="M1920 420H1740V480H1610V550H1450"/>
+    <path id="p8" d="M1920 850H1750V770H1590V690H1420V620H1270"/>
 
-    <path d="M0 760 H170 V680 H300 V600 H450 V530 H570"/>
-    <path d="M170 680 V780 H260 V850"/>
-    <path d="M300 600 H380 V650 H460"/>
-    <path d="M450 530 V460 H540 V420 H650"/>
+    <path d="M300 0V130H390V210H500V280"/>
+    <path d="M1620 0V130H1530V210H1420V280"/>
+    <path d="M300 1080V950H390V870H500V800"/>
+    <path d="M1620 1080V950H1530V870H1420V800"/>
 
-    <path d="M1600 760 H1430 V680 H1300 V600 H1150 V530 H1030"/>
-    <path d="M1430 680 V780 H1340 V850"/>
-    <path d="M1300 600 H1220 V650 H1140"/>
-    <path d="M1150 530 V460 H1060 V420 H950"/>
+    <path d="M650 0V100H730V190H800"/>
+    <path d="M1270 0V100H1190V190H1120"/>
+    <path d="M650 1080V980H730V890H800"/>
+    <path d="M1270 1080V980H1190V890H1120"/>
 
-    <path d="M650 0 V120 H720 V220 H800"/>
-    <path d="M950 0 V120 H880 V220 H800"/>
-    <path d="M650 900 V780 H720 V680 H800"/>
-    <path d="M950 900 V780 H880 V680 H800"/>
+    <path d="M180 230V340H260V410"/>
+    <path d="M1740 230V340H1660V410"/>
+    <path d="M330 690V600H410V540"/>
+    <path d="M1590 690V600H1510V540"/>
 
-    <path d="M0 400 H180 V450 H300"/>
-    <path d="M1600 400 H1420 V450 H1300"/>
+    <path d="M510 390V460H600V510H700"/>
+    <path d="M1410 390V460H1320V510H1220"/>
+    <path d="M500 620V550H600V510"/>
+    <path d="M1420 620V550H1320V510"/>
   </g>
 
-  <!-- Chips -->
-  <g fill="#07152b" stroke="#258bff" stroke-width="2" filter="url(#glow)">
-    <rect x="730" y="350" width="140" height="140" rx="12"/>
-    <rect x="250" y="390" width="90" height="65" rx="7"/>
-    <rect x="1260" y="390" width="90" height="65" rx="7"/>
-    <rect x="700" y="90" width="70" height="45" rx="6"/>
-    <rect x="830" y="765" width="70" height="45" rx="6"/>
+  <!-- Microchips laterales -->
+  <g filter="url(#glow)">
+    <g transform="translate(260 440)">
+      <rect width="150" height="100" rx="9" fill="url(#chip)"
+            stroke="#258bff" stroke-width="2"/>
+      <rect x="14" y="14" width="122" height="72" rx="4"
+            fill="none" stroke="#287cc8" opacity=".7"/>
+      <path d="M30 35H120M30 50H120M30 65H120"
+            stroke="#42baff" stroke-width="2" opacity=".7"/>
+      <path d="M-18 20H0M-18 40H0M-18 60H0M-18 80H0
+               M150 20H168M150 40H168M150 60H168M150 80H168"
+            stroke="#42aaff" stroke-width="3"/>
+    </g>
+
+    <g transform="translate(1510 440)">
+      <rect width="150" height="100" rx="9" fill="url(#chip)"
+            stroke="#258bff" stroke-width="2"/>
+      <rect x="14" y="14" width="122" height="72" rx="4"
+            fill="none" stroke="#287cc8" opacity=".7"/>
+      <path d="M30 35H120M30 50H120M30 65H120"
+            stroke="#42baff" stroke-width="2" opacity=".7"/>
+      <path d="M-18 20H0M-18 40H0M-18 60H0M-18 80H0
+               M150 20H168M150 40H168M150 60H168M150 80H168"
+            stroke="#42aaff" stroke-width="3"/>
+    </g>
   </g>
 
-  <!-- Chip details -->
-  <g fill="none" stroke="#54baff" stroke-width="2" opacity=".8">
-    <path d="M760 380 H840 M760 400 H840 M760 420 H840 M760 440 H840"/>
-    <path d="M760 460 H840"/>
-    <path d="M715 365 V475 M885 365 V475"/>
-    <path d="M730 330 V350 M760 330 V350 M790 330 V350 M820 330 V350 M850 330 V350"/>
-    <path d="M730 490 V510 M760 490 V510 M790 490 V510 M820 490 V510 M850 490 V510"/>
+  <!-- Componentes pequeños -->
+  <g fill="#07172b" stroke="#258bff" stroke-width="2" opacity=".9">
+    <rect x="650" y="220" width="70" height="42" rx="5"/>
+    <rect x="1200" y="220" width="70" height="42" rx="5"/>
+    <rect x="650" y="820" width="70" height="42" rx="5"/>
+    <rect x="1200" y="820" width="70" height="42" rx="5"/>
+    <rect x="420" y="100" width="90" height="50" rx="5"/>
+    <rect x="1410" y="100" width="90" height="50" rx="5"/>
   </g>
 
-  <!-- Conexiones luminosas -->
-  <g fill="#63c5ff" filter="url(#glow)">
-    <circle cx="180" cy="100" r="5"/>
-    <circle cx="300" cy="260" r="5"/>
-    <circle cx="450" cy="340" r="5"/>
-    <circle cx="1420" cy="100" r="5"/>
-    <circle cx="1300" cy="260" r="5"/>
-    <circle cx="1150" cy="340" r="5"/>
-    <circle cx="170" cy="760" r="5"/>
-    <circle cx="300" cy="600" r="5"/>
-    <circle cx="1430" cy="760" r="5"/>
-    <circle cx="1300" cy="600" r="5"/>
-    <circle cx="800" cy="350" r="6"/>
-    <circle cx="800" cy="490" r="6"/>
-    <circle cx="700" cy="112" r="4"/>
-    <circle cx="900" cy="787" r="4"/>
+  <!-- Contactos -->
+  <g fill="#59c7ff" filter="url(#glow)">
+    <circle cx="180" cy="150" r="5"/>
+    <circle cx="340" cy="310" r="5"/>
+    <circle cx="510" cy="390" r="5"/>
+    <circle cx="100" cy="300" r="4"/>
+    <circle cx="230" cy="380" r="4"/>
+    <circle cx="170" cy="850" r="5"/>
+    <circle cx="330" cy="690" r="5"/>
+    <circle cx="500" cy="620" r="5"/>
+
+    <circle cx="1740" cy="150" r="5"/>
+    <circle cx="1580" cy="310" r="5"/>
+    <circle cx="1410" cy="390" r="5"/>
+    <circle cx="1820" cy="300" r="4"/>
+    <circle cx="1690" cy="380" r="4"/>
+    <circle cx="1750" cy="850" r="5"/>
+    <circle cx="1590" cy="690" r="5"/>
+    <circle cx="1420" cy="620" r="5"/>
+
+    <circle cx="300" cy="130" r="4"/>
+    <circle cx="1620" cy="130" r="4"/>
+    <circle cx="300" cy="950" r="4"/>
+    <circle cx="1620" cy="950" r="4"/>
   </g>
 
-  <!-- Pequeñas pistas de conexión -->
-  <g fill="none" stroke="#278cff" stroke-width="1" opacity=".45">
-    <path d="M40 40 H120 V70 H150"/>
-    <path d="M1560 40 H1480 V70 H1450"/>
-    <path d="M40 860 H120 V830 H150"/>
-    <path d="M1560 860 H1480 V830 H1450"/>
-    <path d="M520 100 H580 V150 H620"/>
-    <path d="M1080 100 H1020 V150 H980"/>
-    <path d="M520 800 H580 V750 H620"/>
-    <path d="M1080 800 H1020 V750 H980"/>
+  <!-- Luzes que recorren los circuitos -->
+  <g fill="#b7edff" filter="url(#glow)">
+    <circle r="5">
+      <animateMotion dur="7s" repeatCount="indefinite">
+        <mpath href="#p1"/>
+      </animateMotion>
+    </circle>
+    <circle r="5">
+      <animateMotion dur="9s" repeatCount="indefinite">
+        <mpath href="#p4"/>
+      </animateMotion>
+    </circle>
+    <circle r="5">
+      <animateMotion dur="8s" repeatCount="indefinite">
+        <mpath href="#p5"/>
+      </animateMotion>
+    </circle>
+    <circle r="5">
+      <animateMotion dur="10s" repeatCount="indefinite">
+        <mpath href="#p8"/>
+      </animateMotion>
+    </circle>
+  </g>
+
+  <!-- Resplandor ambiental -->
+  <g fill="#147bff" opacity=".12" filter="url(#softGlow)">
+    <circle cx="250" cy="300" r="65"/>
+    <circle cx="1670" cy="300" r="65"/>
+    <circle cx="300" cy="750" r="70"/>
+    <circle cx="1620" cy="750" r="70"/>
   </g>
 </svg>
