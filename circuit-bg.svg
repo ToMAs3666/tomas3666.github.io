@@ -146,7 +146,7 @@
   </g>
 
   <!-- Contactos -->
-  <g fill="#59c7ff" filter="url(#glow)">
+ <g class="circuit-glow" fill="#59c7ff" filter="url(#glow)">
     <circle cx="180" cy="150" r="5"/>
     <circle cx="340" cy="310" r="5"/>
     <circle cx="510" cy="390" r="5"/>
