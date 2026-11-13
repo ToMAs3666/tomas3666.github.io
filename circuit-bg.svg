@@ -130,29 +130,64 @@
     <circle cx="300" cy="950" r="4"/>
     <circle cx="1620" cy="950" r="4"/>
   </g>
-
-  <!-- Luzes que recorren los circuitos -->
+  
+  <!-- Luces con bucle continuo y reinicio invisible -->
   <g fill="#b7edff" filter="url(#glow)">
+
+    <!-- Circuito superior izquierdo -->
     <circle r="5">
       <animateMotion dur="7s" repeatCount="indefinite">
         <mpath href="#p1"/>
       </animateMotion>
+      <animate attributeName="opacity"
+        values="0;1;1;0"
+        keyTimes="0;0.12;0.82;1"
+        dur="7s" repeatCount="indefinite"/>
     </circle>
+
+    <circle r="4">
+      <animateMotion dur="7s" begin="-3.5s" repeatCount="indefinite">
+        <mpath href="#p1"/>
+      </animateMotion>
+      <animate attributeName="opacity"
+        values="0;1;1;0"
+        keyTimes="0;0.12;0.82;1"
+        dur="7s" begin="-3.5s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Circuito inferior izquierdo -->
     <circle r="5">
       <animateMotion dur="9s" repeatCount="indefinite">
         <mpath href="#p4"/>
       </animateMotion>
+      <animate attributeName="opacity"
+        values="0;1;1;0"
+        keyTimes="0;0.12;0.82;1"
+        dur="9s" repeatCount="indefinite"/>
     </circle>
+
+    <!-- Circuito superior derecho -->
     <circle r="5">
       <animateMotion dur="8s" repeatCount="indefinite">
         <mpath href="#p5"/>
       </animateMotion>
+      <animate attributeName="opacity"
+        values="0;1;1;0"
+        keyTimes="0;0.12;0.82;1"
+        dur="8s" repeatCount="indefinite"/>
     </circle>
+
+    <!-- Circuito inferior derecho -->
     <circle r="5">
       <animateMotion dur="10s" repeatCount="indefinite">
         <mpath href="#p8"/>
       </animateMotion>
+      <animate attributeName="opacity"
+        values="0;1;1;0"
+        keyTimes="0;0.12;0.82;1"
+        dur="10s" repeatCount="indefinite"/>
     </circle>
+
   </g>
 
   <!-- Resplandor ambiental -->
