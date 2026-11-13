@@ -69,8 +69,13 @@
   }
 </style>
   <!-- Pistas principales -->
-  <g fill="none" stroke="url(#trace)" stroke-width="2.5"
-     stroke-linecap="round" stroke-linejoin="round" opacity=".65">
+ <g class="circuit-flow"
+   fill="none"
+   stroke="url(#trace)"
+   stroke-width="2.5"
+   stroke-linecap="round"
+   stroke-linejoin="round"
+   opacity=".75">
 
     <path id="p1" d="M0 150H180V230H340V310H510V390H650"/>
     <path id="p2" d="M0 240H100V300H230V380H390"/>
