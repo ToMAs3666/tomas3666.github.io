@@ -1,12 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
   <defs>
-    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#176bff"/>
-      <stop offset="0.5" stop-color="#42a5ff"/>
-      <stop offset="1" stop-color="#176bff"/>
-    </linearGradient>
     <filter id="glow">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feGaussianBlur stdDeviation="4" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -14,31 +9,46 @@
     </filter>
   </defs>
 
-  <g fill="none" stroke="url(#blue)" stroke-width="2"
-     stroke-linecap="round" stroke-linejoin="round"
-     filter="url(#glow)" opacity=".75">
-    <path class="trace" d="M0 130 H180 V210 H300 V280 H430"/>
-    <path class="trace" d="M1600 180 H1420 V260 H1300 V340 H1160"/>
-    <path class="trace" d="M0 650 H170 V570 H290 V490 H410"/>
-    <path class="trace" d="M1600 700 H1430 V620 H1310 V540 H1180"/>
-    <path class="trace" d="M500 0 V100 H590 V190 H720"/>
-    <path class="trace" d="M1100 0 V120 H1010 V210 H880"/>
-    <path class="trace" d="M650 900 V790 H740 V710 H850"/>
-    <path class="trace" d="M950 900 V800 H870 V730 H780"/>
+  <g fill="none" stroke="#258bff" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round">
+
+    <path d="M0 120 H180 V180 H260 V300 H420 V360 H520"/>
+    <path d="M0 170 H120 V240 H220 V330 H340"/>
+    <path d="M1600 100 H1450 V180 H1360 V280 H1200 V340 H1100"/>
+    <path d="M1600 160 H1510 V250 H1410 V330 H1300"/>
+
+    <path d="M0 680 H160 V610 H280 V520 H440 V470 H540"/>
+    <path d="M0 760 H100 V700 H220 V630 H350"/>
+    <path d="M1600 650 H1460 V580 H1340 V490 H1180 V430 H1080"/>
+    <path d="M1600 750 H1510 V680 H1400 V600 H1280"/>
+
+    <path d="M500 0 V100 H570 V180 H680 V260 H760"/>
+    <path d="M1100 0 V120 H1030 V200 H940 V280 H850"/>
+    <path d="M620 900 V800 H700 V720 H790 V650"/>
+    <path d="M1000 900 V810 H920 V730 H840 V660"/>
+
+    <path d="M300 300 V380 H400 V420 H500"/>
+    <path d="M1300 300 V380 H1200 V420 H1100"/>
+    <path d="M350 600 V540 H450 V500 H550"/>
+    <path d="M1250 600 V540 H1150 V500 H1050"/>
   </g>
 
-  <g fill="#55aaff" filter="url(#glow)">
-    <circle cx="180" cy="130" r="5"/>
-    <circle cx="300" cy="280" r="5"/>
-    <circle cx="1420" cy="180" r="5"/>
-    <circle cx="1300" cy="340" r="5"/>
-    <circle cx="170" cy="650" r="5"/>
-    <circle cx="290" cy="490" r="5"/>
-    <circle cx="1430" cy="700" r="5"/>
-    <circle cx="1310" cy="540" r="5"/>
-    <circle cx="590" cy="190" r="5"/>
-    <circle cx="1010" cy="210" r="5"/>
-    <circle cx="740" cy="710" r="5"/>
-    <circle cx="870" cy="730" r="5"/>
+  <g fill="#55b5ff" filter="url(#glow)">
+    <circle cx="180" cy="120" r="5"/>
+    <circle cx="260" cy="300" r="5"/>
+    <circle cx="420" cy="360" r="5"/>
+    <circle cx="1450" cy="100" r="5"/>
+    <circle cx="1360" cy="280" r="5"/>
+    <circle cx="1200" cy="340" r="5"/>
+    <circle cx="160" cy="680" r="5"/>
+    <circle cx="280" cy="520" r="5"/>
+    <circle cx="440" cy="470" r="5"/>
+    <circle cx="1460" cy="650" r="5"/>
+    <circle cx="1340" cy="490" r="5"/>
+    <circle cx="1180" cy="430" r="5"/>
+    <circle cx="570" cy="180" r="5"/>
+    <circle cx="1030" cy="200" r="5"/>
+    <circle cx="700" cy="720" r="5"/>
+    <circle cx="920" cy="730" r="5"/>
   </g>
 </svg>
