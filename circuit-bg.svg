@@ -32,7 +32,42 @@
     <path d="M500 0V100H600V170 M1420 0V100H1320V170"/>
     <path d="M500 1080V980H600V910 M1420 1080V980H1320V910"/>
   </g>
+<!-- Animación de flujo energético -->
+<style>
+  .circuit-flow {
+    stroke-dasharray: 12 22;
+    animation: energyFlow 5s linear infinite;
+  }
 
+  .circuit-glow {
+    animation: glowPulse 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes energyFlow {
+    from {
+      stroke-dashoffset: 0;
+    }
+    to {
+      stroke-dashoffset: -340;
+    }
+  }
+
+  @keyframes glowPulse {
+    from {
+      opacity: 0.25;
+    }
+    to {
+      opacity: 0.85;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .circuit-flow,
+    .circuit-glow {
+      animation: none;
+    }
+  }
+</style>
   <!-- Pistas principales -->
   <g fill="none" stroke="url(#trace)" stroke-width="2.5"
      stroke-linecap="round" stroke-linejoin="round" opacity=".65">
