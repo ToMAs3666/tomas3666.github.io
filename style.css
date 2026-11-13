@@ -278,6 +278,48 @@ section p {
     max-width: 750px;
 }
 
+/* PROJECT BACKGROUND IMAGES */
+
+.project-glorus {
+    background:
+        linear-gradient(rgba(11, 11, 20, 0.78), rgba(11, 11, 20, 0.94)),
+        url("https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900");
+    background-size: cover;
+    background-position: center;
+}
+
+.project-wallpapers {
+    background:
+        linear-gradient(rgba(11, 11, 20, 0.75), rgba(11, 11, 20, 0.94)),
+        url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=900");
+    background-size: cover;
+    background-position: center;
+}
+
+.project-aether {
+    background:
+        linear-gradient(rgba(11, 11, 20, 0.78), rgba(11, 11, 20, 0.94)),
+        url("https://images.unsplash.com/photo-1518770660439-4636190af475?w=900");
+    background-size: cover;
+    background-position: center;
+}
+
+.project-programming {
+    background:
+        linear-gradient(rgba(11, 11, 20, 0.78), rgba(11, 11, 20, 0.94)),
+        url("https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=900");
+    background-size: cover;
+    background-position: center;
+}
+
+.project-ideas {
+    background:
+        linear-gradient(rgba(11, 11, 20, 0.78), rgba(11, 11, 20, 0.94)),
+        url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900");
+    background-size: cover;
+    background-position: center;
+}
+
 
 /* PROJECT CARDS */
 
