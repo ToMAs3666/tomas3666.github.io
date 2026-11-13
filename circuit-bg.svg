@@ -53,13 +53,21 @@
   }
 
   @keyframes glowPulse {
-    from {
-      opacity: 0.25;
+    0% {
+      opacity: 0.35;
+      filter: brightness(0.8);
     }
-    to {
-      opacity: 0.85;
+
+    50% {
+      opacity: 1;
+      filter: brightness(1.5);
     }
-  }
+
+    100% {
+      opacity: 0.45;
+      filter: brightness(1);
+    }
+}
 
   @media (prefers-reduced-motion: reduce) {
     .circuit-flow,
