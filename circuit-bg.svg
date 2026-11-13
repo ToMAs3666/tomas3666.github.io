@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#176bff"/>
+      <stop offset="0.5" stop-color="#42a5ff"/>
+      <stop offset="1" stop-color="#176bff"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g fill="none" stroke="url(#blue)" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round"
+     filter="url(#glow)" opacity=".75">
+    <path class="trace" d="M0 130 H180 V210 H300 V280 H430"/>
+    <path class="trace" d="M1600 180 H1420 V260 H1300 V340 H1160"/>
+    <path class="trace" d="M0 650 H170 V570 H290 V490 H410"/>
+    <path class="trace" d="M1600 700 H1430 V620 H1310 V540 H1180"/>
+    <path class="trace" d="M500 0 V100 H590 V190 H720"/>
+    <path class="trace" d="M1100 0 V120 H1010 V210 H880"/>
+    <path class="trace" d="M650 900 V790 H740 V710 H850"/>
+    <path class="trace" d="M950 900 V800 H870 V730 H780"/>
+  </g>
+
+  <g fill="#55aaff" filter="url(#glow)">
+    <circle cx="180" cy="130" r="5"/>
+    <circle cx="300" cy="280" r="5"/>
+    <circle cx="1420" cy="180" r="5"/>
+    <circle cx="1300" cy="340" r="5"/>
+    <circle cx="170" cy="650" r="5"/>
+    <circle cx="290" cy="490" r="5"/>
+    <circle cx="1430" cy="700" r="5"/>
+    <circle cx="1310" cy="540" r="5"/>
+    <circle cx="590" cy="190" r="5"/>
+    <circle cx="1010" cy="210" r="5"/>
+    <circle cx="740" cy="710" r="5"/>
+    <circle cx="870" cy="730" r="5"/>
+  </g>
+</svg>
