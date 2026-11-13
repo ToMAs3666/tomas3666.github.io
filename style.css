@@ -206,7 +206,7 @@ section p {
 /* PROJECT SECTION */
 
 .projects-section {
-    background-color: #101015;
+        background-color: transparent;
     padding-top: 70px;
     padding-bottom: 70px;
     border: none;
@@ -425,7 +425,7 @@ section p {
 /* ABOUT SECTION */
 
 .about-section {
-    background-color: #0b0b0f;
+        background-color: transparent;
     padding-top: 70px;
     padding-bottom: 70px;
 }
@@ -489,7 +489,7 @@ section p {
 
 .contact-section {
     text-align: center;
-    background-color: #101015;
+    background-color: transparent;
 }
 
 .contact-section h2 {
