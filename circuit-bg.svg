@@ -109,7 +109,7 @@
   </g>
 
   <!-- Microchips laterales -->
-  <g filter="url(#glow)">
+<g class="circuit-glow" filter="url(#glow)">
     <g transform="translate(260 440)">
       <rect width="150" height="100" rx="9" fill="url(#chip)"
             stroke="#258bff" stroke-width="2"/>
