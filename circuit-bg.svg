@@ -284,11 +284,12 @@
 
   </g>
 
-  <!-- Resplandor ambiental -->
-  <g fill="#147bff" opacity=".12" filter="url(#softGlow)">
+  
+<!-- RESPLANDOR AMBIENTAL DINÁMICO -->
+<g class="ambient-energy" fill="#147bff" filter="url(#softGlow)">
     <circle cx="250" cy="300" r="65"/>
     <circle cx="1670" cy="300" r="65"/>
     <circle cx="300" cy="750" r="70"/>
     <circle cx="1620" cy="750" r="70"/>
-  </g>
-</svg>
+    <circle cx="960" cy="540" r="120"/>
+</g>
