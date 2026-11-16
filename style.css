@@ -2357,3 +2357,20 @@ body::after {
     pointer-events: none;
     z-index: -2;
 }
+/* FIX: CIRCUIT BACKGROUND POSITION */
+
+body {
+    position: relative;
+    isolation: isolate;
+}
+
+.circuit-background {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: -1 !important;
+    pointer-events: none !important;
+    display: block !important;
+}
