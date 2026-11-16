@@ -981,15 +981,16 @@ footer p {
 
 
 
+
 /* =====================================
-   AETHER - UNIFIED FUTURISTIC BACKGROUND
+   AETHER - FINAL BACKGROUND SYSTEM
 ===================================== */
 
 body {
     position: relative;
-    isolation: isolate;
     min-height: 100vh;
     overflow-x: hidden;
+    isolation: isolate;
 
     background:
         radial-gradient(
@@ -1007,53 +1008,53 @@ body {
     color: #ffffff;
 }
 
-/* CIRCUITS */
+/* CIRCUIT BACKGROUND */
 
 body::before {
     content: "";
     position: fixed;
     inset: 0;
-    z-index: -2;
+    z-index: 0;
     pointer-events: none;
 
     background-image: url("circuit-bg.svg");
     background-repeat: repeat;
     background-size: 1000px 563px;
 
-    opacity: 0.20;
-    animation: circuitMove 45s linear infinite;
+    opacity: 0.22;
+    animation: aetherCircuitMove 45s linear infinite;
 }
 
-/* BLUE LIGHT */
+/* BLUE LIGHT EFFECT */
 
 body::after {
     content: "";
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
 
     background:
         radial-gradient(
             ellipse at 15% 20%,
-            rgba(30, 100, 220, 0.10),
+            rgba(30, 100, 220, 0.12),
             transparent 45%
         ),
         radial-gradient(
             ellipse at 85% 75%,
-            rgba(20, 80, 190, 0.08),
+            rgba(20, 80, 190, 0.10),
             transparent 45%
         );
 
-    animation: circuitGlow 12s ease-in-out infinite alternate;
+    animation: aetherGlow 12s ease-in-out infinite alternate;
 }
 
-/* FLOATING PARTICLES */
+/* PARTICLES */
 
 .aether-particles {
     position: fixed;
     inset: 0;
-    z-index: -1;
+    z-index: 0;
     pointer-events: none;
 
     background-image:
@@ -1065,38 +1066,41 @@ body::after {
         radial-gradient(3px 3px at 95% 60%, #4d8dff 70%, transparent);
 
     background-repeat: no-repeat;
+    animation: aetherParticles 12s ease-in-out infinite alternate;
+}
 
-    animation: particleFloat 12s ease-in-out infinite alternate;
+/* KEEP WEBSITE CONTENT ABOVE BACKGROUND */
+
+body > :not(.aether-particles) {
+    position: relative;
+    z-index: 1;
 }
 
 /* ANIMATIONS */
 
-@keyframes circuitMove {
+@keyframes aetherCircuitMove {
     from {
         background-position: 0 0;
     }
-
     to {
         background-position: 100px 100px;
     }
 }
 
-@keyframes circuitGlow {
+@keyframes aetherGlow {
     from {
         opacity: 0.35;
     }
-
     to {
         opacity: 0.85;
     }
 }
 
-@keyframes particleFloat {
+@keyframes aetherParticles {
     from {
         opacity: 0.35;
         transform: translateY(0);
     }
-
     to {
         opacity: 0.85;
         transform: translateY(-12px);
