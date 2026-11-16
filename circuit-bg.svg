@@ -412,23 +412,28 @@
 </defs>
 
 <style>
+    .aether-orbit-1,
+    .aether-orbit-2,
+    .aether-orbit-3,
+    .aether-sphere,
+    .aether-particles {
+        transform-box: view-box;
+        transform-origin: 50% 50%;
+    }
+
     .aether-orbit-1 {
-        transform-origin: 960px 540px;
         animation: aetherRotate 22s linear infinite;
     }
 
     .aether-orbit-2 {
-        transform-origin: 960px 540px;
         animation: aetherRotateReverse 15s linear infinite;
     }
 
     .aether-orbit-3 {
-        transform-origin: 960px 540px;
         animation: aetherRotate 9s linear infinite;
     }
 
     .aether-sphere {
-        transform-origin: 960px 540px;
         animation: aetherPulse 3s ease-in-out infinite;
     }
 
@@ -438,7 +443,6 @@
     }
 
     .aether-particles {
-        transform-origin: 960px 540px;
         animation: aetherRotateReverse 7s linear infinite;
     }
 
