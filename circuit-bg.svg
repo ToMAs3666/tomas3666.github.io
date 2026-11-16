@@ -1,17 +1,35 @@
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+<svg xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1920 1080"
+     preserveAspectRatio="xMidYMid slice">
+
   <defs>
+    <!-- COLORES -->
     <linearGradient id="trace" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0750bb"/>
-      <stop offset=".5" stop-color="#35aaff"/>
+      <stop offset=".5" stop-color="#45caff"/>
       <stop offset="1" stop-color="#0750bb"/>
     </linearGradient>
 
-    <linearGradient id="chip" x2="0" y2="1">
-      <stop stop-color="#102746"/>
-      <stop offset="1" stop-color="#050d19"/>
+    <linearGradient id="brightTrace" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#087cff"/>
+      <stop offset=".5" stop-color="#b5f2ff"/>
+      <stop offset="1" stop-color="#168bff"/>
     </linearGradient>
 
+    <radialGradient id="coreGradient">
+      <stop offset="0" stop-color="#b9f4ff" stop-opacity=".9"/>
+      <stop offset=".2" stop-color="#168bff" stop-opacity=".5"/>
+      <stop offset=".55" stop-color="#0750bb" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#0750bb" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="chip" x2="0" y2="1">
+      <stop stop-color="#102746"/>
+      <stop offset="1" stop-color="#030b18"/>
+    </linearGradient>
+
+    <!-- ILUMINACIÓN -->
     <filter id="glow" x="-100%" y="-100%" width="300%" height="300%">
       <feGaussianBlur stdDeviation="4" result="blur"/>
       <feMerge>
@@ -20,34 +38,129 @@
       </feMerge>
     </filter>
 
-    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
-      <feGaussianBlur stdDeviation="18"/>
+    <filter id="strongGlow" x="-150%" y="-150%" width="400%" height="400%">
+      <feGaussianBlur stdDeviation="9" result="blur1"/>
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
     </filter>
+
+    <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+
+    <filter id="coreGlow" x="-200%" y="-200%" width="500%" height="500%">
+      <feGaussianBlur stdDeviation="35"/>
+    </filter>
+
+    <!-- NÚCLEO CENTRAL -->
+    <radialGradient id="coreLight">
+      <stop offset="0" stop-color="#d9faff" stop-opacity=".8"/>
+      <stop offset=".25" stop-color="#35aaff" stop-opacity=".3"/>
+      <stop offset="1" stop-color="#087cff" stop-opacity="0"/>
+    </radialGradient>
   </defs>
 
   <style>
-    /* CIRCUITOS */
+    /* CIRCUITOS PRINCIPALES */
     .circuit-flow {
-      opacity: .30;
-    }
-
-    /* ENERGÍA EN MOVIMIENTO */
-    .energy-pulse {
       fill: none;
       stroke: url(#trace);
-      stroke-width: 6;
+      stroke-width: 2.8;
       stroke-linecap: round;
-      stroke-dasharray: 110 890;
-      stroke-dashoffset: 1000;
+      stroke-linejoin: round;
+      opacity: .58;
+    }
+
+    .circuit-bright {
+      fill: none;
+      stroke: #168bff;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: .48;
       filter: url(#glow);
-      animation: energyFlow 8s linear infinite;
+    }
+
+    /* PULSOS DE ENERGÍA */
+    .energy-pulse {
+      fill: none;
+      stroke: url(#brightTrace);
+      stroke-width: 7;
+      stroke-linecap: round;
+      stroke-dasharray: 90 910;
+      stroke-dashoffset: 1000;
+      filter: url(#strongGlow);
+      animation: energyFlow 5s linear infinite;
+    }
+
+    .energy-pulse-fast {
+      fill: none;
+      stroke: #8ceaff;
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-dasharray: 4 28;
+      filter: url(#glow);
+      animation: fastFlow 2.5s linear infinite;
     }
 
     @keyframes energyFlow {
-      0% { stroke-dashoffset: 1000; opacity: 0; }
-      12% { opacity: 1; }
-      85% { opacity: 1; }
-      100% { stroke-dashoffset: -1000; opacity: 0; }
+      0% {
+        stroke-dashoffset: 1000;
+        opacity: 0;
+      }
+      10% { opacity: 1; }
+      80% { opacity: 1; }
+      100% {
+        stroke-dashoffset: -1000;
+        opacity: 0;
+      }
+    }
+
+    @keyframes fastFlow {
+      to { stroke-dashoffset: -128; }
+    }
+
+    /* NÚCLEO CENTRAL */
+    .core-aura {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: corePulse 6s ease-in-out infinite;
+    }
+
+    .core-ring {
+      fill: none;
+      stroke: #38baff;
+      stroke-width: 1.8;
+      opacity: .4;
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: ringPulse 8s ease-in-out infinite;
+    }
+
+    @keyframes corePulse {
+      0%, 100% {
+        opacity: .35;
+        transform: scale(.85);
+      }
+      50% {
+        opacity: .9;
+        transform: scale(1.15);
+      }
+    }
+
+    @keyframes ringPulse {
+      0%, 100% {
+        opacity: .2;
+        transform: scale(.9);
+      }
+      50% {
+        opacity: .65;
+        transform: scale(1.08);
+      }
     }
 
     /* MICROCHIPS */
@@ -57,43 +170,58 @@
 
     @keyframes chipPulse {
       0%, 100% {
-        opacity: .55;
-        filter: brightness(.85);
+        opacity: .65;
+        filter: brightness(.9);
       }
       50% {
         opacity: 1;
-        filter: brightness(1.7);
+        filter: brightness(1.8);
       }
     }
 
     /* CONTACTOS */
     .contact-energy {
-      animation: contactPulse 3s ease-in-out infinite;
+      animation: contactPulse 2.8s ease-in-out infinite;
     }
 
     @keyframes contactPulse {
-      0%, 100% { opacity: .4; }
+      0%, 100% { opacity: .35; }
       50% { opacity: 1; }
     }
 
-    /* LUZ AMBIENTAL */
-    .ambient-energy {
-      animation: ambientPulse 10s ease-in-out infinite alternate;
+    /* DESTELLOS */
+    .flash-point {
+      fill: #c1f4ff;
+      filter: url(#strongGlow);
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: flashPoint 2.2s ease-in-out infinite;
     }
 
-    @keyframes ambientPulse {
-      0% { opacity: .035; }
-      50% { opacity: .13; }
-      100% { opacity: .055; }
+    @keyframes flashPoint {
+      0%, 100% {
+        opacity: .12;
+        transform: scale(.5);
+      }
+      45% {
+        opacity: 1;
+        transform: scale(2.2);
+      }
     }
 
     /* PARTÍCULAS */
     .particle {
       fill: #72ceff;
       filter: url(#glow);
-      animation: particlePulse 4s ease-in-out infinite;
       transform-box: fill-box;
       transform-origin: center;
+      animation: particlePulse 4s ease-in-out infinite;
+    }
+
+    .floating-particle {
+      fill: #9beaff;
+      filter: url(#strongGlow);
+      animation: floatingLight 6s ease-in-out infinite;
     }
 
     @keyframes particlePulse {
@@ -103,8 +231,30 @@
       }
       50% {
         opacity: 1;
-        transform: scale(1.5);
+        transform: scale(1.6);
       }
+    }
+
+    @keyframes floatingLight {
+      0%, 100% {
+        opacity: .1;
+        transform: translateY(0);
+      }
+      50% {
+        opacity: 1;
+        transform: translateY(-20px);
+      }
+    }
+
+    /* LUZ AMBIENTAL */
+    .ambient-energy {
+      animation: ambientPulse 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes ambientPulse {
+      0% { opacity: .04; }
+      50% { opacity: .22; }
+      100% { opacity: .08; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -112,117 +262,35 @@
         animation: none !important;
       }
     }
-    
-/* =================================
-   AETHER - INTENSE ENERGY SYSTEM
-================================= */
-
-/* Circuitos secundarios */
-.secondary-circuits {
-    fill: none;
-    stroke: #168bff;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    opacity: .55;
-    filter: url(#glow);
-}
-
-/* Energía eléctrica */
-.electric-flow {
-    fill: none;
-    stroke: #75d9ff;
-    stroke-width: 3.5;
-    stroke-linecap: round;
-    stroke-dasharray: 5 24;
-    filter: url(#glow);
-    animation: electricTravel 2.5s linear infinite;
-}
-
-@keyframes electricTravel {
-    to {
-        stroke-dashoffset: -116;
-    }
-}
-
-/* Destellos */
-.flash-point {
-    fill: #a9eaff;
-    filter: url(#glow);
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: flashPoint 2.2s ease-in-out infinite;
-}
-
-@keyframes flashPoint {
-    0%, 100% {
-        opacity: .15;
-        transform: scale(.6);
-    }
-    45% {
-        opacity: 1;
-        transform: scale(2);
-    }
-    60% {
-        opacity: .4;
-    }
-}
-
-/* Iluminación intensa */
-.intense-glow {
-    fill: #087cff;
-    filter: url(#softGlow);
-    animation: intenseGlow 6s ease-in-out infinite alternate;
-}
-
-@keyframes intenseGlow {
-    0% {
-        opacity: .08;
-    }
-    50% {
-        opacity: .28;
-    }
-    100% {
-        opacity: .12;
-    }
-}
-
-/* Partículas flotantes */
-.floating-particle {
-    fill: #66caff;
-    filter: url(#glow);
-    animation: floatingLight 5s ease-in-out infinite;
-}
-
-@keyframes floatingLight {
-    0%, 100% {
-        opacity: .1;
-        transform: translateY(0);
-    }
-    50% {
-        opacity: 1;
-        transform: translateY(-16px);
-    }
-}
-
   </style>
 
-  <!-- PROFUNDIDAD -->
-  <g fill="none" stroke="#1675d5" opacity=".12" stroke-width="1">
-    <path d="M0 80H300V160H420 M1920 90H1620V170H1500"/>
-    <path d="M0 1000H300V920H420 M1920 990H1620V910H1500"/>
-    <path d="M500 0V100H600V170 M1420 0V100H1320V170"/>
-    <path d="M500 1080V980H600V910 M1420 1080V980H1320V910"/>
-    <path d="M0 540H160V600H260 M1920 540H1760V600H1660"/>
+  <!-- FONDO PROFUNDO -->
+  <rect width="1920" height="1080" fill="#020812"/>
+
+  <!-- ILUMINACIÓN CENTRAL -->
+  <g class="core-aura">
+    <circle cx="960" cy="540" r="330"
+            fill="url(#coreGradient)" filter="url(#coreGlow)"/>
+    <circle cx="960" cy="540" r="220"
+            fill="url(#coreLight)" filter="url(#softGlow)"/>
   </g>
 
-  <!-- PISTAS PRINCIPALES -->
-  <g class="circuit-flow"
-     fill="none"
-     stroke="url(#trace)"
-     stroke-width="2.5"
-     stroke-linecap="round"
-     stroke-linejoin="round">
+  <!-- CIRCUITOS DE PROFUNDIDAD -->
+  <g fill="none" stroke="#1675d5" opacity=".2" stroke-width="1.5">
+    <path d="M0 80H300V160H420L480 220H580"/>
+    <path d="M1920 90H1620V170H1500L1440 230H1340"/>
+    <path d="M0 1000H300V920H420L480 860H580"/>
+    <path d="M1920 990H1620V910H1500L1440 850H1340"/>
+    <path d="M500 0V100H600V170H680"/>
+    <path d="M1420 0V100H1320V170H1240"/>
+    <path d="M500 1080V980H600V910H680"/>
+    <path d="M1420 1080V980H1320V910H1240"/>
+    <path d="M0 540H160V600H260V660H360"/>
+    <path d="M1920 540H1760V600H1660V660H1560"/>
+  </g>
 
+  <!-- CIRCUITOS PRINCIPALES -->
+  <g class="circuit-flow">
     <path id="p1" pathLength="1000" d="M0 150H180V230H340V310H510V390H650"/>
     <path id="p2" pathLength="1000" d="M0 240H100V300H230V380H390"/>
     <path id="p3" pathLength="1000" d="M0 420H180V480H310V550H470"/>
@@ -254,66 +322,105 @@
     <path d="M1420 620V550H1320V510"/>
   </g>
 
-<!-- AETHER - CIRCUITOS SECUNDARIOS -->
-<g class="secondary-circuits">
+  <!-- CIRCUITOS ADICIONALES -->
+  <g class="circuit-bright">
     <path d="M0 320H130V370H260V430H350"/>
     <path d="M1920 320H1790V370H1660V430H1570"/>
-
     <path d="M0 700H140V650H270V590H390"/>
     <path d="M1920 700H1780V650H1650V590H1530"/>
 
     <path d="M420 0V70H520V130H590"/>
     <path d="M1500 0V70H1400V130H1330"/>
-
     <path d="M420 1080V1010H520V950H590"/>
     <path d="M1500 1080V1010H1400V950H1330"/>
 
     <path d="M800 0V90H860V150"/>
     <path d="M1120 0V90H1060V150"/>
-
     <path d="M800 1080V990H860V930"/>
     <path d="M1120 1080V990H1060V930"/>
-</g>
 
-<!-- FLUJO ELÉCTRICO SECUNDARIO -->
-<g class="electric-flow">
+    <path d="M700 300H790V360H870V420"/>
+    <path d="M1220 300H1130V360H1050V420"/>
+    <path d="M700 780H790V720H870V660"/>
+    <path d="M1220 780H1130V720H1050V660"/>
+
+    <path d="M0 530H230V500H380"/>
+    <path d="M1920 550H1690V580H1540"/>
+    <path d="M500 0V180H580V260"/>
+    <path d="M1420 1080V900H1340V820"/>
+  </g>
+
+  <!-- PULSOS DE ENERGÍA PRINCIPALES -->
+  <g>
+    <use href="#p1" class="energy-pulse"/>
+    <use href="#p2" class="energy-pulse" style="animation-delay:-1.2s"/>
+    <use href="#p3" class="energy-pulse" style="animation-delay:-2.4s"/>
+    <use href="#p4" class="energy-pulse" style="animation-delay:-3.6s"/>
+    <use href="#p5" class="energy-pulse" style="animation-delay:-.8s"/>
+    <use href="#p6" class="energy-pulse" style="animation-delay:-2s"/>
+    <use href="#p7" class="energy-pulse" style="animation-delay:-3.2s"/>
+    <use href="#p8" class="energy-pulse" style="animation-delay:-4.4s"/>
+  </g>
+
+  <!-- FLUJO SECUNDARIO -->
+  <g class="energy-pulse-fast">
     <path d="M0 320H130V370H260V430H350"/>
     <path d="M1920 320H1790V370H1660V430H1570"/>
     <path d="M0 700H140V650H270V590H390"/>
     <path d="M1920 700H1780V650H1650V590H1530"/>
-</g>
+    <path d="M700 300H790V360H870V420"/>
+    <path d="M1220 780H1130V720H1050V660"/>
+  </g>
 
-  <!-- FLUJO DE ENERGÍA -->
-  <g>
-    <use href="#p1" class="energy-pulse"/>
-    <use href="#p2" class="energy-pulse" style="animation-delay:-2s"/>
-    <use href="#p3" class="energy-pulse" style="animation-delay:-4s"/>
-    <use href="#p4" class="energy-pulse" style="animation-delay:-1s"/>
-    <use href="#p5" class="energy-pulse" style="animation-delay:-3s"/>
-    <use href="#p6" class="energy-pulse" style="animation-delay:-5s"/>
-    <use href="#p7" class="energy-pulse" style="animation-delay:-2.5s"/>
-    <use href="#p8" class="energy-pulse" style="animation-delay:-4.5s"/>
+  <!-- NÚCLEO ENERGÉTICO CENTRAL -->
+  <g class="core-ring">
+    <circle cx="960" cy="540" r="115"/>
+    <circle cx="960" cy="540" r="155"
+            stroke-dasharray="5 18"/>
+    <circle cx="960" cy="540" r="195"
+            stroke-dasharray="2 26"/>
+  </g>
+
+  <g class="core-aura" filter="url(#strongGlow)">
+    <circle cx="960" cy="540" r="65"
+            fill="url(#coreLight)"/>
+    <circle cx="960" cy="540" r="8"
+            fill="#c4f5ff"/>
+    <circle cx="960" cy="540" r="22"
+            fill="none" stroke="#64cfff"
+            stroke-width="2" opacity=".7"/>
   </g>
 
   <!-- MICROCHIPS -->
   <g class="chip-energy" filter="url(#glow)">
     <g transform="translate(260 440)">
-      <rect width="150" height="100" rx="9" fill="url(#chip)" stroke="#258bff" stroke-width="2"/>
-      <rect x="14" y="14" width="122" height="72" rx="4" fill="none" stroke="#287cc8" opacity=".7"/>
-      <path d="M30 35H120M30 50H120M30 65H120" stroke="#42baff" stroke-width="2" opacity=".7"/>
-      <path d="M-18 20H0M-18 40H0M-18 60H0M-18 80H0 M150 20H168M150 40H168M150 60H168M150 80H168" stroke="#42aaff" stroke-width="3"/>
+      <rect width="150" height="100" rx="9"
+            fill="url(#chip)" stroke="#258bff" stroke-width="2"/>
+      <rect x="14" y="14" width="122" height="72" rx="4"
+            fill="none" stroke="#287cc8" opacity=".8"/>
+      <path d="M30 35H120M30 50H120M30 65H120"
+            stroke="#42baff" stroke-width="2"/>
+      <path d="M-18 20H0M-18 40H0M-18 60H0M-18 80H0
+               M150 20H168M150 40H168M150 60H168M150 80H168"
+            stroke="#42aaff" stroke-width="3"/>
     </g>
 
     <g transform="translate(1510 440)">
-      <rect width="150" height="100" rx="9" fill="url(#chip)" stroke="#258bff" stroke-width="2"/>
-      <rect x="14" y="14" width="122" height="72" rx="4" fill="none" stroke="#287cc8" opacity=".7"/>
-      <path d="M30 35H120M30 50H120M30 65H120" stroke="#42baff" stroke-width="2" opacity=".7"/>
-      <path d="M-18 20H0M-18 40H0M-18 60H0M-18 80H0 M150 20H168M150 40H168M150 60H168M150 80H168" stroke="#42aaff" stroke-width="3"/>
+      <rect width="150" height="100" rx="9"
+            fill="url(#chip)" stroke="#258bff" stroke-width="2"/>
+      <rect x="14" y="14" width="122" height="72" rx="4"
+            fill="none" stroke="#287cc8" opacity=".8"/>
+      <path d="M30 35H120M30 50H120M30 65H120"
+            stroke="#42baff" stroke-width="2"/>
+      <path d="M-18 20H0M-18 40H0M-18 60H0M-18 80H0
+               M150 20H168M150 40H168M150 60H168M150 80H168"
+            stroke="#42aaff" stroke-width="3"/>
     </g>
   </g>
 
-  <!-- COMPONENTES -->
-  <g fill="#07172b" stroke="#258bff" stroke-width="2" opacity=".9">
+  <!-- COMPONENTES ELECTRÓNICOS -->
+  <g fill="#07172b" stroke="#258bff" stroke-width="2"
+     filter="url(#glow)">
     <rect x="650" y="220" width="70" height="42" rx="5"/>
     <rect x="1200" y="220" width="70" height="42" rx="5"/>
     <rect x="650" y="820" width="70" height="42" rx="5"/>
@@ -322,8 +429,9 @@
     <rect x="1410" y="100" width="90" height="50" rx="5"/>
   </g>
 
-  <!-- CONTACTOS -->
-  <g class="contact-energy" fill="#59c7ff" filter="url(#glow)">
+  <!-- CONTACTOS LUMINOSOS -->
+  <g class="contact-energy" fill="#79d9ff"
+     filter="url(#strongGlow)">
     <circle cx="180" cy="150" r="5"/>
     <circle cx="340" cy="310" r="5"/>
     <circle cx="510" cy="390" r="5"/>
@@ -346,30 +454,15 @@
     <circle cx="1620" cy="130" r="4"/>
     <circle cx="300" cy="950" r="4"/>
     <circle cx="1620" cy="950" r="4"/>
+
+    <circle cx="800" cy="360" r="4"/>
+    <circle cx="1120" cy="720" r="4"/>
+    <circle cx="870" cy="420" r="4"/>
+    <circle cx="1050" cy="660" r="4"/>
   </g>
 
-  <!-- PARTÍCULAS -->
+  <!-- DESTELLOS -->
   <g>
-    <circle class="particle" cx="570" cy="260" r="3"/>
-    <circle class="particle" cx="1350" cy="260" r="3" style="animation-delay:-1.5s"/>
-    <circle class="particle" cx="740" cy="700" r="2.5" style="animation-delay:-2.5s"/>
-    <circle class="particle" cx="1180" cy="700" r="2.5" style="animation-delay:-.8s"/>
-    <circle class="particle" cx="950" cy="180" r="2" style="animation-delay:-3s"/>
-    <circle class="particle" cx="960" cy="900" r="3" style="animation-delay:-1s"/>
-  </g>
-
-<!-- AETHER - INTENSE LIGHT SYSTEM -->
-
-<g class="intense-glow">
-    <circle cx="250" cy="300" r="95"/>
-    <circle cx="1670" cy="300" r="95"/>
-    <circle cx="300" cy="750" r="100"/>
-    <circle cx="1620" cy="750" r="100"/>
-    <circle cx="960" cy="540" r="180"/>
-</g>
-
-<!-- DESTELLOS ELÉCTRICOS -->
-<g>
     <circle class="flash-point" cx="180" cy="230" r="4"/>
     <circle class="flash-point" cx="510" cy="390" r="4"
             style="animation-delay:-1s"/>
@@ -385,10 +478,33 @@
             style="animation-delay:-1.2s"/>
     <circle class="flash-point" cx="960" cy="900" r="3"
             style="animation-delay:-2s"/>
-</g>
+    <circle class="flash-point" cx="790" cy="360" r="3"
+            style="animation-delay:-.8s"/>
+    <circle class="flash-point" cx="1130" cy="720" r="3"
+            style="animation-delay:-1.7s"/>
+  </g>
 
-<!-- PARTÍCULAS FLOTANTES -->
-<g>
+  <!-- PARTÍCULAS -->
+  <g>
+    <circle class="particle" cx="570" cy="260" r="3"/>
+    <circle class="particle" cx="1350" cy="260" r="3"
+            style="animation-delay:-1.5s"/>
+    <circle class="particle" cx="740" cy="700" r="2.5"
+            style="animation-delay:-2.5s"/>
+    <circle class="particle" cx="1180" cy="700" r="2.5"
+            style="animation-delay:-.8s"/>
+    <circle class="particle" cx="950" cy="180" r="2"
+            style="animation-delay:-3s"/>
+    <circle class="particle" cx="960" cy="900" r="3"
+            style="animation-delay:-1s"/>
+    <circle class="particle" cx="820" cy="470" r="3"
+            style="animation-delay:-2s"/>
+    <circle class="particle" cx="1100" cy="600" r="3"
+            style="animation-delay:-.5s"/>
+  </g>
+
+  <!-- PARTÍCULAS FLOTANTES -->
+  <g>
     <circle class="floating-particle" cx="600" cy="330" r="3"/>
     <circle class="floating-particle" cx="1320" cy="350" r="3"
             style="animation-delay:-2s"/>
@@ -396,14 +512,22 @@
             style="animation-delay:-1s"/>
     <circle class="floating-particle" cx="1170" cy="780" r="3"
             style="animation-delay:-3s"/>
-</g>
+    <circle class="floating-particle" cx="450" cy="500" r="2.5"
+            style="animation-delay:-2.5s"/>
+    <circle class="floating-particle" cx="1470" cy="500" r="2.5"
+            style="animation-delay:-1.5s"/>
+  </g>
 
   <!-- LUZ AMBIENTAL -->
-  <g class="ambient-energy" fill="#147bff" filter="url(#softGlow)">
-    <circle cx="250" cy="300" r="65"/>
-    <circle cx="1670" cy="300" r="65"/>
-    <circle cx="300" cy="750" r="70"/>
-    <circle cx="1620" cy="750" r="70"/>
-    <circle cx="960" cy="540" r="120"/>
+  <g class="ambient-energy" fill="#147bff"
+     filter="url(#softGlow)">
+    <circle cx="250" cy="300" r="100"/>
+    <circle cx="1670" cy="300" r="100"/>
+    <circle cx="300" cy="750" r="110"/>
+    <circle cx="1620" cy="750" r="110"/>
+    <circle cx="960" cy="540" r="190"/>
+    <circle cx="700" cy="250" r="90"/>
+    <circle cx="1220" cy="830" r="90"/>
   </g>
+
 </svg>
