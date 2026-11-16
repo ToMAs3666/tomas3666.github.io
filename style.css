@@ -2055,11 +2055,10 @@ body::after {
 
 /* KEEP WEBSITE CONTENT ABOVE BACKGROUND */
 
-body > :not(.aether-particles) {
+body > :not(.aether-particles):not(.circuit-background) {
     position: relative;
     z-index: 1;
 }
-
 /* ANIMATIONS */
 
 @keyframes aetherCircuitMove {
