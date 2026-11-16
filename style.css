@@ -1041,3 +1041,40 @@ body::before {
         background-position: 55px 55px, -55px -55px, 30px -20px, -30px 20px;
     }
 }
+/* AETHER CIRCUIT LIGHTS */
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        linear-gradient(90deg, transparent 0%, rgba(77, 141, 255, 0.18) 50%, transparent 100%)
+        0 20% / 300px 1px no-repeat,
+
+        linear-gradient(90deg, transparent 0%, rgba(77, 141, 255, 0.14) 50%, transparent 100%)
+        100% 65% / 250px 1px no-repeat,
+
+        linear-gradient(180deg, transparent 0%, rgba(77, 141, 255, 0.15) 50%, transparent 100%)
+        25% 0 / 1px 220px no-repeat,
+
+        linear-gradient(180deg, transparent 0%, rgba(77, 141, 255, 0.12) 50%, transparent 100%)
+        75% 100% / 1px 260px no-repeat;
+
+    opacity: 0.7;
+    animation: circuitPulse 6s ease-in-out infinite alternate;
+}
+
+@keyframes circuitPulse {
+    from {
+        opacity: 0.25;
+        filter: brightness(0.8);
+    }
+
+    to {
+        opacity: 0.9;
+        filter: brightness(1.5);
+    }
+}
