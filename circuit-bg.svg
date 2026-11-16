@@ -135,7 +135,18 @@
     <path d="M500 620V550H600V510"/>
     <path d="M1420 620V550H1320V510"/>
   </g>
+<!-- ENERGÍA QUE RECORRE LOS CIRCUITOS -->
+<g>
+  <use href="#p1" class="energy-pulse"/>
+  <use href="#p2" class="energy-pulse" style="animation-delay: 1.5s"/>
+  <use href="#p3" class="energy-pulse" style="animation-delay: 3s"/>
+  <use href="#p4" class="energy-pulse" style="animation-delay: 2s"/>
 
+  <use href="#p5" class="energy-pulse" style="animation-delay: 0.8s"/>
+  <use href="#p6" class="energy-pulse" style="animation-delay: 2.5s"/>
+  <use href="#p7" class="energy-pulse" style="animation-delay: 4s"/>
+  <use href="#p8" class="energy-pulse" style="animation-delay: 3.5s"/>
+</g>
   <!-- Microchips laterales -->
 <g class="circuit-glow" filter="url(#glow)">
     <g transform="translate(260 440)">
