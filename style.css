@@ -1100,3 +1100,68 @@ body::after {
         opacity: 0.85;
     }
 }
+/* AETHER FLOATING PARTICLES */
+
+.aether-particles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+
+    background-image:
+        radial-gradient(2px 2px at 10% 20%, #75aaff 70%, transparent),
+        radial-gradient(2px 2px at 25% 75%, #4d8dff 70%, transparent),
+        radial-gradient(3px 3px at 45% 35%, #75aaff 70%, transparent),
+        radial-gradient(2px 2px at 65% 80%, #4d8dff 70%, transparent),
+        radial-gradient(2px 2px at 85% 25%, #75aaff 70%, transparent),
+        radial-gradient(3px 3px at 95% 60%, #4d8dff 70%, transparent);
+
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+    animation: particleFloat 12s ease-in-out infinite alternate;
+}
+
+.aether-particles::before,
+.aether-particles::after {
+    content: "";
+    position: absolute;
+    inset: -20%;
+
+    background-image:
+        radial-gradient(2px 2px at 20% 40%, #4d8dff 70%, transparent),
+        radial-gradient(3px 3px at 70% 20%, #75aaff 70%, transparent),
+        radial-gradient(2px 2px at 80% 75%, #4d8dff 70%, transparent);
+
+    background-repeat: no-repeat;
+    animation: particleDrift 18s linear infinite;
+}
+
+.aether-particles::after {
+    opacity: 0.5;
+    animation-duration: 25s;
+    animation-direction: reverse;
+}
+
+@keyframes particleFloat {
+    from {
+        opacity: 0.35;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0.85;
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes particleDrift {
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(25px, -35px);
+    }
+}
