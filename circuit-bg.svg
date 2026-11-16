@@ -111,6 +111,23 @@
         filter: brightness(1.7);
     }
 }  
+  .ambient-energy {
+    animation: ambientPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes ambientPulse {
+    0% {
+        opacity: 0.04;
+    }
+
+    50% {
+        opacity: 0.16;
+    }
+
+    100% {
+        opacity: 0.08;
+    }
+}
 </style>
   <!-- Pistas principales -->
  <g class="circuit-flow"
