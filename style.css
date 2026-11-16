@@ -17,7 +17,7 @@ background-image:
     linear-gradient(180deg, #080d18 0%, #090b13 50%, #060910 100%);
 color: #ffffff;
 font-family: Arial, sans-serif;
-
+}
 
 /* NAVIGATION */
 
@@ -847,7 +847,7 @@ footer p {
         gap: 10px;
         font-size: 13px;
     }
-    
+}
 /* COOKIE CONSENT BANNER */
 
 .cookie-banner {
@@ -980,28 +980,137 @@ footer p {
 
 
 
-/* =========================================
-   AETHER - GLOBAL BACKGROUND
-========================================= */
+
+/* =====================================
+   AETHER - UNIFIED FUTURISTIC BACKGROUND
+===================================== */
 
 body {
     position: relative;
+    isolation: isolate;
     min-height: 100vh;
+    overflow-x: hidden;
 
     background:
         radial-gradient(
-            ellipse at 80% 35%,
-            rgba(25, 65, 145, 0.20),
-            transparent 42%
+            ellipse at 50% 0%,
+            rgba(30, 90, 180, 0.16),
+            transparent 65%
+        ),
+        linear-gradient(
+            180deg,
+            #080d18 0%,
+            #090b13 50%,
+            #060910 100%
+        );
+
+    color: #ffffff;
+}
+
+/* CIRCUITS */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+
+    background-image: url("circuit-bg.svg");
+    background-repeat: repeat;
+    background-size: 1000px 563px;
+
+    opacity: 0.20;
+    animation: circuitMove 45s linear infinite;
+}
+
+/* BLUE LIGHT */
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at 15% 20%,
+            rgba(30, 100, 220, 0.10),
+            transparent 45%
         ),
         radial-gradient(
-            ellipse at 15% 85%,
-            rgba(20, 45, 100, 0.10),
-            transparent 40%
-        ),
-        #0b0b0f;
+            ellipse at 85% 75%,
+            rgba(20, 80, 190, 0.08),
+            transparent 45%
+        );
 
-    background-attachment: fixed;
+    animation: circuitGlow 12s ease-in-out infinite alternate;
+}
+
+/* FLOATING PARTICLES */
+
+.aether-particles {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+
+    background-image:
+        radial-gradient(2px 2px at 10% 20%, #75aaff 70%, transparent),
+        radial-gradient(2px 2px at 25% 75%, #4d8dff 70%, transparent),
+        radial-gradient(3px 3px at 45% 35%, #75aaff 70%, transparent),
+        radial-gradient(2px 2px at 65% 80%, #4d8dff 70%, transparent),
+        radial-gradient(2px 2px at 85% 25%, #75aaff 70%, transparent),
+        radial-gradient(3px 3px at 95% 60%, #4d8dff 70%, transparent);
+
+    background-repeat: no-repeat;
+
+    animation: particleFloat 12s ease-in-out infinite alternate;
+}
+
+/* ANIMATIONS */
+
+@keyframes circuitMove {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: 100px 100px;
+    }
+}
+
+@keyframes circuitGlow {
+    from {
+        opacity: 0.35;
+    }
+
+    to {
+        opacity: 0.85;
+    }
+}
+
+@keyframes particleFloat {
+    from {
+        opacity: 0.35;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0.85;
+        transform: translateY(-12px);
+    }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+    body::before,
+    body::after,
+    .aether-particles {
+        animation: none;
+    }
 }
 
 /* Contenido por encima del fondo */
