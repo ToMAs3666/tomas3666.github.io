@@ -128,6 +128,48 @@
         opacity: 0.08;
     }
 }
+  /* MICROCHIP ENERGY */
+.chip-energy {
+    animation: chipEnergy 3.5s ease-in-out infinite;
+}
+
+@keyframes chipEnergy {
+    0%, 100% {
+        opacity: 0.55;
+        filter: brightness(0.8);
+    }
+    50% {
+        opacity: 1;
+        filter: brightness(1.7);
+    }
+}
+
+/* CONTACT ENERGY */
+.contact-energy {
+    animation: contactPulse 2.8s ease-in-out infinite;
+}
+
+@keyframes contactPulse {
+    0%, 100% {
+        opacity: 0.35;
+        filter: brightness(0.8);
+    }
+    50% {
+        opacity: 1;
+        filter: brightness(2);
+    }
+}
+
+/* AMBIENT LIGHT */
+.ambient-energy {
+    animation: ambientPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes ambientPulse {
+    0% { opacity: 0.04; }
+    50% { opacity: 0.16; }
+    100% { opacity: 0.08; }
+}
 </style>
   <!-- Pistas principales -->
  <g class="circuit-flow"
@@ -311,3 +353,4 @@
     <circle cx="1620" cy="750" r="70"/>
     <circle cx="960" cy="540" r="120"/>
 </g>
+</svg>
