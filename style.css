@@ -2347,3 +2347,14 @@ body::after {
         transform: translate(25px, -35px);
     }
 }
+/* AETHER - SVG CIRCUIT BACKGROUND */
+
+.circuit-background {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    pointer-events: none;
+    z-index: -2;
+}
