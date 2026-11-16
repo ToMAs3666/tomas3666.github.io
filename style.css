@@ -21,37 +21,85 @@ font-family: Arial, sans-serif;
 
 /* NAVIGATION */
 
+/* AETHER GLASS NAVIGATION */
+
 .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 10%;
-    background-color: #111116;
+
+    padding: 22px 10%;
+
+    background: rgba(8, 13, 24, 0.78);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(77, 141, 255, 0.18);
+
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
-    font-size: 26px;
-    letter-spacing: 2px;
+    font-size: 27px;
+    font-weight: bold;
+    letter-spacing: 3px;
+
+    color: #ffffff;
+
+    text-shadow: 0 0 15px rgba(77, 141, 255, 0.25);
 }
 
 .logo span {
     color: #4d8dff;
+    text-shadow: 0 0 12px rgba(77, 141, 255, 0.8);
 }
 
 .navbar ul {
     display: flex;
+    align-items: center;
     list-style: none;
-    gap: 30px;
+    gap: 35px;
 }
 
 .navbar a {
-    color: #cccccc;
+    position: relative;
+
+    color: #c5ccda;
     text-decoration: none;
-    transition: color 0.3s ease;
+
+    font-size: 14px;
+    letter-spacing: 0.5px;
+
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.navbar a::after {
+    content: "";
+    position: absolute;
+
+    left: 0;
+    bottom: -8px;
+
+    width: 0;
+    height: 2px;
+
+    background: #4d8dff;
+    box-shadow: 0 0 10px #4d8dff;
+
+    transition: width 0.3s ease;
 }
 
 .navbar a:hover {
-    color: #4d8dff;
+    color: #ffffff;
+    text-shadow: 0 0 12px rgba(77, 141, 255, 0.8);
+}
+
+.navbar a:hover::after {
+    width: 100%;
 }
 
 
