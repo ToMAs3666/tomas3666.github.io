@@ -11,10 +11,12 @@ html {
 }
 
 body {
-    background-color: #0b0b0f;
-    color: white;
-    font-family: Arial, sans-serif;
-}
+   background-color: #080d18;
+background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(30, 90, 180, 0.16), transparent 65%),
+    linear-gradient(180deg, #080d18 0%, #090b13 50%, #060910 100%);
+color: #ffffff;
+font-family: Arial, sans-serif;
 
 
 /* NAVIGATION */
