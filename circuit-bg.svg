@@ -35,20 +35,41 @@
 <!-- Animación de flujo energético -->
 <style>
   .circuit-flow {
-    stroke-dasharray: 12 22;
-    animation: energyFlow 5s linear infinite;
+    opacity: 0.28;
   }
 
   .circuit-glow {
     animation: glowPulse 4s ease-in-out infinite alternate;
   }
 
-  @keyframes energyFlow {
-    from {
-      stroke-dashoffset: 0;
+  .energy-pulse {
+    fill: none;
+    stroke: url(#trace);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-dasharray: 100 900;
+    stroke-dashoffset: 100;
+    filter: url(#glow);
+    animation: pulseTravel 7s linear infinite;
+  }
+
+  @keyframes pulseTravel {
+    0% {
+      stroke-dashoffset: 100;
+      opacity: 0;
     }
-    to {
-      stroke-dashoffset: -340;
+
+    10% {
+      opacity: 1;
+    }
+
+    80% {
+      opacity: 1;
+    }
+
+    100% {
+      stroke-dashoffset: -900;
+      opacity: 0;
     }
   }
 
@@ -67,10 +88,10 @@
       opacity: 0.45;
       filter: brightness(1);
     }
-}
+  }
 
   @media (prefers-reduced-motion: reduce) {
-    .circuit-flow,
+    .energy-pulse,
     .circuit-glow {
       animation: none;
     }
@@ -85,16 +106,15 @@
    stroke-linejoin="round"
    opacity=".75">
 
-    <path id="p1" d="M0 150H180V230H340V310H510V390H650"/>
-    <path id="p2" d="M0 240H100V300H230V380H390"/>
-    <path id="p3" d="M0 420H180V480H310V550H470"/>
-    <path id="p4" d="M0 850H170V770H330V690H500V620H650"/>
-
-    <path id="p5" d="M1920 150H1740V230H1580V310H1410V390H1270"/>
-    <path id="p6" d="M1920 240H1820V300H1690V380H1530"/>
-    <path id="p7" d="M1920 420H1740V480H1610V550H1450"/>
-    <path id="p8" d="M1920 850H1750V770H1590V690H1420V620H1270"/>
-
+    <path id="p1" pathLength="1000" d="M0 150H180V230H340V310H510V390H650"/>
+    <path id="p2" pathLength="1000" d="M0 150H180V230H340V310H510V390H650"/>
+    <path id="p3" pathLength="1000" d="M0 150H180V230H340V310H510V390H650"/>
+    <path id="p4" pathLength="1000" d="M0 150H180V230H340V310H510V390H650"/>
+    <path id="p5" pathLength="1000" d="M0 150H180V230H340V310H510V390H650"/>
+    <path id="p6" pathLength="1000" d="M0 150H180V230H340V310H510V390H650"/>
+    <path id="p7" pathLength="1000" d="M0 150H180V230H340V310H510V390H650"/>
+    <path id="p8" pathLength="1000" d="M0 150H180V230H340V310H510V390H650"/>
+   
     <path d="M300 0V130H390V210H500V280"/>
     <path d="M1620 0V130H1530V210H1420V280"/>
     <path d="M300 1080V950H390V870H500V800"/>
