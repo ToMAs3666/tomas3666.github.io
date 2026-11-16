@@ -558,7 +558,7 @@
                 fill="#8ceaff" opacity=".4"
                 filter="url(#aetherStrongGlow)"/>
 
-        <circle cx="960" cy="540" r="12"
+               <circle cx="960" cy="540" r="12"
                 fill="#ffffff"
                 filter="url(#aetherStrongGlow)"/>
 
@@ -566,7 +566,4 @@
                 fill="#ffffff"/>
     </g>
 
-</g>
-
-     
 </svg>
