@@ -372,24 +372,54 @@
     <path d="M1220 780H1130V720H1050V660"/>
   </g>
 
-  <!-- NÚCLEO ENERGÉTICO CENTRAL -->
-  <g class="core-ring">
-    <circle cx="960" cy="540" r="115"/>
-    <circle cx="960" cy="540" r="155"
-            stroke-dasharray="5 18"/>
-    <circle cx="960" cy="540" r="195"
-            stroke-dasharray="2 26"/>
-  </g>
+ 
+<!-- AETHER - CENTRAL ENERGY CORE -->
 
-  <g class="core-aura" filter="url(#strongGlow)">
+<g class="core-aura">
+    <!-- Aura exterior -->
+    <circle cx="960" cy="540" r="180"
+            fill="url(#coreLight)"
+            opacity=".9"/>
+
+    <!-- Anillos luminosos -->
+    <circle cx="960" cy="540" r="115"
+            fill="none"
+            stroke="#168bff"
+            stroke-width="3"
+            opacity=".8"
+            filter="url(#glow)"/>
+
+    <circle cx="960" cy="540" r="145"
+            fill="none"
+            stroke="#55caff"
+            stroke-width="2"
+            stroke-dasharray="12 14"
+            filter="url(#glow)"/>
+
+    <circle cx="960" cy="540" r="170"
+            fill="none"
+            stroke="#087cff"
+            stroke-width="2"
+            stroke-dasharray="3 20"
+            opacity=".8"/>
+    
+    <!-- Núcleo brillante -->
     <circle cx="960" cy="540" r="65"
-            fill="url(#coreLight)"/>
-    <circle cx="960" cy="540" r="8"
-            fill="#c4f5ff"/>
-    <circle cx="960" cy="540" r="22"
-            fill="none" stroke="#64cfff"
-            stroke-width="2" opacity=".7"/>
-  </g>
+            fill="#087cff"
+            opacity=".12"
+            filter="url(#coreGlow)"/>
+
+    <circle cx="960" cy="540" r="34"
+            fill="url(#coreLight)"
+            filter="url(#strongGlow)"/>
+
+    <circle cx="960" cy="540" r="12"
+            fill="#b9f4ff"
+            filter="url(#strongGlow)"/>
+
+    <circle cx="960" cy="540" r="5"
+            fill="#ffffff"/>
+</g>
 
   <!-- MICROCHIPS -->
   <g class="chip-energy" filter="url(#glow)">
