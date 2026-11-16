@@ -585,4 +585,164 @@
     <circle cx="960" cy="540" r="8"
             fill="#ffffff"/>
 </g>
+<!-- AETHER - ENERGY CORE -->
+
+<defs>
+    <radialGradient id="energySphere">
+        <stop offset="0%" stop-color="#ffffff"/>
+        <stop offset="12%" stop-color="#a8f4ff"/>
+        <stop offset="35%" stop-color="#32aaff"/>
+        <stop offset="70%" stop-color="#075cff"/>
+        <stop offset="100%" stop-color="#001b55" stop-opacity="0.1"/>
+    </radialGradient>
+
+    <radialGradient id="energyAura">
+        <stop offset="0%" stop-color="#168bff" stop-opacity=".65"/>
+        <stop offset="55%" stop-color="#087cff" stop-opacity=".2"/>
+        <stop offset="100%" stop-color="#087cff" stop-opacity="0"/>
+    </radialGradient>
+
+    <filter id="energyGlow" x="-100%" y="-100%" width="300%" height="300%">
+        <feGaussianBlur stdDeviation="9" result="blur"/>
+        <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+
+    <filter id="energyStrongGlow" x="-150%" y="-150%" width="400%" height="400%">
+        <feGaussianBlur stdDeviation="20" result="blur"/>
+        <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+    </filter>
+</defs>
+
+<style>
+    .energy-outer-ring {
+        transform-origin: 960px 540px;
+        animation: outerRotate 24s linear infinite;
+    }
+
+    .energy-inner-ring {
+        transform-origin: 960px 540px;
+        animation: innerRotate 12s linear infinite;
+    }
+
+    .energy-sphere {
+        transform-origin: 960px 540px;
+        animation: spherePulse 3s ease-in-out infinite;
+    }
+
+    .energy-electric {
+        stroke-dasharray: 15 25;
+        animation: electricFlow 2s linear infinite;
+    }
+
+    .energy-core-particles {
+        transform-origin: 960px 540px;
+        animation: particleRotate 8s linear infinite;
+    }
+
+    @keyframes outerRotate {
+        to { transform: rotate(360deg); }
+    }
+
+    @keyframes innerRotate {
+        to { transform: rotate(-360deg); }
+    }
+
+    @keyframes spherePulse {
+        0%, 100% { transform: scale(.92); opacity: .85; }
+        50% { transform: scale(1.08); opacity: 1; }
+    }
+
+    @keyframes electricFlow {
+        to { stroke-dashoffset: -80; }
+    }
+
+    @keyframes particleRotate {
+        to { transform: rotate(360deg); }
+    }
+</style>
+
+<g id="aether-energy-core">
+
+    <!-- ENERGÍA EXTERIOR -->
+    <circle cx="960" cy="540" r="230"
+            fill="url(#energyAura)"
+            filter="url(#energyStrongGlow)"/>
+
+    <!-- ANILLO EXTERIOR -->
+    <g class="energy-outer-ring" fill="none">
+        <circle cx="960" cy="540" r="185"
+                stroke="#087cff" stroke-width="3"
+                stroke-dasharray="45 18 8 18"
+                filter="url(#energyGlow)"/>
+
+        <circle cx="960" cy="540" r="205"
+                stroke="#32aaff" stroke-width="1.5"
+                stroke-dasharray="3 18" opacity=".8"/>
+
+        <path d="M 960 330 A 210 210 0 0 1 1170 540"
+              stroke="#8cecff" stroke-width="3"
+              filter="url(#energyGlow)"/>
+    </g>
+
+    <!-- ANILLO INTERIOR -->
+    <g class="energy-inner-ring" fill="none">
+        <circle cx="960" cy="540" r="145"
+                stroke="#55caff" stroke-width="3"
+                stroke-dasharray="70 20 12 20"
+                filter="url(#energyGlow)"/>
+
+        <circle cx="960" cy="540" r="125"
+                stroke="#087cff" stroke-width="2"
+                stroke-dasharray="5 12"/>
+    </g>
+
+    <!-- DESCARGAS ELÉCTRICAS -->
+    <g class="energy-electric" fill="none"
+       stroke="#8cecff" stroke-width="3"
+       stroke-linecap="round" filter="url(#energyGlow)">
+
+        <path d="M 960 355 L 978 390 L 954 420 L 985 448"/>
+        <path d="M 1135 540 L 1095 525 L 1075 555 L 1040 535"/>
+        <path d="M 960 725 L 940 690 L 970 660 L 945 630"/>
+        <path d="M 785 540 L 825 555 L 850 525 L 880 545"/>
+    </g>
+
+    <!-- PARTÍCULAS ORBITALES -->
+    <g class="energy-core-particles" filter="url(#energyGlow)">
+        <circle cx="960" cy="335" r="5" fill="#ffffff"/>
+        <circle cx="1165" cy="540" r="4" fill="#55caff"/>
+        <circle cx="960" cy="745" r="5" fill="#ffffff"/>
+        <circle cx="755" cy="540" r="4" fill="#55caff"/>
+    </g>
+
+    <!-- ESFERA CENTRAL -->
+    <g class="energy-sphere">
+        <circle cx="960" cy="540" r="105"
+                fill="#087cff" opacity=".25"
+                filter="url(#energyStrongGlow)"/>
+
+        <circle cx="960" cy="540" r="82"
+                fill="url(#energySphere)"
+                filter="url(#energyGlow)"/>
+
+        <circle cx="960" cy="540" r="48"
+                fill="#8cecff" opacity=".3"
+                filter="url(#energyGlow)"/>
+
+        <circle cx="960" cy="540" r="19"
+                fill="#ffffff"
+                filter="url(#energyStrongGlow)"/>
+
+        <circle cx="960" cy="540" r="7"
+                fill="#ffffff"/>
+    </g>
+
+</g>
+
 </svg>
