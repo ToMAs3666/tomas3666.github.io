@@ -374,169 +374,21 @@
 
  
 
-  <!-- AETHER ENERGY CORE - FINAL VERSION -->
 
-  <defs>
-    <radialGradient id="aetherSphere">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="12%" stop-color="#c5f8ff"/>
-      <stop offset="32%" stop-color="#48c5ff"/>
-      <stop offset="65%" stop-color="#087cff"/>
-      <stop offset="100%" stop-color="#001b55" stop-opacity=".15"/>
-    </radialGradient>
-
-    <radialGradient id="aetherAura">
-      <stop offset="0%" stop-color="#168bff" stop-opacity=".8"/>
-      <stop offset="50%" stop-color="#087cff" stop-opacity=".3"/>
-      <stop offset="100%" stop-color="#087cff" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-
-  <style>
-    .aether-ring-outer {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: aetherRotate 25s linear infinite;
-    }
-
-    .aether-ring-inner {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: aetherRotateReverse 14s linear infinite;
-    }
-
-    .aether-sphere {
-      transform-box: fill-box;
-      transform-origin: center;
-      animation: aetherPulse 3s ease-in-out infinite;
-    }
-
-    .aether-electric {
-      stroke-dasharray: 12 18;
-      animation: aetherElectric 2s linear infinite;
-    }
-
-    @keyframes aetherRotate {
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes aetherRotateReverse {
-      to { transform: rotate(-360deg); }
-    }
-
-    @keyframes aetherPulse {
-      0%, 100% { transform: scale(.92); }
-      50% { transform: scale(1.08); }
-    }
-
-    @keyframes aetherElectric {
-      to { stroke-dashoffset: -120; }
-    }
-  </style>
-
-  <!-- AURA ENERGÉTICA -->
-  <g>
-    <circle cx="960" cy="540" r="260"
-            fill="url(#aetherAura)"
-            filter="url(#coreGlow)"/>
-
-    <circle cx="960" cy="540" r="190"
-            fill="url(#aetherAura)"
-            filter="url(#softGlow)"/>
-  </g>
-
-  <!-- ANILLOS EXTERIORES -->
-  <g class="aether-ring-outer" fill="none">
-    <circle cx="960" cy="540" r="205"
-            stroke="#087cff"
-            stroke-width="3"
-            stroke-dasharray="50 15 8 15"
-            filter="url(#strongGlow)"/>
-
-    <circle cx="960" cy="540" r="225"
-            stroke="#35baff"
-            stroke-width="1.5"
-            stroke-dasharray="3 20"
-            opacity=".8"/>
-
-    <circle cx="960" cy="540" r="185"
-            stroke="#8cecff"
-            stroke-width="2"
-            stroke-dasharray="80 120"/>
-  </g>
-
-  <!-- ANILLOS INTERIORES -->
-  <g class="aether-ring-inner" fill="none">
-    <circle cx="960" cy="540" r="145"
-            stroke="#55caff"
-            stroke-width="3"
-            stroke-dasharray="65 18 8 18"
-            filter="url(#glow)"/>
-
+<!-- AETHER - VISIBLE CORE TEST -->
+<g id="aether-energy-core">
+    <circle cx="960" cy="540" r="180"
+            fill="#087cff" opacity="0.25"/>
     <circle cx="960" cy="540" r="120"
-            stroke="#087cff"
-            stroke-width="2"
-            stroke-dasharray="4 12"/>
-
-    <circle cx="960" cy="540" r="100"
-            stroke="#8cecff"
-            stroke-width="1.5"
-            opacity=".7"/>
-  </g>
-
-  <!-- DESCARGAS ELÉCTRICAS -->
-  <g class="aether-electric"
-     fill="none"
-     stroke="#a8f4ff"
-     stroke-width="3"
-     stroke-linecap="round"
-     filter="url(#strongGlow)">
-
-    <path d="M960 330 L980 375 L950 405 L985 445"/>
-    <path d="M1170 540 L1125 520 L1090 555 L1050 535"/>
-    <path d="M960 750 L940 705 L975 675 L945 635"/>
-    <path d="M750 540 L795 560 L830 525 L870 545"/>
-
-    <path d="M820 390 L850 420 L830 450"/>
-    <path d="M1100 390 L1070 420 L1090 450"/>
-    <path d="M820 690 L850 660 L830 630"/>
-    <path d="M1100 690 L1070 660 L1090 630"/>
-  </g>
-
-  <!-- PARTÍCULAS ORBITALES -->
-  <g fill="#c5f8ff" filter="url(#strongGlow)">
-    <circle cx="960" cy="315" r="5"/>
-    <circle cx="1185" cy="540" r="5"/>
-    <circle cx="960" cy="765" r="5"/>
-    <circle cx="735" cy="540" r="5"/>
-  </g>
-
-  <!-- ESFERA ENERGÉTICA CENTRAL -->
-  <g class="aether-sphere">
-
-    <circle cx="960" cy="540" r="100"
-            fill="#087cff"
-            opacity=".35"
-            filter="url(#coreGlow)"/>
-
-    <circle cx="960" cy="540" r="82"
-            fill="url(#aetherSphere)"
-            filter="url(#strongGlow)"/>
-
-    <circle cx="960" cy="540" r="48"
-            fill="#8cecff"
-            opacity=".3"
-            filter="url(#glow)"/>
-
-    <circle cx="960" cy="540" r="22"
-            fill="#d9faff"
-            filter="url(#strongGlow)"/>
-
-    <circle cx="960" cy="540" r="9"
+            fill="none" stroke="#00aaff"
+            stroke-width="8"/>
+    <circle cx="960" cy="540" r="75"
+            fill="#087cff"/>
+    <circle cx="960" cy="540" r="35"
+            fill="#8ceaff"/>
+    <circle cx="960" cy="540" r="15"
             fill="#ffffff"/>
-
-  </g>
-
+</g>
 </svg>
 
 
