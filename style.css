@@ -21,7 +21,10 @@ font-family: Arial, sans-serif;
 
 /* NAVIGATION */
 
-/* AETHER GLASS NAVIGATION */
+
+/* =================================
+   AETHER - ENERGY GLASS NAVIGATION
+================================= */
 
 .navbar {
     position: sticky;
@@ -38,16 +41,19 @@ font-family: Arial, sans-serif;
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
 
-    border-bottom: 1px solid rgba(77, 141, 255, 0.18);
+    border-bottom: 1px solid rgba(77, 141, 255, 0.22);
 
-    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
+    box-shadow:
+        0 5px 30px rgba(0, 0, 0, 0.25),
+        0 1px 15px rgba(77, 141, 255, 0.05);
 }
+
+/* LOGO */
 
 .logo {
     font-size: 27px;
     font-weight: bold;
     letter-spacing: 3px;
-
     color: #ffffff;
 
     text-shadow: 0 0 15px rgba(77, 141, 255, 0.25);
@@ -58,50 +64,119 @@ font-family: Arial, sans-serif;
     text-shadow: 0 0 12px rgba(77, 141, 255, 0.8);
 }
 
+/* NAVIGATION LINKS */
+
 .navbar ul {
     display: flex;
     align-items: center;
     list-style: none;
-    gap: 35px;
+    gap: 12px;
 }
 
-.navbar a {
-    position: relative;
+/* INDIVIDUAL BUTTONS */
 
-    color: #c5ccda;
+.navbar ul li a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 11px 19px;
+
+    color: #b9c7dc;
     text-decoration: none;
 
-    font-size: 14px;
-    letter-spacing: 0.5px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.7px;
 
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+    background: rgba(77, 141, 255, 0.035);
+    border: 1px solid rgba(77, 141, 255, 0.12);
+    border-radius: 9px;
+
+    transition:
+        color 0.3s ease,
+        background 0.3s ease,
+        border 0.3s ease,
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+
+    overflow: hidden;
 }
 
-.navbar a::after {
+/* ENERGY LINE */
+
+.navbar ul li a::after {
     content: "";
     position: absolute;
 
-    left: 0;
-    bottom: -8px;
+    left: 50%;
+    bottom: 0;
 
     width: 0;
     height: 2px;
 
-    background: #4d8dff;
-    box-shadow: 0 0 10px #4d8dff;
+    transform: translateX(-50%);
+
+    background: #58a6ff;
+    box-shadow: 0 0 12px #4d8dff;
 
     transition: width 0.3s ease;
 }
 
-.navbar a:hover {
+/* HOVER EFFECT */
+
+.navbar ul li a:hover {
     color: #ffffff;
-    text-shadow: 0 0 12px rgba(77, 141, 255, 0.8);
+
+    background: rgba(77, 141, 255, 0.13);
+    border-color: rgba(77, 141, 255, 0.65);
+
+    box-shadow:
+        0 0 12px rgba(77, 141, 255, 0.18),
+        inset 0 0 12px rgba(77, 141, 255, 0.08);
+
+    transform: translateY(-3px);
+
+    text-shadow: 0 0 10px rgba(100, 170, 255, 0.8);
 }
 
-.navbar a:hover::after {
-    width: 100%;
+.navbar ul li a:hover::after {
+    width: 65%;
 }
 
+/* CLICK EFFECT */
+
+.navbar ul li a:active {
+    transform: translateY(-1px) scale(0.97);
+}
+
+/* KEYBOARD ACCESSIBILITY */
+
+.navbar ul li a:focus-visible {
+    outline: 2px solid #4d8dff;
+    outline-offset: 4px;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 18px 5%;
+        flex-wrap: wrap;
+        gap: 18px;
+    }
+
+    .navbar ul {
+        gap: 7px;
+        flex-wrap: wrap;
+    }
+
+    .navbar ul li a {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+}
 
 /* AETHER HERO SECTION */
 
