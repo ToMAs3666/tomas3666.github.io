@@ -1211,51 +1211,135 @@ font-family: Arial, sans-serif;
 }
 
 
-/* AETHER FUTURISTIC BUTTONS */
+
+/* AETHER - ENERGY CORE BUTTONS */
 
 .button {
+    position: relative;
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     margin-top: 30px;
-    padding: 15px 30px;
+    padding: 15px 32px;
 
-    background: linear-gradient(135deg, #4d8dff, #2866d4);
+    background:
+        linear-gradient(135deg, #0750a8, #087cff 55%, #03458f);
 
     color: #ffffff;
     text-decoration: none;
 
-    border: 1px solid rgba(130, 180, 255, 0.45);
-    border-radius: 8px;
+    border: 1px solid rgba(105, 205, 255, 0.8);
+    border-radius: 9px;
 
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     font-family: inherit;
-    letter-spacing: 0.4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 
     cursor: pointer;
+    overflow: hidden;
 
     box-shadow:
-        0 0 15px rgba(77, 141, 255, 0.25),
-        inset 0 0 10px rgba(255, 255, 255, 0.08);
+        0 0 12px rgba(0, 125, 255, 0.35),
+        0 0 28px rgba(0, 100, 255, 0.18),
+        inset 0 0 14px rgba(120, 220, 255, 0.18);
 
-    transition: all 0.3s ease;
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease,
+        background 0.3s ease;
 }
 
+/* ENERGY LINE */
+.button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -120%;
+
+    width: 70%;
+    height: 100%;
+
+    background: linear-gradient(
+        110deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+
+    transform: skewX(-25deg);
+    transition: left 0.65s ease;
+}
+
+/* INNER ENERGY */
+.button::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    border-radius: inherit;
+    background: radial-gradient(
+        circle at center,
+        rgba(90, 200, 255, 0.2),
+        transparent 75%
+    );
+
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+/* HOVER */
 .button:hover {
-    background: linear-gradient(135deg, #70aaff, #347aff);
+    transform: translateY(-4px) scale(1.025);
 
-    transform: translateY(-4px);
+    border-color: #b5f2ff;
+
+    background:
+        linear-gradient(135deg, #087cff, #159fff, #0750bb);
 
     box-shadow:
-        0 0 20px rgba(77, 141, 255, 0.55),
-        0 8px 25px rgba(0, 80, 200, 0.2);
+        0 0 15px rgba(0, 160, 255, 0.75),
+        0 0 35px rgba(0, 110, 255, 0.5),
+        0 0 65px rgba(0, 100, 255, 0.2),
+        inset 0 0 20px rgba(255, 255, 255, 0.2);
 }
 
-.button:active {
-    transform: translateY(-1px);
+.button:hover::before {
+    left: 150%;
 }
+
+.button:hover::after {
+    opacity: 1;
+}
+
+/* CLICK */
+.button:active {
+    transform: translateY(-1px) scale(0.98);
+
+    box-shadow:
+        0 0 12px rgba(0, 150, 255, 0.5),
+        inset 0 0 18px rgba(255, 255, 255, 0.2);
+}
+
+/* KEYBOARD ACCESS */
+.button:focus-visible {
+    outline: 2px solid #b5f2ff;
+    outline-offset: 4px;
+}
+
+/* REDUCED MOTION */
+@media (prefers-reduced-motion: reduce) {
+    .button,
+    .button::before,
+    .button::after {
+        transition: none;
+    }
+}
+
 
 /* GENERAL SECTIONS */
 
