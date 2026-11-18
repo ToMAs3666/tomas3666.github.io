@@ -272,6 +272,9 @@ function loadBackgroundCollections() {
    FULLSCREEN PREVIEW
 ======================================== */
 
+let currentRenderer = null;
+let currentAnimation = null;
+
 function openBackgroundPreview(background, category) {
 
     const preview = document.getElementById("background-preview");
@@ -280,32 +283,154 @@ function openBackgroundPreview(background, category) {
 
     if (!preview || !previewContent || !previewTitle) return;
 
+    // Limpiar escena anterior
+    if (currentAnimation) {
+        cancelAnimationFrame(currentAnimation);
+        currentAnimation = null;
+    }
+
+    if (currentRenderer) {
+        currentRenderer.dispose();
+        currentRenderer = null;
+    }
+
     previewContent.innerHTML = "";
-
-    const scene = document.createElement("div");
-
-    scene.className = "preview-scene";
-
-    scene.style.setProperty("--scene-color", background.color);
-
-    const orbit = document.createElement("div");
-    orbit.className = "preview-orbit";
-
-    const core = document.createElement("div");
-    core.className = "preview-core";
-
-    scene.appendChild(orbit);
-    scene.appendChild(core);
-
-    previewContent.appendChild(scene);
 
     previewTitle.textContent = background.name;
 
     preview.classList.add("active");
-
     preview.setAttribute("aria-hidden", "false");
 
     document.body.style.overflow = "hidden";
+
+    if (typeof THREE === "undefined") {
+        previewContent.textContent = "Three.js konnte nicht geladen werden.";
+        return;
+    }
+
+    // ESCENA 3D
+    const scene = new THREE.Scene();
+
+    scene.background = new THREE.Color("#030711");
+
+    const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+    );
+
+    camera.position.z = 7;
+
+    const renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: false
+    });
+
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    previewContent.appendChild(renderer.domElement);
+
+    currentRenderer = renderer;
+
+    // ILUMINACIÓN
+    const light = new THREE.PointLight(
+        new THREE.Color(background.color),
+        3,
+        30
+    );
+
+    light.position.set(0, 0, 4);
+
+    scene.add(light);
+
+    scene.add(
+        new THREE.AmbientLight(0xffffff, 0.4)
+    );
+
+    // AETHER CORE
+    const geometry = new THREE.IcosahedronGeometry(1.5, 2);
+
+    const material = new THREE.MeshPhysicalMaterial({
+        color: background.color,
+        metalness: 0.6,
+        roughness: 0.2,
+        emissive: background.color,
+        emissiveIntensity: 0.7,
+        wireframe: background.id !== "15"
+    });
+
+    const core = new THREE.Mesh(geometry, material);
+
+    scene.add(core);
+
+    // PARTÍCULAS
+    const particleGeometry = new THREE.BufferGeometry();
+
+    const particleCount = 1200;
+
+    const positions = new Float32Array(particleCount * 3);
+
+    for (let i = 0; i < particleCount * 3; i++) {
+        positions[i] = (Math.random() - 0.5) * 18;
+    }
+
+    particleGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions, 3)
+    );
+
+    const particleMaterial = new THREE.PointsMaterial({
+        color: 0x8abaff,
+        size: 0.035,
+        transparent: true,
+        opacity: 0.8
+    });
+
+    const particles = new THREE.Points(
+        particleGeometry,
+        particleMaterial
+    );
+
+    scene.add(particles);
+
+    // ANIMACIÓN
+    function animate() {
+
+        currentAnimation = requestAnimationFrame(animate);
+
+        core.rotation.x += 0.003;
+        core.rotation.y += 0.006;
+
+        particles.rotation.y += 0.0007;
+
+        light.intensity = 2.5 + Math.sin(Date.now() * 0.002) * 0.7;
+
+        renderer.render(scene, camera);
+
+    }
+
+    animate();
+
+    // RESPONSIVE
+    function resizeScene() {
+
+        if (!currentRenderer) return;
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(
+            window.innerWidth,
+            window.innerHeight
+        );
+
+    }
+
+    window.addEventListener("resize", resizeScene);
 
 }
 
