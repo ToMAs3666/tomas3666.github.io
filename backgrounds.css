@@ -392,4 +392,128 @@
         transition: none;
     }
 }
+/* BACKGROUND LAB - PREVIEW EFFECTS */
+
+.background-number {
+    position: absolute;
+    top: 15px;
+    left: 18px;
+    z-index: 2;
+    color: rgba(255,255,255,0.65);
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.background-thumbnail {
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            var(--scene-color),
+            transparent 60%
+        ),
+        linear-gradient(135deg, #101c35, #080b12);
+    background-size: 200% 200%;
+    animation: sceneMovement 10s ease-in-out infinite alternate;
+}
+
+@keyframes sceneMovement {
+    from {
+        background-position: 0% 50%;
+    }
+    to {
+        background-position: 100% 50%;
+    }
+}
+
+/* FULLSCREEN SCENE */
+
+.preview-scene {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at 50% 50%,
+            var(--scene-color),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(20, 80, 180, 0.25),
+            transparent 40%
+        ),
+        #050810;
+    animation: previewAtmosphere 8s ease-in-out infinite alternate;
+}
+
+.preview-orbit {
+    position: absolute;
+    width: min(65vw, 650px);
+    aspect-ratio: 1;
+    border: 1px solid rgba(100,160,255,0.55);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow:
+        0 0 50px rgba(50,120,255,0.2),
+        inset 0 0 50px rgba(50,120,255,0.15);
+    animation: previewOrbit 18s linear infinite;
+}
+
+.preview-core {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: var(--scene-color);
+    opacity: 0.25;
+    filter: blur(65px);
+    animation: previewPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes previewAtmosphere {
+    from {
+        transform: scale(1);
+        filter: hue-rotate(0deg);
+    }
+    to {
+        transform: scale(1.12);
+        filter: hue-rotate(25deg);
+    }
+}
+
+@keyframes previewOrbit {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg) scale(0.8);
+    }
+    to {
+        transform: translate(-50%, -50%) rotate(360deg) scale(1.15);
+    }
+}
+
+@keyframes previewPulse {
+    from {
+        opacity: 0.15;
+        scale: 0.8;
+    }
+    to {
+        opacity: 0.65;
+        scale: 1.6;
+    }
+}
+
+@media (max-width: 600px) {
+    .preview-orbit {
+        width: 85vw;
+    }
+
+    .preview-core {
+        width: 100px;
+        height: 100px;
+    }
+}
 
