@@ -2533,3 +2533,24 @@ body > *:not(.circuit-background) {
     position: relative;
     z-index: 1;
 }
+
+/* ANIMATED WALLPAPERS PROJECT LINK */
+
+.project-link {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.project-open {
+    margin-top: 20px;
+    color: #4d8dff;
+    font-weight: 600;
+    transition: 0.3s ease;
+}
+
+.project-link:hover .project-open {
+    letter-spacing: 1px;
+}
