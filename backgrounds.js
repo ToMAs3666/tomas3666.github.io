@@ -608,21 +608,154 @@ if (id === "15") {
 
     /* AUTOMOTIVE */
 
+  
     // AUTO 01 — NEON GARAGE
     else if (id === "auto-01") {
-        createCar(scene, color, true);
 
-        for (let i = 0; i < 5; i++) {
-            const frame = addMesh(scene,
-                new THREE.BoxGeometry(0.08, 5, 0.08),
-                cyan,
-                { glow: 2 }
-            );
+        const garage = new THREE.Group();
 
-            frame.position.set(-5 + i * 2.5, 1, -2);
+        // Materiales
+        const bodyMat = new THREE.MeshPhysicalMaterial({
+            color: 0x087cff,
+            metalness: 0.9,
+            roughness: 0.2,
+            clearcoat: 1,
+            clearcoatRoughness: 0.1
+        });
+
+        const glassMat = new THREE.MeshPhysicalMaterial({
+            color: 0x071b32,
+            metalness: 0.7,
+            roughness: 0.08,
+            transparent: true,
+            opacity: 0.9
+        });
+
+        const tireMat = new THREE.MeshStandardMaterial({
+            color: 0x080a0e,
+            roughness: 0.85
+        });
+
+        const neonMat = new THREE.MeshBasicMaterial({
+            color: 0x00dfff
+        });
+
+        // Carrocería
+        const body = new THREE.Mesh(
+            new THREE.BoxGeometry(3.8, 0.55, 1.7),
+            bodyMat
+        );
+        body.position.y = -0.35;
+        garage.add(body);
+
+        // Capó
+        const hood = new THREE.Mesh(
+            new THREE.BoxGeometry(1.25, 0.22, 1.65),
+            bodyMat
+        );
+        hood.position.set(1.15, -0.12, 0);
+        garage.add(hood);
+
+        // Cabina
+        const cabin = new THREE.Mesh(
+            new THREE.BoxGeometry(1.8, 0.7, 1.35),
+            glassMat
+        );
+        cabin.position.set(-0.25, 0.27, 0);
+        garage.add(cabin);
+
+        // Techo
+        const roof = new THREE.Mesh(
+            new THREE.BoxGeometry(1.2, 0.12, 1.25),
+            bodyMat
+        );
+        roof.position.set(-0.25, 0.67, 0);
+        garage.add(roof);
+
+        // Ruedas
+        for (const x of [-1.2, 1.2]) {
+            for (const z of [-0.88, 0.88]) {
+
+                const wheel = new THREE.Mesh(
+                    new THREE.CylinderGeometry(0.43, 0.43, 0.22, 40),
+                    tireMat
+                );
+
+                wheel.rotation.x = Math.PI / 2;
+                wheel.position.set(x, -0.55, z);
+                garage.add(wheel);
+
+                const rim = new THREE.Mesh(
+                    new THREE.CylinderGeometry(0.23, 0.23, 0.235, 32),
+                    new THREE.MeshStandardMaterial({
+                        color: 0x91b8d8,
+                        metalness: 1,
+                        roughness: 0.2
+                    })
+                );
+
+                rim.rotation.x = Math.PI / 2;
+                rim.position.set(x, -0.55, z);
+                garage.add(rim);
+            }
         }
 
-        addParticles(scene, blue, 500);
+        // Faros delanteros
+        for (const z of [-0.55, 0.55]) {
+            const headlight = new THREE.Mesh(
+                new THREE.BoxGeometry(0.08, 0.13, 0.38),
+                neonMat
+            );
+
+            headlight.position.set(1.94, -0.25, z);
+            garage.add(headlight);
+        }
+
+        // Alerón trasero
+        const spoiler = new THREE.Mesh(
+            new THREE.BoxGeometry(0.18, 0.08, 1.9),
+            bodyMat
+        );
+        spoiler.position.set(-1.85, 0.25, 0);
+        garage.add(spoiler);
+
+        garage.rotation.y = -0.35;
+        garage.position.y = -0.1;
+
+        scene.add(garage);
+        currentObjects.push(garage);
+
+        // Plataforma del garaje
+        const floor = new THREE.Mesh(
+            new THREE.BoxGeometry(18, 0.12, 12),
+            new THREE.MeshStandardMaterial({
+                color: 0x07111f,
+                metalness: 0.8,
+                roughness: 0.35
+            })
+        );
+        floor.position.set(0, -1.25, -1);
+        scene.add(floor);
+
+        // Marcos de neón
+        for (let i = 0; i < 5; i++) {
+            const frame = new THREE.Mesh(
+                new THREE.BoxGeometry(0.045, 5, 0.045),
+                neonMat
+            );
+
+            frame.position.set(-6 + i * 3, 1, -3);
+            scene.add(frame);
+        }
+
+        // Iluminación del garaje
+        const blueLight = new THREE.PointLight(0x087cff, 35, 18);
+        blueLight.position.set(0, 3, 3);
+        scene.add(blueLight);
+
+        const cyanLight = new THREE.PointLight(0x00eaff, 20, 14);
+        cyanLight.position.set(-4, 1, -2);
+        scene.add(cyanLight);
     }
 
     // AUTO 02 — NIGHT DRIVE
