@@ -872,24 +872,141 @@ if (id === "15") {
     }
 
 
+   
     // 07 — GEOMETRY
     else if (id === "07") {
-        const geometries = [
-            new THREE.TorusKnotGeometry(0.8, 0.2, 120, 16),
-            new THREE.OctahedronGeometry(1.2),
-            new THREE.TetrahedronGeometry(1.2),
-            new THREE.DodecahedronGeometry(1)
+
+        const geometryGroup = new THREE.Group();
+
+        const colors = [
+            0x087bff,
+            0x00dfff,
+            0x7545ff,
+            0x1688ff,
+            0x9bdcff
         ];
 
-        geometries.forEach((geo, i) => {
-            const mesh = addMesh(scene, geo, i % 2 ? cyan : color, {
-                wireframe: true,
-                glow: 1
+        // Formas geométricas principales
+        const shapes = [
+            new THREE.OctahedronGeometry(1, 0),
+            new THREE.IcosahedronGeometry(0.9, 0),
+            new THREE.TetrahedronGeometry(1, 0),
+            new THREE.DodecahedronGeometry(0.85, 0),
+            new THREE.TorusKnotGeometry(0.65, 0.16, 100, 12)
+        ];
+
+        const objects = [];
+
+        for (let i = 0; i < 12; i++) {
+
+            const geometry = shapes[i % shapes.length].clone();
+
+            const material = new THREE.MeshPhysicalMaterial({
+                color: colors[i % colors.length],
+                metalness: 0.7,
+                roughness: 0.16,
+                transmission: 0.25,
+                thickness: 0.8,
+                transparent: true,
+                opacity: 0.85,
+                clearcoat: 1,
+                emissive: colors[i % colors.length],
+                emissiveIntensity: 0.15
             });
 
-            mesh.position.set((i - 1.5) * 2.5, random(-1, 1), 0);
+            const mesh = new THREE.Mesh(
+                geometry,
+                material
+            );
+
+            const scale = random(0.35, 0.85);
+
+            mesh.scale.setScalar(scale);
+
+            mesh.position.set(
+                random(-5, 5),
+                random(-3, 3),
+                random(-3, 2)
+            );
+
+            geometryGroup.add(mesh);
+
+            objects.push({
+                mesh,
+                speed: random(0.15, 0.5),
+                offset: random(0, Math.PI * 2),
+                baseY: mesh.position.y
+            });
+
+            // Bordes luminosos
+            const edges = new THREE.LineSegments(
+                new THREE.EdgesGeometry(geometry),
+                new THREE.LineBasicMaterial({
+                    color: 0x55cfff,
+                    transparent: true,
+                    opacity: 0.35
+                })
+            );
+
+            mesh.add(edges);
+        }
+
+        scene.add(geometryGroup);
+
+        // Estructura geométrica central
+        const centralFrame = new THREE.Mesh(
+            new THREE.IcosahedronGeometry(2.2, 1),
+            new THREE.MeshBasicMaterial({
+                color: 0x1688ff,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.12
+            })
+        );
+
+        scene.add(centralFrame);
+
+        // Iluminación
+        const light1 = new THREE.PointLight(
+            0x087bff, 55, 20
+        );
+
+        light1.position.set(-4, 4, 4);
+        scene.add(light1);
+
+        const light2 = new THREE.PointLight(
+            0x00dfff, 40, 18
+        );
+
+        light2.position.set(4, -3, 2);
+        scene.add(light2);
+
+        addParticles(scene, 0x55cfff, 650, 15);
+
+        currentObjects.push({
+            update: t => {
+
+                geometryGroup.rotation.y = t * 0.08;
+
+                objects.forEach(obj => {
+
+                    obj.mesh.rotation.x =
+                        t * obj.speed + obj.offset;
+
+                    obj.mesh.rotation.y =
+                        t * obj.speed * 0.7;
+
+                    obj.mesh.position.y =
+                        obj.baseY +
+                        Math.sin(t * 0.7 + obj.offset) * 0.3;
+                });
+
+                centralFrame.rotation.x = t * 0.08;
+                centralFrame.rotation.y = -t * 0.12;
+            }
         });
     }
+
 
     // 05 — HOLO GRID
     else if (id === "05") {
