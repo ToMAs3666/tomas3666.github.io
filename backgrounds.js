@@ -270,33 +270,78 @@ function createUniqueScene(scene, bg) {
     const purple = 0x9b55ff;
     const white = 0xc8eaff;
 
-    // 15 — AETHER CORE
-    if (id === "15") {
-        const core = addMesh(scene,
-            new THREE.IcosahedronGeometry(1.4, 3),
-            color,
-            { glow: 1.5, wireframe: true }
-        );
+  
+// 15 — AETHER CORE
+if (id === "15") {
 
-        const inner = addMesh(scene,
-            new THREE.SphereGeometry(0.65, 32, 32),
-            white,
-            { glow: 2 }
-        );
+    // Núcleo geométrico
+    const core = addMesh(
+        scene,
+        new THREE.IcosahedronGeometry(1.25, 2),
+        0x087bff,
+        {
+            glow: 0.8,
+            wireframe: true,
+            metalness: 0.8,
+            roughness: 0.2
+        }
+    );
 
-        const rings = [
-            addRing(scene, blue, 2, 0.025),
-            addRing(scene, cyan, 2.5, 0.018),
-            addRing(scene, purple, 3, 0.015)
-        ];
+    // Núcleo energético azul
+    const inner = addMesh(
+        scene,
+        new THREE.SphereGeometry(0.48, 48, 48),
+        0x087bff,
+        {
+            glow: 0.65,
+            metalness: 0.35,
+            roughness: 0.2
+        }
+    );
 
-        rings[1].rotation.x = 1;
-        rings[2].rotation.y = 1;
+    // Aura interior
+    const aura = addMesh(
+        scene,
+        new THREE.SphereGeometry(0.85, 48, 48),
+        0x0066ff,
+        {
+            transparent: true,
+            opacity: 0.12,
+            glow: 1
+        }
+    );
 
-        addParticles(scene, white, 1200);
+    // Anillos orbitales
+    const ring1 = addRing(scene, 0x1688ff, 1.9, 0.018);
+    const ring2 = addRing(scene, 0x00eaff, 2.35, 0.025);
+    const ring3 = addRing(scene, 0x9b55ff, 2.8, 0.012);
 
-        currentObjects.push(core, inner, ...rings);
-    }
+    ring1.rotation.set(0.4, 0.2, 0);
+    ring2.rotation.set(1.1, 0.5, 0.3);
+    ring3.rotation.set(0.8, 1.2, 0.2);
+
+    // Partículas energéticas
+    addParticles(scene, 0x69caff, 1000, 12);
+
+    // Animación independiente
+    currentObjects.push({
+        update: t => {
+            core.rotation.y = t * 0.18;
+            core.rotation.x = t * 0.08;
+
+            inner.rotation.y = -t * 0.3;
+
+            aura.scale.setScalar(
+                1 + Math.sin(t * 2) * 0.035
+            );
+
+            ring1.rotation.z = t * 0.12;
+            ring2.rotation.y = t * 0.16;
+            ring3.rotation.x = 0.8 + t * 0.1;
+        }
+    });
+}
+
 
     // 14 — GLASS DIMENSION
     else if (id === "14") {
