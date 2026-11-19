@@ -543,35 +543,80 @@ if (id === "15") {
     }
 
 
+   
     // 12 — DIGITAL TERRAIN
     else if (id === "12") {
-        const geometry = new THREE.PlaneGeometry(16, 12, 70, 60);
-        geometry.rotateX(-Math.PI / 2);
 
-        const terrain = addMesh(scene, geometry, color, {
+        const terrainGroup = new THREE.Group();
+
+        const geometry = new THREE.PlaneGeometry(
+            18, 12, 100, 80
+        );
+
+        const positions = geometry.attributes.position;
+        const basePositions = positions.array.slice();
+
+        const material = new THREE.MeshBasicMaterial({
+            color: 0x087bff,
             wireframe: true,
-            glow: 0.8
+            transparent: true,
+            opacity: 0.55
         });
 
-        terrain.position.y = -1.7;
+        const terrain = new THREE.Mesh(geometry, material);
+
+        terrain.rotation.x = -Math.PI / 2.7;
+        terrain.position.y = -1.8;
+
+        terrainGroup.add(terrain);
+
+        // Segunda capa de profundidad
+        const secondTerrain = terrain.clone();
+
+        secondTerrain.scale.set(1.15, 1, 1.15);
+        secondTerrain.position.y = -2.1;
+        secondTerrain.material = material.clone();
+        secondTerrain.material.color.set(0x00dfff);
+        secondTerrain.material.opacity = 0.18;
+
+        terrainGroup.add(secondTerrain);
+
+        scene.add(terrainGroup);
 
         currentObjects.push({
             update: t => {
-                const positions = geometry.attributes.position;
+
                 for (let i = 0; i < positions.count; i++) {
-                    const x = positions.getX(i);
-                    const z = positions.getZ(i);
-                    positions.setY(
-                        i,
-                        Math.sin(x * 0.8 + t) * 0.25 +
-                        Math.cos(z * 0.7 + t * 0.8) * 0.25
-                    );
+
+                    const x = basePositions[i * 3];
+                    const y = basePositions[i * 3 + 1];
+
+                    const wave =
+                        Math.sin(x * 0.8 + t * 1.2) * 0.35 +
+                        Math.cos(y * 1.1 + t) * 0.22 +
+                        Math.sin((x + y) * 0.45 - t) * 0.2;
+
+                    positions.setZ(i, basePositions[i * 3 + 2] + wave);
                 }
+
                 positions.needsUpdate = true;
                 geometry.computeVertexNormals();
+
+                terrainGroup.rotation.y = Math.sin(t * 0.15) * 0.08;
             }
         });
+
+        // Puntos luminosos sobre el horizonte
+        addParticles(scene, 0x1688ff, 500, 15);
+
+        const horizonLight = new THREE.PointLight(
+            0x087bff, 35, 18
+        );
+
+        horizonLight.position.set(0, 3, -4);
+        scene.add(horizonLight);
     }
+
 
     // 09 — LIQUID MOTION
     else if (id === "09") {
