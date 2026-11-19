@@ -1168,550 +1168,118 @@ else if (id === "05") {
 
 
 
-// ========================================
-// AUTO 02 — NIGHT DRIVE
-// ========================================
-else if (id === "auto-02") {
 
-    const roadGroup = new THREE.Group();
+else if (id.startsWith("auto-")) {
 
-    const road = new THREE.Mesh(
-        new THREE.PlaneGeometry(18, 14),
+    const scenes = {
+        "auto-01": { color: 0x1769ff, floor: 0x080d18, light: 0x087bff },
+        "auto-02": { color: 0xb50e32, floor: 0x080912, light: 0xff174d },
+        "auto-03": { color: 0x00aacc, floor: 0x050d18, light: 0x00dfff },
+        "auto-04": { color: 0xaaaaaa, floor: 0x080b12, light: 0x8acaff },
+        "auto-05": { color: 0x176b42, floor: 0x07120e, light: 0x35ff9a },
+        "auto-06": { color: 0xff8a20, floor: 0x100b08, light: 0xffa13a },
+        "auto-07": { color: 0x742cff, floor: 0x0b0715, light: 0x9b55ff },
+        "auto-08": { color: 0xff5533, floor: 0x140907, light: 0xff7945 },
+        "auto-09": { color: 0x252d3a, floor: 0x07090e, light: 0x1688ff }
+    };
+
+    const config = scenes[id] || scenes["auto-01"];
+    const environment = new THREE.Group();
+
+    // Suelo reflectante
+    const floor = new THREE.Mesh(
+        new THREE.PlaneGeometry(30, 30),
         new THREE.MeshStandardMaterial({
-            color: 0x080d18,
-            metalness: 0.6,
-            roughness: 0.35
+            color: config.floor,
+            metalness: 0.85,
+            roughness: 0.18
         })
     );
+    floor.rotation.x = -Math.PI / 2;
+    floor.position.y = -0.12;
+    environment.add(floor);
 
-    road.rotation.x = -Math.PI / 2;
-    road.position.y = -2;
-    roadGroup.add(road);
-
-    // Líneas de carretera
-    for (let i = 0; i < 18; i++) {
-        const lane = new THREE.Mesh(
-            new THREE.BoxGeometry(0.06, 0.015, 0.65),
-            new THREE.MeshBasicMaterial({ color: 0x1688ff })
-        );
-
-        lane.position.set(0, -1.97, -7 + i * 0.8);
-        roadGroup.add(lane);
-    }
-
-    // Edificios de ciudad
-    for (let i = 0; i < 45; i++) {
-        const height = random(1, 5);
-
-        const building = new THREE.Mesh(
-            new THREE.BoxGeometry(random(0.4, 1.2), height, 0.5),
-            new THREE.MeshStandardMaterial({
-                color: 0x101c32,
-                emissive: 0x061b44,
-                emissiveIntensity: 0.8
-            })
-        );
-
-        building.position.set(
-            i % 2 ? random(5, 9) : random(-9, -5),
-            -2 + height / 2,
-            random(-7, 6)
-        );
-
-        roadGroup.add(building);
-    }
-
-    scene.add(roadGroup);
-
-    const headlights = new THREE.PointLight(0x1688ff, 80, 18);
-    headlights.position.set(0, 0, 3);
-    scene.add(headlights);
-
-    addParticles(scene, 0x1688ff, 500, 14);
-
-    currentObjects.push({
-        update: t => {
-            roadGroup.position.z = (t * 2) % 0.8;
-        }
-    });
-}
-
-
-// ========================================
-// AUTO 03 — HYPER TUNNEL
-// ========================================
-else if (id === "auto-03") {
-
-    const tunnel = new THREE.Group();
-    const rings = [];
-
-    for (let i = 0; i < 24; i++) {
-        const ring = new THREE.Mesh(
-            new THREE.TorusGeometry(2.5, 0.025, 8, 80),
-            new THREE.MeshBasicMaterial({
-                color: i % 2 ? 0x1688ff : 0x00dfff,
-                transparent: true,
-                opacity: 0.65
-            })
-        );
-
-        ring.position.z = -i * 0.75;
-        tunnel.add(ring);
-        rings.push(ring);
-    }
-
-    scene.add(tunnel);
-
-    const centerLight = new THREE.PointLight(0x087bff, 100, 20);
-    centerLight.position.set(0, 0, 2);
-    scene.add(centerLight);
-
-    addParticles(scene, 0x55cfff, 900, 16);
-
-    currentObjects.push({
-        update: t => {
-            rings.forEach((ring, i) => {
-                ring.position.z = -((i * 0.75 + t * 3) % 18);
-                ring.rotation.z = t * 0.1 + i * 0.03;
-            });
-        }
-    });
-}
-
-
-// ========================================
-// AUTO 04 — DARK SHOWROOM
-// ========================================
-else if (id === "auto-04") {
-
-    const showroom = new THREE.Group();
-
-    const floor = new THREE.Mesh(
-        new THREE.PlaneGeometry(18, 14),
+    // Plataforma luminosa
+    const platform = new THREE.Mesh(
+        new THREE.CylinderGeometry(3.8, 3.8, 0.12, 96),
         new THREE.MeshStandardMaterial({
-            color: 0x080b12,
+            color: 0x101827,
             metalness: 0.9,
             roughness: 0.2
         })
     );
+    platform.position.y = 0;
+    environment.add(platform);
 
-    floor.rotation.x = -Math.PI / 2;
-    floor.position.y = -1.7;
-    showroom.add(floor);
-
-    const platform = new THREE.Mesh(
-        new THREE.CylinderGeometry(3.2, 3.2, 0.18, 96),
-        new THREE.MeshStandardMaterial({
-            color: 0x111b2b,
-            metalness: 0.9,
-            roughness: 0.18,
-            emissive: 0x061b44
-        })
+    const platformRing = new THREE.Mesh(
+        new THREE.TorusGeometry(3.65, 0.035, 10, 120),
+        new THREE.MeshBasicMaterial({ color: config.light })
     );
+    platformRing.rotation.x = Math.PI / 2;
+    platformRing.position.y = 0.08;
+    environment.add(platformRing);
 
-    platform.position.y = -1.55;
-    showroom.add(platform);
+    // Coche 3D
+    const vehicle = createAetherCar(config.color);
+    vehicle.group.position.y = 0.12;
+    environment.add(vehicle.group);
 
-    const rim = new THREE.Mesh(
-        new THREE.TorusGeometry(3.15, 0.035, 8, 120),
-        new THREE.MeshBasicMaterial({ color: 0x1688ff })
-    );
+    // Arcos futuristas alrededor
+    for (let i = 0; i < 3; i++) {
+        const arch = new THREE.Mesh(
+            new THREE.TorusGeometry(4.7 + i * 0.55, 0.025, 8, 100),
+            new THREE.MeshBasicMaterial({
+                color: config.light,
+                transparent: true,
+                opacity: 0.35 - i * 0.07
+            })
+        );
 
-    rim.rotation.x = Math.PI / 2;
-    rim.position.y = -1.43;
-    showroom.add(rim);
+        arch.position.y = 0.4 + i * 0.5;
+        arch.rotation.x = Math.PI / 2;
+        environment.add(arch);
+    }
 
-    scene.add(showroom);
+    // Paneles de luz en el techo
+    for (let i = 0; i < 5; i++) {
+        const lightBar = new THREE.Mesh(
+            new THREE.BoxGeometry(0.12, 0.04, 5),
+            new THREE.MeshBasicMaterial({
+                color: config.light
+            })
+        );
+        lightBar.position.set(-4 + i * 2, 5, -2);
+        environment.add(lightBar);
+    }
+
+    scene.add(environment);
+
+    const mainLight = new THREE.PointLight(config.light, 95, 22);
+    mainLight.position.set(-4, 4, 4);
+    scene.add(mainLight);
+
+    const fillLight = new THREE.PointLight(0x8acaff, 65, 20);
+    fillLight.position.set(4, 2, -3);
+    scene.add(fillLight);
 
     const topLight = new THREE.SpotLight(
-        0x8acaff,
-        120,
-        18,
-        Math.PI / 5
+        0xffffff, 100, 18, Math.PI / 4, 0.5
     );
-
-    topLight.position.set(0, 7, 2);
+    topLight.position.set(0, 8, 1);
     scene.add(topLight);
 
-    const blueLight = new THREE.PointLight(0x087bff, 55, 15);
-    blueLight.position.set(-4, 1, 3);
-    scene.add(blueLight);
-
-    addParticles(scene, 0x1688ff, 250, 12);
+    addParticles(scene, config.light, 350, 14);
 
     currentObjects.push({
         update: t => {
-            showroom.rotation.y = Math.sin(t * 0.15) * 0.04;
-            platform.rotation.y = t * 0.08;
-        }
-    });
-}
+            environment.rotation.y = Math.sin(t * 0.12) * 0.035;
+            vehicle.group.rotation.y = Math.sin(t * 0.25) * 0.08;
 
+            vehicle.wheels.forEach((wheel, i) => {
+                wheel.rotation.x = t * 0.8;
+            });
 
-// ========================================
-// AUTO 05 — MOUNTAIN RUN
-// ========================================
-else if (id === "auto-05") {
-
-    const mountainGroup = new THREE.Group();
-
-    for (let i = 0; i < 18; i++) {
-        const height = random(3, 7);
-
-        const mountain = new THREE.Mesh(
-            new THREE.ConeGeometry(random(1.5, 3.5), height, 4),
-            new THREE.MeshStandardMaterial({
-                color: 0x101e36,
-                metalness: 0.25,
-                roughness: 0.9,
-                wireframe: i % 3 === 0
-            })
-        );
-
-        mountain.position.set(
-            random(-12, 12),
-            -1 + height / 2,
-            random(-9, -3)
-        );
-
-        mountain.rotation.y = Math.PI / 4;
-        mountainGroup.add(mountain);
-    }
-
-    const road = new THREE.Mesh(
-        new THREE.PlaneGeometry(5, 18),
-        new THREE.MeshStandardMaterial({
-            color: 0x090d16,
-            roughness: 0.8
-        })
-    );
-
-    road.rotation.x = -Math.PI / 2;
-    road.position.set(0, -1.8, 0);
-    mountainGroup.add(road);
-
-    for (let i = 0; i < 14; i++) {
-        const marker = new THREE.Mesh(
-            new THREE.BoxGeometry(0.08, 0.02, 0.7),
-            new THREE.MeshBasicMaterial({ color: 0x00dfff })
-        );
-
-        marker.position.set(0, -1.77, -8 + i * 1.2);
-        mountainGroup.add(marker);
-    }
-
-    scene.add(mountainGroup);
-
-    const horizon = new THREE.PointLight(0x1688ff, 75, 22);
-    horizon.position.set(0, 3, -7);
-    scene.add(horizon);
-
-    addParticles(scene, 0x9bdcff, 300, 15);
-
-    currentObjects.push({
-        update: t => {
-            mountainGroup.position.z = (t * 0.5) % 1;
-        }
-    });
-}
-
-
-// ========================================
-// AUTO 06 — ENGINE CORE
-// ========================================
-else if (id === "auto-06") {
-
-    const engineGroup = new THREE.Group();
-
-    const core = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.85, 0.85, 2.1, 48),
-        new THREE.MeshStandardMaterial({
-            color: 0x202b3a,
-            metalness: 1,
-            roughness: 0.2
-        })
-    );
-
-    engineGroup.add(core);
-
-    for (let i = 0; i < 8; i++) {
-        const piston = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.13, 0.13, 1.6, 20),
-            new THREE.MeshStandardMaterial({
-                color: 0x9caec4,
-                metalness: 1,
-                roughness: 0.16
-            })
-        );
-
-        const angle = i * Math.PI / 4;
-
-        piston.position.set(
-            Math.cos(angle) * 1.25,
-            0,
-            Math.sin(angle) * 1.25
-        );
-
-        engineGroup.add(piston);
-    }
-
-    const rotor = new THREE.Mesh(
-        new THREE.TorusGeometry(1.7, 0.07, 12, 100),
-        new THREE.MeshBasicMaterial({ color: 0x1688ff })
-    );
-
-    rotor.rotation.x = Math.PI / 2;
-    engineGroup.add(rotor);
-
-    const innerRotor = new THREE.Mesh(
-        new THREE.TorusGeometry(1.3, 0.035, 8, 100),
-        new THREE.MeshBasicMaterial({ color: 0x00dfff })
-    );
-
-    innerRotor.rotation.y = Math.PI / 2;
-    engineGroup.add(innerRotor);
-
-    scene.add(engineGroup);
-
-    const light = new THREE.PointLight(0x087bff, 85, 18);
-    light.position.set(0, 2, 3);
-    scene.add(light);
-
-    addParticles(scene, 0x1688ff, 400, 12);
-
-    currentObjects.push({
-        update: t => {
-            engineGroup.rotation.y = t * 0.35;
-            rotor.rotation.z = t * 0.9;
-            innerRotor.rotation.x = t * 0.65;
-        }
-    });
-}
-
-
-// ========================================
-// AUTO 07 — FUTURE MACHINE
-// ========================================
-else if (id === "auto-07") {
-
-    const machine = new THREE.Group();
-
-    for (let i = 0; i < 4; i++) {
-        const frame = new THREE.Mesh(
-            new THREE.BoxGeometry(
-                3.8 - i * 0.35,
-                0.08,
-                3.8 - i * 0.35
-            ),
-            new THREE.MeshStandardMaterial({
-                color: 0x17283f,
-                metalness: 0.95,
-                roughness: 0.2,
-                emissive: 0x062b77,
-                emissiveIntensity: 0.4
-            })
-        );
-
-        frame.position.y = -1.5 + i * 0.8;
-        machine.add(frame);
-    }
-
-    for (let i = 0; i < 4; i++) {
-        const pillar = new THREE.Mesh(
-            new THREE.CylinderGeometry(0.08, 0.08, 4, 16),
-            new THREE.MeshStandardMaterial({
-                color: 0x8acaff,
-                metalness: 0.9,
-                roughness: 0.2,
-                emissive: 0x087bff,
-                emissiveIntensity: 0.6
-            })
-        );
-
-        const angle = i * Math.PI / 2;
-
-        pillar.position.set(
-            Math.cos(angle) * 1.6,
-            0,
-            Math.sin(angle) * 1.6
-        );
-
-        machine.add(pillar);
-    }
-
-    const core = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(0.65, 2),
-        new THREE.MeshPhysicalMaterial({
-            color: 0x00dfff,
-            metalness: 0.5,
-            roughness: 0.1,
-            emissive: 0x087bff,
-            emissiveIntensity: 1.4
-        })
-    );
-
-    machine.add(core);
-    scene.add(machine);
-
-    const light = new THREE.PointLight(0x00dfff, 90, 20);
-    light.position.set(0, 0, 2);
-    scene.add(light);
-
-    addParticles(scene, 0x1688ff, 450, 12);
-
-    currentObjects.push({
-        update: t => {
-            machine.rotation.y = t * 0.12;
-            core.rotation.x = t * 0.6;
-            core.rotation.y = t * 0.45;
-            core.scale.setScalar(1 + Math.sin(t * 2) * 0.1);
-        }
-    });
-}
-
-
-// ========================================
-// AUTO 08 — SUNSET DRIVE
-// ========================================
-else if (id === "auto-08") {
-
-    const sun = new THREE.Mesh(
-        new THREE.SphereGeometry(2.2, 64, 64),
-        new THREE.MeshBasicMaterial({
-            color: 0xff743f
-        })
-    );
-
-    sun.position.set(0, 2.5, -8);
-    scene.add(sun);
-
-    const glow = new THREE.Mesh(
-        new THREE.SphereGeometry(2.8, 48, 48),
-        new THREE.MeshBasicMaterial({
-            color: 0xff4b28,
-            transparent: true,
-            opacity: 0.13,
-            side: THREE.BackSide
-        })
-    );
-
-    glow.position.copy(sun.position);
-    scene.add(glow);
-
-    const road = new THREE.Mesh(
-        new THREE.PlaneGeometry(18, 14),
-        new THREE.MeshStandardMaterial({
-            color: 0x10101b,
-            metalness: 0.5,
-            roughness: 0.5
-        })
-    );
-
-    road.rotation.x = -Math.PI / 2;
-    road.position.y = -2;
-    scene.add(road);
-
-    for (let i = 0; i < 16; i++) {
-        const line = new THREE.Mesh(
-            new THREE.BoxGeometry(0.08, 0.015, 0.6),
-            new THREE.MeshBasicMaterial({ color: 0xff7b45 })
-        );
-
-        line.position.set(0, -1.98, -7 + i * 0.8);
-        scene.add(line);
-    }
-
-    const sunLight = new THREE.PointLight(0xff643a, 85, 25);
-    sunLight.position.set(0, 3, -5);
-    scene.add(sunLight);
-
-    addParticles(scene, 0xffa16b, 250, 14);
-
-    currentObjects.push({
-        update: t => {
-            glow.scale.setScalar(1 + Math.sin(t) * 0.04);
-            sun.rotation.y = t * 0.04;
-        }
-    });
-}
-
-
-// ========================================
-// AUTO 09 — CARBON VISION
-// ========================================
-else if (id === "auto-09") {
-
-    const carbonGroup = new THREE.Group();
-
-    const carbonMaterial = new THREE.MeshStandardMaterial({
-        color: 0x111722,
-        metalness: 0.95,
-        roughness: 0.28
-    });
-
-    for (let i = 0; i < 22; i++) {
-        const panel = new THREE.Mesh(
-            new THREE.BoxGeometry(
-                random(0.8, 2.2),
-                0.045,
-                0.045
-            ),
-            carbonMaterial
-        );
-
-        panel.position.set(
-            random(-5, 5),
-            random(-3, 3),
-            random(-2, 2)
-        );
-
-        panel.rotation.z = random(-0.5, 0.5);
-        carbonGroup.add(panel);
-    }
-
-    const frame = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(2.3, 1),
-        new THREE.MeshBasicMaterial({
-            color: 0x1688ff,
-            wireframe: true,
-            transparent: true,
-            opacity: 0.22
-        })
-    );
-
-    carbonGroup.add(frame);
-
-    const center = new THREE.Mesh(
-        new THREE.TorusKnotGeometry(0.85, 0.17, 150, 20),
-        new THREE.MeshPhysicalMaterial({
-            color: 0x253b5a,
-            metalness: 1,
-            roughness: 0.12,
-            clearcoat: 1,
-            emissive: 0x062b77,
-            emissiveIntensity: 0.8
-        })
-    );
-
-    carbonGroup.add(center);
-    scene.add(carbonGroup);
-
-    const blueLight = new THREE.PointLight(0x087bff, 85, 20);
-    blueLight.position.set(-3, 3, 4);
-    scene.add(blueLight);
-
-    const cyanLight = new THREE.PointLight(0x00dfff, 55, 20);
-    cyanLight.position.set(3, -2, 3);
-    scene.add(cyanLight);
-
-    addParticles(scene, 0x1688ff, 500, 14);
-
-    currentObjects.push({
-        update: t => {
-            carbonGroup.rotation.y = t * 0.1;
-            frame.rotation.x = t * 0.12;
-            center.rotation.x = t * 0.35;
-            center.rotation.y = t * 0.25;
+            platformRing.rotation.z = t * 0.12;
         }
     });
 }
