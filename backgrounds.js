@@ -1,240 +1,72 @@
 
 /* ========================================
    AETHER BACKGROUND LAB
-   BACKGROUND COLLECTION SYSTEM
+   24 UNIQUE 3D BACKGROUNDS
 ======================================== */
 
 const abstractBackgrounds = [
-    {
-        id: "15",
-        name: "AETHER Core",
-        description: "Ein futuristisches Energieportal mit leuchtenden Partikeln.",
-        color: "#1769ff",
-        favorite: true
-    },
-    {
-        id: "14",
-        name: "Glass Dimension",
-        description: "Digitale Glasstrukturen und transparente 3D-Elemente.",
-        color: "#49aaff",
-        favorite: true
-    },
-    {
-        id: "11",
-        name: "Light Rays",
-        description: "Dynamische Lichtstrahlen und volumetrische Beleuchtung.",
-        color: "#236bff",
-        favorite: true
-    },
-    {
-        id: "12",
-        name: "Digital Terrain",
-        description: "Eine digitale Landschaft mit beweglichen 3D-Wellen.",
-        color: "#087fbd",
-        favorite: true
-    },
-    {
-        id: "09",
-        name: "Liquid Motion",
-        description: "Flüssige Formen und dynamische Farbverläufe.",
-        color: "#a04bff",
-        favorite: true
-    },
-    {
-        id: "10",
-        name: "Orbit",
-        description: "Leuchtende Planeten und rotierende Umlaufbahnen.",
-        color: "#397bff",
-        favorite: true
-    },
-    {
-        id: "07",
-        name: "Geometry",
-        description: "Abstrakte geometrische Formen in einer 3D-Umgebung.",
-        color: "#00a6c9",
-        favorite: true
-    },
-    {
-        id: "05",
-        name: "Holo Grid",
-        description: "Ein futuristisches holografisches Gitternetz.",
-        color: "#327bff",
-        favorite: true
-    },
-    {
-        id: "01",
-        name: "Blue Aura",
-        description: "Atmosphärische blaue Lichter und sanfte Farbverläufe.",
-        color: "#1455ff",
-        favorite: true
-    },
-    {
-        id: "02",
-        name: "Cyber Circuits",
-        description: "Leuchtende digitale Schaltkreise.",
-        color: "#00a6ff"
-    },
-    {
-        id: "03",
-        name: "Deep Waves",
-        description: "Abstrakte Wellen und digitale Tiefen.",
-        color: "#145de0"
-    },
-    {
-        id: "04",
-        name: "Particle Space",
-        description: "Schwebende Partikel in einem digitalen Universum.",
-        color: "#8b5cff"
-    },
-    {
-        id: "06",
-        name: "Energy Flow",
-        description: "Leuchtende Energiebänder in Bewegung.",
-        color: "#008cff"
-    },
-    {
-        id: "08",
-        name: "Digital Rain",
-        description: "Ein futuristischer digitaler Regen.",
-        color: "#00b8a9"
-    },
-    {
-        id: "13",
-        name: "Neural Network",
-        description: "Ein Netzwerk aus digitalen Verbindungen.",
-        color: "#526fff"
-    }
+    { id:"15", name:"AETHER Core", description:"Ein futuristisches Energieportal mit leuchtenden Partikeln.", color:"#1769ff", favorite:true },
+    { id:"14", name:"Glass Dimension", description:"Digitale Glasstrukturen und transparente 3D-Elemente.", color:"#49aaff", favorite:true },
+    { id:"11", name:"Light Rays", description:"Dynamische Lichtstrahlen und volumetrische Beleuchtung.", color:"#236bff", favorite:true },
+    { id:"12", name:"Digital Terrain", description:"Eine digitale Landschaft mit beweglichen 3D-Wellen.", color:"#087fbd", favorite:true },
+    { id:"09", name:"Liquid Motion", description:"Flüssige Formen und dynamische Farbverläufe.", color:"#a04bff", favorite:true },
+    { id:"10", name:"Orbit", description:"Leuchtende Planeten und rotierende Umlaufbahnen.", color:"#397bff", favorite:true },
+    { id:"07", name:"Geometry", description:"Abstrakte geometrische Formen in einer 3D-Umgebung.", color:"#00a6c9", favorite:true },
+    { id:"05", name:"Holo Grid", description:"Ein futuristisches holografisches Gitternetz.", color:"#327bff", favorite:true },
+    { id:"01", name:"Blue Aura", description:"Atmosphärische blaue Lichter und sanfte Farbverläufe.", color:"#1455ff", favorite:true },
+    { id:"02", name:"Cyber Circuits", description:"Leuchtende digitale Schaltkreise.", color:"#00a6ff" },
+    { id:"03", name:"Deep Waves", description:"Abstrakte Wellen und digitale Tiefen.", color:"#145de0" },
+    { id:"04", name:"Particle Space", description:"Schwebende Partikel in einem digitalen Universum.", color:"#8b5cff" },
+    { id:"06", name:"Energy Flow", description:"Leuchtende Energiebänder in Bewegung.", color:"#008cff" },
+    { id:"08", name:"Digital Rain", description:"Ein futuristischer digitaler Regen.", color:"#00b8a9" },
+    { id:"13", name:"Neural Network", description:"Ein Netzwerk aus digitalen Verbindungen.", color:"#526fff" }
 ];
 
-
-/* AUTOMOTIVE COLLECTION */
-
 const automotiveBackgrounds = [
-    {
-        id: "auto-01",
-        name: "Neon Garage",
-        description: "Ein Sportwagen in einer futuristischen Neon-Garage.",
-        color: "#087cff"
-    },
-    {
-        id: "auto-02",
-        name: "Night Drive",
-        description: "Eine nächtliche Fahrt durch eine beleuchtete Stadt.",
-        color: "#2761ff"
-    },
-    {
-        id: "auto-03",
-        name: "Hyper Tunnel",
-        description: "Ein Hypercar in einem futuristischen Lichttunnel.",
-        color: "#00a6d9"
-    },
-    {
-        id: "auto-04",
-        name: "Dark Showroom",
-        description: "Eine luxuriöse Fahrzeugpräsentation.",
-        color: "#687fff"
-    },
-    {
-        id: "auto-05",
-        name: "Mountain Run",
-        description: "Eine kurvenreiche Bergstrasse bei Sonnenaufgang.",
-        color: "#e18a42"
-    },
-    {
-        id: "auto-06",
-        name: "Engine Core",
-        description: "Mechanische Details und eine futuristische Motorwelt.",
-        color: "#ff663c"
-    },
-    {
-        id: "auto-07",
-        name: "Future Machine",
-        description: "Ein futuristisches Konzeptfahrzeug.",
-        color: "#00b6c9"
-    },
-    {
-        id: "auto-08",
-        name: "Sunset Drive",
-        description: "Ein Sportwagen auf einer Strasse im Abendlicht.",
-        color: "#e58b45"
-    },
-    {
-        id: "auto-09",
-        name: "Carbon Vision",
-        description: "Carbon-Details und dramatische Fahrzeugbeleuchtung.",
-        color: "#397bff"
-    }
+    { id:"auto-01", name:"Neon Garage", description:"Ein Sportwagen in einer futuristischen Neon-Garage.", color:"#087cff" },
+    { id:"auto-02", name:"Night Drive", description:"Eine nächtliche Fahrt durch eine beleuchtete Stadt.", color:"#2761ff" },
+    { id:"auto-03", name:"Hyper Tunnel", description:"Ein Hypercar in einem futuristischen Lichttunnel.", color:"#00a6d9" },
+    { id:"auto-04", name:"Dark Showroom", description:"Eine luxuriöse Fahrzeugpräsentation.", color:"#687fff" },
+    { id:"auto-05", name:"Mountain Run", description:"Eine kurvenreiche Bergstrasse bei Sonnenaufgang.", color:"#e18a42" },
+    { id:"auto-06", name:"Engine Core", description:"Mechanische Details und eine futuristische Motorwelt.", color:"#ff663c" },
+    { id:"auto-07", name:"Future Machine", description:"Ein futuristisches Konzeptfahrzeug.", color:"#00b6c9" },
+    { id:"auto-08", name:"Sunset Drive", description:"Ein Sportwagen auf einer Strasse im Abendlicht.", color:"#e58b45" },
+    { id:"auto-09", name:"Carbon Vision", description:"Carbon-Details und dramatische Fahrzeugbeleuchtung.", color:"#397bff" }
 ];
 
 
 /* ========================================
-   CREATE BACKGROUND CARDS
+   COLLECTIONS
 ======================================== */
 
 function createBackgroundCard(background, category) {
-
     const card = document.createElement("article");
-
     card.className = "background-card";
 
     card.innerHTML = `
-        <div
-            class="background-thumbnail"
-            style="--scene-color: ${background.color}"
-        >
-            <span class="background-number">
-                ${background.id.toUpperCase()}
-            </span>
+        <div class="background-thumbnail"
+             style="--scene-color:${background.color}">
+            <span class="background-number">${background.id.toUpperCase()}</span>
         </div>
-
-        <span class="background-category">
-            ${category}
-        </span>
-
+        <span class="background-category">${category}</span>
         <h3>${background.name}</h3>
-
         <p>${background.description}</p>
-
         <div class="background-card-content">
-
             <div class="background-actions">
-
-                <button
-                    class="preview-button"
-                    type="button"
-                >
-                    Preview
-                </button>
-
-                <button
-                    type="button"
-                    disabled
-                    title="Download wird später verfügbar sein"
-                >
-                    Download bald
-                </button>
-
+                <button class="preview-button" type="button">Preview</button>
+                <button type="button" disabled>Download bald</button>
             </div>
-
         </div>
     `;
 
-    const previewButton = card.querySelector(".preview-button");
-
-    previewButton.addEventListener("click", () => {
+    card.querySelector(".preview-button").addEventListener("click", () => {
         openBackgroundPreview(background, category);
     });
 
     return card;
 }
 
-
-/* ========================================
-   LOAD COLLECTIONS
-======================================== */
-
 function loadBackgroundCollections() {
-
     const abstractGrid = document.getElementById("abstract-grid");
     const automotiveGrid = document.getElementById("automotive-grid");
 
@@ -243,59 +75,736 @@ function loadBackgroundCollections() {
     abstractGrid.innerHTML = "";
     automotiveGrid.innerHTML = "";
 
-    abstractBackgrounds.forEach(background => {
+    abstractBackgrounds.forEach(bg =>
+        abstractGrid.appendChild(createBackgroundCard(bg, "ABSTRACT COLLECTION"))
+    );
 
-        const card = createBackgroundCard(
-            background,
-            "ABSTRACT COLLECTION"
-        );
-
-        abstractGrid.appendChild(card);
-
-    });
-
-    automotiveBackgrounds.forEach(background => {
-
-        const card = createBackgroundCard(
-            background,
-            "AUTOMOTIVE COLLECTION"
-        );
-
-        automotiveGrid.appendChild(card);
-
-    });
-
+    automotiveBackgrounds.forEach(bg =>
+        automotiveGrid.appendChild(createBackgroundCard(bg, "AUTOMOTIVE COLLECTION"))
+    );
 }
 
 
 /* ========================================
-   FULLSCREEN PREVIEW
+   3D ENGINE
 ======================================== */
 
 let currentRenderer = null;
 let currentAnimation = null;
+let currentResize = null;
+let currentScene = null;
+let currentObjects = [];
+
+const random = (min, max) => Math.random() * (max - min) + min;
+
+function addMesh(scene, geometry, color, options = {}) {
+    const material = new THREE.MeshStandardMaterial({
+        color,
+        metalness: options.metalness ?? 0.65,
+        roughness: options.roughness ?? 0.3,
+        emissive: color,
+        emissiveIntensity: options.glow ?? 0.2,
+        transparent: options.transparent ?? false,
+        opacity: options.opacity ?? 1,
+        wireframe: options.wireframe ?? false
+    });
+
+    const mesh = new THREE.Mesh(geometry, material);
+
+    if (options.position) mesh.position.set(...options.position);
+    if (options.scale) mesh.scale.set(...options.scale);
+
+    scene.add(mesh);
+    currentObjects.push(mesh);
+
+    return mesh;
+}
+
+function addParticles(scene, color, count = 700, spread = 17) {
+    const geometry = new THREE.BufferGeometry();
+    const positions = new Float32Array(count * 3);
+
+    for (let i = 0; i < count; i++) {
+        positions[i * 3] = random(-spread, spread);
+        positions[i * 3 + 1] = random(-spread, spread);
+        positions[i * 3 + 2] = random(-spread, spread);
+    }
+
+    geometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions, 3)
+    );
+
+    const material = new THREE.PointsMaterial({
+        color,
+        size: 0.045,
+        transparent: true,
+        opacity: 0.8,
+        sizeAttenuation: true
+    });
+
+    const particles = new THREE.Points(geometry, material);
+    scene.add(particles);
+    currentObjects.push(particles);
+
+    return particles;
+}
+
+function addRing(scene, color, radius, tube, position = [0, 0, 0]) {
+    const ring = addMesh(
+        scene,
+        new THREE.TorusGeometry(radius, tube, 12, 120),
+        color,
+        { glow: 1, metalness: 0.5 }
+    );
+
+    ring.position.set(...position);
+    return ring;
+}
+
+function addLine(scene, points, color, radius = 0.025) {
+    const curve = new THREE.CatmullRomCurve3(
+        points.map(p => new THREE.Vector3(...p))
+    );
+
+    return addMesh(
+        scene,
+        new THREE.TubeGeometry(curve, 80, radius, 6, false),
+        color,
+        { glow: 1 }
+    );
+}
+
+
+/* ========================================
+   AUTOMOTIVE MODEL
+======================================== */
+
+function createCar(scene, color, futuristic = false) {
+    const car = new THREE.Group();
+
+    const bodyMaterial = new THREE.MeshStandardMaterial({
+        color,
+        metalness: 0.9,
+        roughness: 0.2,
+        emissive: color,
+        emissiveIntensity: 0.12
+    });
+
+    const body = new THREE.Mesh(
+        new THREE.BoxGeometry(3.4, 0.55, 1.5),
+        bodyMaterial
+    );
+
+    body.position.y = 0;
+    car.add(body);
+
+    const cabin = new THREE.Mesh(
+        new THREE.BoxGeometry(1.7, 0.65, 1.2),
+        new THREE.MeshPhysicalMaterial({
+            color: 0x102b48,
+            metalness: 0.8,
+            roughness: 0.12,
+            transparent: true,
+            opacity: 0.85
+        })
+    );
+
+    cabin.position.set(-0.15, 0.55, 0);
+    car.add(cabin);
+
+    const wheels = [];
+
+    for (const x of [-1.1, 1.1]) {
+        for (const z of [-0.78, 0.78]) {
+            const wheel = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.38, 0.38, 0.2, 32),
+                new THREE.MeshStandardMaterial({
+                    color: 0x101318,
+                    metalness: 0.7,
+                    roughness: 0.5
+                })
+            );
+
+            wheel.rotation.x = Math.PI / 2;
+            wheel.position.set(x, -0.25, z);
+            car.add(wheel);
+            wheels.push(wheel);
+        }
+    }
+
+    const spoiler = new THREE.Mesh(
+        new THREE.BoxGeometry(0.3, 0.08, 1.8),
+        bodyMaterial
+    );
+
+    spoiler.position.set(-1.55, 0.55, 0);
+    car.add(spoiler);
+
+    if (futuristic) {
+        const glow = new THREE.PointLight(color, 4, 7);
+        glow.position.set(0, -0.4, 0);
+        car.add(glow);
+    }
+
+    car.position.y = -0.5;
+    car.rotation.y = -0.3;
+
+    scene.add(car);
+    currentObjects.push(car);
+
+    return { car, wheels };
+}
+
+
+/* ========================================
+   SCENE GENERATOR
+======================================== */
+
+function createUniqueScene(scene, bg) {
+    const color = new THREE.Color(bg.color);
+    const id = bg.id;
+
+    const blue = 0x1688ff;
+    const cyan = 0x00eaff;
+    const purple = 0x9b55ff;
+    const white = 0xc8eaff;
+
+    // 15 — AETHER CORE
+    if (id === "15") {
+        const core = addMesh(scene,
+            new THREE.IcosahedronGeometry(1.4, 3),
+            color,
+            { glow: 1.5, wireframe: true }
+        );
+
+        const inner = addMesh(scene,
+            new THREE.SphereGeometry(0.65, 32, 32),
+            white,
+            { glow: 2 }
+        );
+
+        const rings = [
+            addRing(scene, blue, 2, 0.025),
+            addRing(scene, cyan, 2.5, 0.018),
+            addRing(scene, purple, 3, 0.015)
+        ];
+
+        rings[1].rotation.x = 1;
+        rings[2].rotation.y = 1;
+
+        addParticles(scene, white, 1200);
+
+        currentObjects.push(core, inner, ...rings);
+    }
+
+    // 14 — GLASS DIMENSION
+    else if (id === "14") {
+        for (let i = 0; i < 12; i++) {
+            const glass = addMesh(scene,
+                new THREE.OctahedronGeometry(random(0.4, 1.1), 0),
+                color,
+                { transparent: true, opacity: 0.35, roughness: 0.05 }
+            );
+
+            glass.position.set(random(-5, 5), random(-3, 3), random(-4, 2));
+            glass.rotation.set(random(0, 3), random(0, 3), 0);
+        }
+
+        addParticles(scene, white, 500);
+    }
+
+    // 11 — LIGHT RAYS
+    else if (id === "11") {
+        for (let i = 0; i < 22; i++) {
+            const ray = addMesh(scene,
+                new THREE.CylinderGeometry(0.015, 0.13, 12, 8),
+                color,
+                { glow: 1, transparent: true, opacity: 0.6 }
+            );
+
+            ray.position.set(random(-5, 5), random(-2, 2), random(-3, 1));
+            ray.rotation.z = random(-0.5, 0.5);
+        }
+        addParticles(scene, white, 500);
+    }
+
+    // 12 — DIGITAL TERRAIN
+    else if (id === "12") {
+        const geometry = new THREE.PlaneGeometry(16, 12, 70, 60);
+        geometry.rotateX(-Math.PI / 2);
+
+        const terrain = addMesh(scene, geometry, color, {
+            wireframe: true,
+            glow: 0.8
+        });
+
+        terrain.position.y = -1.7;
+
+        currentObjects.push({
+            update: t => {
+                const positions = geometry.attributes.position;
+                for (let i = 0; i < positions.count; i++) {
+                    const x = positions.getX(i);
+                    const z = positions.getZ(i);
+                    positions.setY(
+                        i,
+                        Math.sin(x * 0.8 + t) * 0.25 +
+                        Math.cos(z * 0.7 + t * 0.8) * 0.25
+                    );
+                }
+                positions.needsUpdate = true;
+                geometry.computeVertexNormals();
+            }
+        });
+    }
+
+    // 09 — LIQUID MOTION
+    else if (id === "09") {
+        for (let i = 0; i < 9; i++) {
+            const sphere = addMesh(scene,
+                new THREE.SphereGeometry(random(0.45, 1), 32, 32),
+                i % 2 ? purple : color,
+                { glow: 0.8, roughness: 0.12 }
+            );
+
+            sphere.position.set(random(-4, 4), random(-2, 2), random(-2, 2));
+
+            currentObjects.push({
+                update: t => {
+                    sphere.position.y += Math.sin(t + i) * 0.002;
+                    sphere.rotation.y += 0.003;
+                }
+            });
+        }
+    }
+
+    // 10 — ORBIT
+    else if (id === "10") {
+        addMesh(scene,
+            new THREE.SphereGeometry(0.9, 48, 48),
+            color,
+            { glow: 1.5 }
+        );
+
+        for (let i = 0; i < 5; i++) {
+            const ring = addRing(scene,
+                i % 2 ? cyan : purple,
+                1.7 + i * 0.35,
+                0.015
+            );
+
+            ring.rotation.x = i * 0.55;
+            ring.rotation.y = i * 0.35;
+        }
+
+        addParticles(scene, white, 600);
+    }
+
+    // 07 — GEOMETRY
+    else if (id === "07") {
+        const geometries = [
+            new THREE.TorusKnotGeometry(0.8, 0.2, 120, 16),
+            new THREE.OctahedronGeometry(1.2),
+            new THREE.TetrahedronGeometry(1.2),
+            new THREE.DodecahedronGeometry(1)
+        ];
+
+        geometries.forEach((geo, i) => {
+            const mesh = addMesh(scene, geo, i % 2 ? cyan : color, {
+                wireframe: true,
+                glow: 1
+            });
+
+            mesh.position.set((i - 1.5) * 2.5, random(-1, 1), 0);
+        });
+    }
+
+    // 05 — HOLO GRID
+    else if (id === "05") {
+        const grid = new THREE.GridHelper(18, 45, color, blue);
+        grid.position.y = -1.5;
+        scene.add(grid);
+        currentObjects.push(grid);
+
+        for (let i = 0; i < 8; i++) {
+            const beam = addMesh(scene,
+                new THREE.BoxGeometry(0.025, random(1, 4), 0.025),
+                cyan,
+                { glow: 1 }
+            );
+
+            beam.position.set(random(-7, 7), random(-0.5, 2), random(-3, 2));
+        }
+    }
+
+    // 01 — BLUE AURA
+    else if (id === "01") {
+        for (let i = 0; i < 5; i++) {
+            const aura = addMesh(scene,
+                new THREE.SphereGeometry(1.2 + i * 0.45, 32, 32),
+                color,
+                { transparent: true, opacity: 0.08, glow: 1 }
+            );
+
+            aura.scale.set(1.5, 0.8, 0.6);
+        }
+
+        addParticles(scene, white, 1000);
+    }
+
+    // 02 — CYBER CIRCUITS
+    else if (id === "02") {
+        for (let i = 0; i < 24; i++) {
+            const x = random(-6, 6);
+            const y = random(-3, 3);
+            const length = random(0.5, 3);
+
+            addLine(scene, [
+                [x, y, 0],
+                [x + length, y, 0],
+                [x + length, y + random(-2, 2), 0]
+            ], i % 2 ? cyan : color, 0.025);
+
+            addMesh(scene,
+                new THREE.SphereGeometry(0.09, 12, 12),
+                white,
+                { glow: 2, position: [x + length, y, 0] }
+            );
+        }
+    }
+
+    // 03 — DEEP WAVES
+    else if (id === "03") {
+        for (let i = 0; i < 8; i++) {
+            const wave = addRing(scene, color, 1 + i * 0.55, 0.035);
+            wave.rotation.x = 1.1;
+            wave.position.y = -1 + i * 0.3;
+        }
+        addParticles(scene, blue, 800);
+    }
+
+    // 04 — PARTICLE SPACE
+    else if (id === "04") {
+        addParticles(scene, purple, 3500, 13);
+
+        for (let i = 0; i < 8; i++) {
+            const star = addMesh(scene,
+                new THREE.IcosahedronGeometry(0.12, 1),
+                white,
+                { glow: 2 }
+            );
+            star.position.set(random(-6, 6), random(-4, 4), random(-4, 2));
+        }
+    }
+
+    // 06 — ENERGY FLOW
+    else if (id === "06") {
+        for (let i = 0; i < 7; i++) {
+            const points = [];
+
+            for (let j = 0; j <= 30; j++) {
+                const x = -7 + j * 0.46;
+                const y = Math.sin(j * 0.4 + i) * 0.7 + i * 0.35;
+                points.push([x, y, i * 0.2]);
+            }
+
+            addLine(scene, points, i % 2 ? cyan : color, 0.045);
+        }
+    }
+
+    // 08 — DIGITAL RAIN
+    else if (id === "08") {
+        for (let i = 0; i < 160; i++) {
+            const drop = addMesh(scene,
+                new THREE.BoxGeometry(0.025, random(0.2, 1), 0.025),
+                i % 3 ? color : cyan,
+                { glow: 1 }
+            );
+
+            drop.position.set(random(-8, 8), random(-6, 6), random(-2, 2));
+            drop.userData.fallSpeed = random(0.02, 0.08);
+        }
+    }
+
+    // 13 — NEURAL NETWORK
+    else if (id === "13") {
+        const nodes = [];
+
+        for (let i = 0; i < 45; i++) {
+            const point = new THREE.Vector3(
+                random(-5, 5),
+                random(-3, 3),
+                random(-3, 3)
+            );
+
+            nodes.push(point);
+
+            const node = addMesh(scene,
+                new THREE.SphereGeometry(0.07, 12, 12),
+                cyan,
+                { glow: 2 }
+            );
+
+            node.position.copy(point);
+        }
+
+        nodes.forEach((point, i) => {
+            nodes.slice(i + 1).forEach(other => {
+                if (point.distanceTo(other) < 2.5) {
+                    addLine(scene, [
+                        point.toArray(),
+                        other.toArray()
+                    ], color, 0.008);
+                }
+            });
+        });
+    }
+
+    /* AUTOMOTIVE */
+
+    // AUTO 01 — NEON GARAGE
+    else if (id === "auto-01") {
+        createCar(scene, color, true);
+
+        for (let i = 0; i < 5; i++) {
+            const frame = addMesh(scene,
+                new THREE.BoxGeometry(0.08, 5, 0.08),
+                cyan,
+                { glow: 2 }
+            );
+
+            frame.position.set(-5 + i * 2.5, 1, -2);
+        }
+
+        addParticles(scene, blue, 500);
+    }
+
+    // AUTO 02 — NIGHT DRIVE
+    else if (id === "auto-02") {
+        createCar(scene, color);
+
+        for (let i = 0; i < 18; i++) {
+            const building = addMesh(scene,
+                new THREE.BoxGeometry(1, random(2, 7), 1),
+                0x102443,
+                { glow: 0.3 }
+            );
+
+            building.position.set(
+                random(-9, 9),
+                -1 + building.geometry.parameters.height / 2,
+                random(-6, -3)
+            );
+        }
+
+        addParticles(scene, white, 300);
+    }
+
+    // AUTO 03 — HYPER TUNNEL
+    else if (id === "auto-03") {
+        createCar(scene, cyan, true);
+
+        for (let i = 0; i < 16; i++) {
+            const ring = addMesh(scene,
+                new THREE.TorusGeometry(3 + i * 0.12, 0.035, 8, 80),
+                i % 2 ? cyan : color,
+                { glow: 2 }
+            );
+
+            ring.position.z = -i * 1.5;
+        }
+    }
+
+    // AUTO 04 — DARK SHOWROOM
+    else if (id === "auto-04") {
+        createCar(scene, 0x7c9dff);
+
+        const floor = addMesh(scene,
+            new THREE.CircleGeometry(4, 64),
+            0x15243b,
+            { metalness: 0.9 }
+        );
+
+        floor.rotation.x = -Math.PI / 2;
+        floor.position.y = -1.3;
+
+        addRing(scene, color, 3.5, 0.035, [0, -1.25, 0]);
+
+        const spotlight = new THREE.SpotLight(0xffffff, 100);
+        spotlight.position.set(0, 7, 2);
+        scene.add(spotlight);
+    }
+
+    // AUTO 05 — MOUNTAIN RUN
+    else if (id === "auto-05") {
+        createCar(scene, 0xd88c4b);
+
+        for (let side of [-1, 1]) {
+            for (let i = 0; i < 7; i++) {
+                const mountain = addMesh(scene,
+                    new THREE.ConeGeometry(random(1, 2.5), random(3, 7), 5),
+                    0x344b57
+                );
+
+                mountain.position.set(
+                    side * random(5, 9),
+                    random(0, 2),
+                    -i * 2
+                );
+            }
+        }
+
+        addLine(scene, [
+            [-3, -1.3, 2],
+            [-1, -1.3, -3],
+            [2, -1.3, -7],
+            [-1, -1.3, -12]
+        ], 0xffffff, 0.04);
+    }
+
+    // AUTO 06 — ENGINE CORE
+    else if (id === "auto-06") {
+        const engine = addMesh(scene,
+            new THREE.CylinderGeometry(1.1, 1.1, 1.2, 12),
+            0x555e68,
+            { metalness: 1 }
+        );
+
+        engine.rotation.x = Math.PI / 2;
+
+        for (let i = 0; i < 8; i++) {
+            const piston = addMesh(scene,
+                new THREE.CylinderGeometry(0.15, 0.15, 1.5, 16),
+                color,
+                { glow: 0.5 }
+            );
+
+            const angle = i * Math.PI / 4;
+
+            piston.position.set(
+                Math.cos(angle) * 1.7,
+                Math.sin(angle) * 1.7,
+                0
+            );
+        }
+
+        addRing(scene, 0xff663c, 2.2, 0.08);
+        addParticles(scene, 0xff9966, 400);
+    }
+
+    // AUTO 07 — FUTURE MACHINE
+    else if (id === "auto-07") {
+        createCar(scene, cyan, true);
+
+        for (let i = 0; i < 6; i++) {
+            const wing = addMesh(scene,
+                new THREE.BoxGeometry(2 + i * 0.3, 0.035, 0.035),
+                cyan,
+                { glow: 1 }
+            );
+
+            wing.position.set(0, 1.2 + i * 0.2, -1);
+            wing.rotation.z = 0.2;
+        }
+    }
+
+    // AUTO 08 — SUNSET DRIVE
+    else if (id === "auto-08") {
+        createCar(scene, 0xe58b45);
+
+        const sun = addMesh(scene,
+            new THREE.SphereGeometry(2, 48, 48),
+            0xffa34f,
+            { glow: 2 }
+        );
+
+        sun.position.set(0, 3, -8);
+
+        addLine(scene, [
+            [-8, -1.4, 4],
+            [-3, -1.4, 0],
+            [2, -1.4, -4],
+            [8, -1.4, -9]
+        ], 0xffb66a, 0.08);
+    }
+
+    // AUTO 09 — CARBON VISION
+    else if (id === "auto-09") {
+        createCar(scene, 0x303b50, true);
+
+        const carbon = addMesh(scene,
+            new THREE.PlaneGeometry(15, 12, 30, 30),
+            0x202630,
+            { wireframe: true, glow: 0.2 }
+        );
+
+        carbon.position.z = -2;
+
+        for (let i = 0; i < 8; i++) {
+            const strip = addMesh(scene,
+                new THREE.BoxGeometry(0.035, 6, 0.035),
+                color,
+                { glow: 2 }
+            );
+
+            strip.position.set(-5 + i * 1.4, 0, 1);
+            strip.rotation.z = 0.2;
+        }
+    }
+}
+
+
+/* ========================================
+   OPEN PREVIEW
+======================================== */
+
+function cleanupPreview() {
+    if (currentAnimation !== null) {
+        cancelAnimationFrame(currentAnimation);
+        currentAnimation = null;
+    }
+
+    if (currentResize) {
+        window.removeEventListener("resize", currentResize);
+        currentResize = null;
+    }
+
+    if (currentRenderer) {
+        currentRenderer.dispose();
+        currentRenderer.domElement.remove();
+        currentRenderer = null;
+    }
+
+    if (currentScene) {
+        currentScene.traverse(object => {
+            if (object.geometry) object.geometry.dispose();
+
+            if (object.material) {
+                const materials = Array.isArray(object.material)
+                    ? object.material
+                    : [object.material];
+
+                materials.forEach(material => material.dispose());
+            }
+        });
+
+        currentScene = null;
+    }
+
+    currentObjects = [];
+}
 
 function openBackgroundPreview(background, category) {
-
     const preview = document.getElementById("background-preview");
     const previewContent = document.getElementById("preview-content");
     const previewTitle = document.getElementById("preview-title");
 
     if (!preview || !previewContent || !previewTitle) return;
 
-    // Limpiar escena anterior
-    if (currentAnimation) {
-        cancelAnimationFrame(currentAnimation);
-        currentAnimation = null;
-    }
-
-    if (currentRenderer) {
-        currentRenderer.dispose();
-        currentRenderer = null;
-    }
+    cleanupPreview();
 
     previewContent.innerHTML = "";
-
     previewTitle.textContent = background.name;
 
     preview.classList.add("active");
@@ -308,10 +817,9 @@ function openBackgroundPreview(background, category) {
         return;
     }
 
-    // ESCENA 3D
     const scene = new THREE.Scene();
-
     scene.background = new THREE.Color("#030711");
+    currentScene = scene;
 
     const camera = new THREE.PerspectiveCamera(
         60,
@@ -320,118 +828,78 @@ function openBackgroundPreview(background, category) {
         1000
     );
 
-    camera.position.z = 7;
+    camera.position.set(0, 0, 9);
 
     const renderer = new THREE.WebGLRenderer({
         antialias: true,
-        alpha: false
+        alpha: false,
+        powerPreference: "high-performance"
     });
 
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
     renderer.setSize(window.innerWidth, window.innerHeight);
 
     previewContent.appendChild(renderer.domElement);
-
     currentRenderer = renderer;
 
-    // ILUMINACIÓN
-    const light = new THREE.PointLight(
-        new THREE.Color(background.color),
-        3,
-        30
-    );
-
-    light.position.set(0, 0, 4);
-
+    const light = new THREE.PointLight(background.color, 4, 35);
+    light.position.set(0, 3, 5);
     scene.add(light);
 
-    scene.add(
-        new THREE.AmbientLight(0xffffff, 0.4)
-    );
+    scene.add(new THREE.AmbientLight(0xffffff, 0.7));
 
-    // AETHER CORE
-    const geometry = new THREE.IcosahedronGeometry(1.5, 2);
+    createUniqueScene(scene, background);
 
-    const material = new THREE.MeshPhysicalMaterial({
-        color: background.color,
-        metalness: 0.6,
-        roughness: 0.2,
-        emissive: background.color,
-        emissiveIntensity: 0.7,
-        wireframe: background.id !== "15"
-    });
+    const clock = new THREE.Clock();
 
-    const core = new THREE.Mesh(geometry, material);
-
-    scene.add(core);
-
-    // PARTÍCULAS
-    const particleGeometry = new THREE.BufferGeometry();
-
-    const particleCount = 1200;
-
-    const positions = new Float32Array(particleCount * 3);
-
-    for (let i = 0; i < particleCount * 3; i++) {
-        positions[i] = (Math.random() - 0.5) * 18;
-    }
-
-    particleGeometry.setAttribute(
-        "position",
-        new THREE.BufferAttribute(positions, 3)
-    );
-
-    const particleMaterial = new THREE.PointsMaterial({
-        color: 0x8abaff,
-        size: 0.035,
-        transparent: true,
-        opacity: 0.8
-    });
-
-    const particles = new THREE.Points(
-        particleGeometry,
-        particleMaterial
-    );
-
-    scene.add(particles);
-
-    // ANIMACIÓN
     function animate() {
-
         currentAnimation = requestAnimationFrame(animate);
 
-        core.rotation.x += 0.003;
-        core.rotation.y += 0.006;
+        const time = clock.getElapsedTime();
 
-        particles.rotation.y += 0.0007;
+        currentObjects.forEach((object, index) => {
+            if (object.update) {
+                object.update(time);
+                return;
+            }
 
-        light.intensity = 2.5 + Math.sin(Date.now() * 0.002) * 0.7;
+            if (object.userData.fallSpeed) {
+                object.position.y -= object.userData.fallSpeed;
+
+                if (object.position.y < -7) {
+                    object.position.y = 7;
+                    object.position.x = random(-8, 8);
+                }
+
+                return;
+            }
+
+            if (object.isPoints) {
+                object.rotation.y += 0.0008;
+                object.rotation.x += 0.0002;
+            } else {
+                object.rotation.y += 0.002 + index * 0.00005;
+                object.rotation.x += 0.0007;
+            }
+        });
+
+        light.intensity = 3.5 + Math.sin(time * 1.5) * 0.8;
 
         renderer.render(scene, camera);
-
     }
 
     animate();
 
-    // RESPONSIVE
-    function resizeScene() {
-
+    currentResize = () => {
         if (!currentRenderer) return;
 
         camera.aspect = window.innerWidth / window.innerHeight;
-
         camera.updateProjectionMatrix();
 
-        renderer.setSize(
-            window.innerWidth,
-            window.innerHeight
-        );
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    };
 
-    }
-
-    window.addEventListener("resize", resizeScene);
-
+    window.addEventListener("resize", currentResize);
 }
 
 
@@ -440,17 +908,16 @@ function openBackgroundPreview(background, category) {
 ======================================== */
 
 function closeBackgroundPreview() {
-
     const preview = document.getElementById("background-preview");
 
     if (!preview) return;
 
     preview.classList.remove("active");
-
     preview.setAttribute("aria-hidden", "true");
 
     document.body.style.overflow = "";
 
+    cleanupPreview();
 }
 
 
@@ -459,7 +926,6 @@ function closeBackgroundPreview() {
 ======================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-
     loadBackgroundCollections();
 
     const closeButton = document.getElementById("close-preview");
@@ -469,13 +935,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.addEventListener("keydown", event => {
-
         if (event.key === "Escape") {
             closeBackgroundPreview();
         }
-
     });
-
 });
-
-
