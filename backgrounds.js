@@ -731,27 +731,146 @@ if (id === "15") {
     }
 
 
+    
     // 10 — ORBIT
     else if (id === "10") {
-        addMesh(scene,
-            new THREE.SphereGeometry(0.9, 48, 48),
-            color,
-            { glow: 1.5 }
+
+        const orbitGroup = new THREE.Group();
+
+        // Planeta central
+        const planet = new THREE.Mesh(
+            new THREE.SphereGeometry(1.25, 64, 64),
+            new THREE.MeshPhysicalMaterial({
+                color: 0x0755c9,
+                metalness: 0.65,
+                roughness: 0.25,
+                clearcoat: 1,
+                emissive: 0x031b55,
+                emissiveIntensity: 0.7
+            })
         );
 
-        for (let i = 0; i < 5; i++) {
-            const ring = addRing(scene,
-                i % 2 ? cyan : purple,
-                1.7 + i * 0.35,
-                0.015
+        orbitGroup.add(planet);
+
+        // Líneas luminosas del planeta
+        const atmosphere = new THREE.Mesh(
+            new THREE.SphereGeometry(1.34, 48, 48),
+            new THREE.MeshBasicMaterial({
+                color: 0x1688ff,
+                transparent: true,
+                opacity: 0.16,
+                side: THREE.BackSide
+            })
+        );
+
+        orbitGroup.add(atmosphere);
+
+        // Anillos orbitales
+        const ringColors = [
+            0x1688ff,
+            0x00dfff,
+            0x7545ff
+        ];
+
+        const rings = [];
+
+        for (let i = 0; i < 3; i++) {
+
+            const ring = new THREE.Mesh(
+                new THREE.TorusGeometry(
+                    2.1 + i * 0.35,
+                    0.018,
+                    8,
+                    180
+                ),
+                new THREE.MeshBasicMaterial({
+                    color: ringColors[i],
+                    transparent: true,
+                    opacity: 0.75
+                })
             );
 
-            ring.rotation.x = i * 0.55;
-            ring.rotation.y = i * 0.35;
+            ring.rotation.x = Math.PI / 2.5 + i * 0.25;
+            ring.rotation.y = i * 0.6;
+
+            orbitGroup.add(ring);
+            rings.push(ring);
         }
 
-        addParticles(scene, white, 600);
+        // Satélites
+        const satellites = [];
+
+        for (let i = 0; i < 5; i++) {
+
+            const satellite = new THREE.Mesh(
+                new THREE.SphereGeometry(
+                    random(0.08, 0.17),
+                    24,
+                    24
+                ),
+                new THREE.MeshStandardMaterial({
+                    color: i % 2 ? 0x00dfff : 0xffffff,
+                    emissive: 0x1688ff,
+                    emissiveIntensity: 1.5,
+                    metalness: 0.7,
+                    roughness: 0.2
+                })
+            );
+
+            orbitGroup.add(satellite);
+
+            satellites.push({
+                mesh: satellite,
+                radius: 2.2 + i * 0.2,
+                speed: 0.3 + i * 0.12,
+                offset: i * Math.PI * 2 / 5
+            });
+        }
+
+        scene.add(orbitGroup);
+
+        // Iluminación espacial
+        const blueLight = new THREE.PointLight(
+            0x087bff, 65, 18
+        );
+
+        blueLight.position.set(3, 3, 4);
+        scene.add(blueLight);
+
+        const cyanLight = new THREE.PointLight(
+            0x00dfff, 35, 15
+        );
+
+        cyanLight.position.set(-4, -2, 2);
+        scene.add(cyanLight);
+
+        addParticles(scene, 0x9bdcff, 850, 16);
+
+        // Movimiento orbital
+        currentObjects.push({
+            update: t => {
+
+                planet.rotation.y = t * 0.12;
+                atmosphere.rotation.y = -t * 0.08;
+
+                rings.forEach((ring, i) => {
+                    ring.rotation.z = t * (0.08 + i * 0.035);
+                });
+
+                satellites.forEach(s => {
+
+                    const angle = t * s.speed + s.offset;
+
+                    s.mesh.position.set(
+                        Math.cos(angle) * s.radius,
+                        Math.sin(angle * 0.7) * 0.45,
+                        Math.sin(angle) * s.radius
+                    );
+                });
+            }
+        });
     }
+
 
     // 07 — GEOMETRY
     else if (id === "07") {
