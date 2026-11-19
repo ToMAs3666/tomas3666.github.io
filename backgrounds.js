@@ -70,6 +70,140 @@ function loadBackgroundCollections() {
     const abstractGrid = document.getElementById("abstract-grid");
     const automotiveGrid = document.getElementById("automotive-grid");
 
+function createAetherCar(color = 0x1769ff) {
+    const car = new THREE.Group();
+
+    const bodyMat = new THREE.MeshPhysicalMaterial({
+        color,
+        metalness: 0.85,
+        roughness: 0.19,
+        clearcoat: 1,
+        clearcoatRoughness: 0.08
+    });
+
+    const darkMat = new THREE.MeshPhysicalMaterial({
+        color: 0x080d16,
+        metalness: 0.65,
+        roughness: 0.16
+    });
+
+    const glassMat = new THREE.MeshPhysicalMaterial({
+        color: 0x071a30,
+        metalness: 0.45,
+        roughness: 0.08,
+        transparent: true,
+        opacity: 0.88
+    });
+
+    const rubberMat = new THREE.MeshStandardMaterial({
+        color: 0x08090c,
+        roughness: 0.85
+    });
+
+    const metalMat = new THREE.MeshStandardMaterial({
+        color: 0x9aafc5,
+        metalness: 1,
+        roughness: 0.2
+    });
+
+    function part(geometry, material, x, y, z) {
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.position.set(x, y, z);
+        car.add(mesh);
+        return mesh;
+    }
+
+    // Carrocería principal
+    part(new THREE.BoxGeometry(2.5, 0.48, 5.1), bodyMat, 0, 0.65, 0);
+
+    // Capó y parte trasera
+    part(new THREE.BoxGeometry(2.35, 0.2, 1.35), bodyMat, 0, 0.94, -1.55);
+    part(new THREE.BoxGeometry(2.3, 0.25, 1.05), bodyMat, 0, 0.9, 1.85);
+
+    // Techo deportivo
+    const roof = part(
+        new THREE.BoxGeometry(1.8, 0.65, 2.15),
+        bodyMat,
+        0, 1.25, 0.05
+    );
+    roof.scale.set(1, 0.85, 1);
+
+    // Cristales
+    part(new THREE.BoxGeometry(1.68, 0.48, 1.9), glassMat, 0, 1.29, 0.05);
+
+    // Alerón
+    part(new THREE.BoxGeometry(2.15, 0.09, 0.35), darkMat, 0, 1.25, 2.25);
+    part(new THREE.BoxGeometry(0.12, 0.38, 0.12), metalMat, -0.75, 1.08, 2.15);
+    part(new THREE.BoxGeometry(0.12, 0.38, 0.12), metalMat, 0.75, 1.08, 2.15);
+
+    // Ruedas
+    const wheels = [];
+
+    for (const x of [-1.2, 1.2]) {
+        for (const z of [-1.65, 1.65]) {
+            const wheel = new THREE.Group();
+            wheel.position.set(x, 0.48, z);
+
+            const tire = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.48, 0.48, 0.25, 40),
+                rubberMat
+            );
+            tire.rotation.z = Math.PI / 2;
+            wheel.add(tire);
+
+            const rim = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.27, 0.27, 0.27, 32),
+                metalMat
+            );
+            rim.rotation.z = Math.PI / 2;
+            wheel.add(rim);
+
+            const hub = new THREE.Mesh(
+                new THREE.CylinderGeometry(0.09, 0.09, 0.29, 24),
+                bodyMat
+            );
+            hub.rotation.z = Math.PI / 2;
+            wheel.add(hub);
+
+            car.add(wheel);
+            wheels.push(wheel);
+        }
+    }
+
+    // Faros delanteros
+    for (const x of [-0.85, 0.85]) {
+        const headlight = part(
+            new THREE.BoxGeometry(0.55, 0.12, 0.08),
+            new THREE.MeshBasicMaterial({ color: 0xbceaff }),
+            x, 0.75, -2.57
+        );
+
+        const glow = new THREE.PointLight(0x83caff, 5, 5);
+        glow.position.set(x, 0.8, -2.8);
+        car.add(glow);
+    }
+
+    // Luces traseras
+    for (const x of [-0.85, 0.85]) {
+        part(
+            new THREE.BoxGeometry(0.55, 0.1, 0.08),
+            new THREE.MeshBasicMaterial({ color: 0xff193d }),
+            x, 0.78, 2.58
+        );
+    }
+
+    // Detalles laterales
+    for (const x of [-1.26, 1.26]) {
+        part(
+            new THREE.BoxGeometry(0.06, 0.09, 2.2),
+            metalMat,
+            x, 0.55, 0
+        );
+    }
+
+    return { group: car, wheels };
+}
+
     if (!abstractGrid || !automotiveGrid) return;
 
     abstractGrid.innerHTML = "";
