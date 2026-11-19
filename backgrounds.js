@@ -343,21 +343,126 @@ if (id === "15") {
 }
 
 
+   
     // 14 — GLASS DIMENSION
     else if (id === "14") {
-        for (let i = 0; i < 12; i++) {
-            const glass = addMesh(scene,
-                new THREE.OctahedronGeometry(random(0.4, 1.1), 0),
-                color,
-                { transparent: true, opacity: 0.35, roughness: 0.05 }
+
+        // Cristales flotantes
+        const crystalGeometries = [
+            new THREE.OctahedronGeometry(1.25, 0),
+            new THREE.IcosahedronGeometry(1, 0),
+            new THREE.DodecahedronGeometry(1.1, 0),
+            new THREE.OctahedronGeometry(0.8, 0),
+            new THREE.IcosahedronGeometry(0.7, 1),
+            new THREE.TetrahedronGeometry(1, 0)
+        ];
+
+        const positions = [
+            [-4, 1.5, -1],
+            [-1.5, -1.2, 0],
+            [1.5, 1.7, -2],
+            [4, -0.8, -1],
+            [0, 0.2, -4],
+            [3, 2.5, -4]
+        ];
+
+        crystalGeometries.forEach((geometry, i) => {
+
+            const group = new THREE.Group();
+
+            const glassMaterial = new THREE.MeshPhysicalMaterial({
+                color: i % 2 === 0 ? 0x49aaff : 0x9bdfff,
+                metalness: 0.15,
+                roughness: 0.08,
+                transmission: 0.75,
+                thickness: 1.2,
+                ior: 1.45,
+                transparent: true,
+                opacity: 0.75,
+                side: THREE.DoubleSide
+            });
+
+            const crystal = new THREE.Mesh(
+                geometry,
+                glassMaterial
             );
 
-            glass.position.set(random(-5, 5), random(-3, 3), random(-4, 2));
-            glass.rotation.set(random(0, 3), random(0, 3), 0);
+            group.add(crystal);
+
+            // Bordes luminosos
+            const edges = new THREE.EdgesGeometry(geometry);
+
+            const outline = new THREE.LineSegments(
+                edges,
+                new THREE.LineBasicMaterial({
+                    color: 0x8bdcff,
+                    transparent: true,
+                    opacity: 0.9
+                })
+            );
+
+            group.add(outline);
+
+            group.position.set(...positions[i]);
+            group.rotation.set(
+                random(0, 2),
+                random(0, 2),
+                random(0, 2)
+            );
+
+            group.scale.setScalar(random(0.8, 1.3));
+
+            scene.add(group);
+
+            currentObjects.push({
+                update: t => {
+                    group.rotation.y += 0.002;
+                    group.rotation.x += 0.001;
+                    group.position.y =
+                        positions[i][1] + Math.sin(t + i) * 0.12;
+                }
+            });
+        });
+
+        // Paneles de cristal
+        for (let i = 0; i < 5; i++) {
+
+            const panel = new THREE.Mesh(
+                new THREE.BoxGeometry(2.2, 3.5, 0.035),
+                new THREE.MeshPhysicalMaterial({
+                    color: 0x287dff,
+                    transparent: true,
+                    opacity: 0.12,
+                    metalness: 0.5,
+                    roughness: 0.08
+                })
+            );
+
+            panel.position.set(
+                random(-6, 6),
+                random(-2, 2),
+                -3 - i
+            );
+
+            panel.rotation.y = random(-0.5, 0.5);
+
+            scene.add(panel);
+            currentObjects.push(panel);
         }
 
-        addParticles(scene, white, 500);
+        // Partículas luminosas
+        addParticles(scene, 0x8bdcff, 700, 12);
+
+        // Iluminación
+        const glassLight = new THREE.PointLight(0x49aaff, 45, 20);
+        glassLight.position.set(0, 3, 4);
+        scene.add(glassLight);
+
+        const cyanLight = new THREE.PointLight(0x00eaff, 25, 15);
+        cyanLight.position.set(-5, -2, 2);
+        scene.add(cyanLight);
     }
+
 
     // 11 — LIGHT RAYS
     else if (id === "11") {
