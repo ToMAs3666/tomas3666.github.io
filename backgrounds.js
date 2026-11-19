@@ -36,39 +36,8 @@ const automotiveBackgrounds = [
 
 
 /* ========================================
-   COLLECTIONS
+   AUTOMOTIVE MODEL
 ======================================== */
-
-function createBackgroundCard(background, category) {
-    const card = document.createElement("article");
-    card.className = "background-card";
-
-    card.innerHTML = `
-        <div class="background-thumbnail"
-             style="--scene-color:${background.color}">
-            <span class="background-number">${background.id.toUpperCase()}</span>
-        </div>
-        <span class="background-category">${category}</span>
-        <h3>${background.name}</h3>
-        <p>${background.description}</p>
-        <div class="background-card-content">
-            <div class="background-actions">
-                <button class="preview-button" type="button">Preview</button>
-                <button type="button" disabled>Download bald</button>
-            </div>
-        </div>
-    `;
-
-    card.querySelector(".preview-button").addEventListener("click", () => {
-        openBackgroundPreview(background, category);
-    });
-
-    return card;
-}
-
-function loadBackgroundCollections() {
-    const abstractGrid = document.getElementById("abstract-grid");
-    const automotiveGrid = document.getElementById("automotive-grid");
 
 function createAetherCar(color = 0x1769ff) {
     const car = new THREE.Group();
@@ -172,7 +141,7 @@ function createAetherCar(color = 0x1769ff) {
 
     // Faros delanteros
     for (const x of [-0.85, 0.85]) {
-        const headlight = part(
+        part(
             new THREE.BoxGeometry(0.55, 0.12, 0.08),
             new THREE.MeshBasicMaterial({ color: 0xbceaff }),
             x, 0.75, -2.57
@@ -203,6 +172,42 @@ function createAetherCar(color = 0x1769ff) {
 
     return { group: car, wheels };
 }
+
+
+/* ========================================
+   COLLECTIONS
+======================================== */
+
+function createBackgroundCard(background, category) {
+    const card = document.createElement("article");
+    card.className = "background-card";
+
+    card.innerHTML = `
+        <div class="background-thumbnail"
+             style="--scene-color:${background.color}">
+            <span class="background-number">${background.id.toUpperCase()}</span>
+        </div>
+        <span class="background-category">${category}</span>
+        <h3>${background.name}</h3>
+        <p>${background.description}</p>
+        <div class="background-card-content">
+            <div class="background-actions">
+                <button class="preview-button" type="button">Preview</button>
+                <button type="button" disabled>Download bald</button>
+            </div>
+        </div>
+    `;
+
+    card.querySelector(".preview-button").addEventListener("click", () => {
+        openBackgroundPreview(background, category);
+    });
+
+    return card;
+}
+
+function loadBackgroundCollections() {
+    const abstractGrid = document.getElementById("abstract-grid");
+    const automotiveGrid = document.getElementById("automotive-grid");
 
     if (!abstractGrid || !automotiveGrid) return;
 
@@ -311,7 +316,7 @@ function addLine(scene, points, color, radius = 0.025) {
 
 
 /* ========================================
-   AUTOMOTIVE MODEL
+   AUTOMOTIVE MODEL - LEGACY
 ======================================== */
 
 function createCar(scene, color, futuristic = false) {
@@ -404,7 +409,7 @@ function createUniqueScene(scene, bg) {
     const purple = 0x9b55ff;
     const white = 0xc8eaff;
 
-   
+
 // ========================================
 // 15 — AETHER CORE
 // ========================================
@@ -428,9 +433,7 @@ if (id === "15") {
 
     const innerCore = new THREE.Mesh(
         new THREE.SphereGeometry(0.48, 48, 48),
-        new THREE.MeshBasicMaterial({
-            color: 0x1688ff
-        })
+        new THREE.MeshBasicMaterial({ color: 0x1688ff })
     );
 
     coreGroup.add(innerCore);
@@ -447,7 +450,6 @@ if (id === "15") {
     coreGroup.add(aura);
 
     const rings = [];
-
     const ringColors = [0x1688ff, 0x00dfff, 0x7545ff];
 
     for (let i = 0; i < 3; i++) {
@@ -530,7 +532,6 @@ else if (id === "14") {
         );
 
         crystal.scale.setScalar(random(0.5, 1.15));
-
         glassGroup.add(crystal);
 
         const edges = new THREE.LineSegments(
@@ -552,7 +553,6 @@ else if (id === "14") {
         });
     }
 
-    // Transparente Glasplatten
     for (let i = 0; i < 5; i++) {
         const panel = new THREE.Mesh(
             new THREE.BoxGeometry(2.8, 3.8, 0.035),
@@ -596,8 +596,7 @@ else if (id === "14") {
             crystals.forEach(c => {
                 c.mesh.rotation.x = t * c.speed;
                 c.mesh.rotation.y = t * c.speed * 0.8;
-                c.mesh.position.y =
-                    c.baseY + Math.sin(t + c.offset) * 0.25;
+                c.mesh.position.y = c.baseY + Math.sin(t + c.offset) * 0.25;
             });
         }
     });
@@ -626,12 +625,7 @@ else if (id === "11") {
             })
         );
 
-        ray.position.set(
-            random(-7, 7),
-            random(-1, 2),
-            random(-5, 1)
-        );
-
+        ray.position.set(random(-7, 7), random(-1, 2), random(-5, 1));
         ray.rotation.z = random(-0.5, 0.5);
         ray.rotation.x = random(-0.3, 0.3);
 
@@ -640,8 +634,7 @@ else if (id === "11") {
         currentObjects.push({
             update: t => {
                 ray.rotation.z += 0.0005;
-                ray.material.opacity =
-                    0.1 + Math.sin(t * 1.2 + i) * 0.06;
+                ray.material.opacity = 0.1 + Math.sin(t * 1.2 + i) * 0.06;
             }
         });
     }
@@ -693,7 +686,6 @@ else if (id === "12") {
     const terrain = new THREE.Mesh(geometry, material);
     terrain.rotation.x = -Math.PI / 2.7;
     terrain.position.y = -1.8;
-
     terrainGroup.add(terrain);
 
     const secondTerrain = terrain.clone();
@@ -740,7 +732,6 @@ else if (id === "12") {
 else if (id === "09") {
 
     const liquidGroup = new THREE.Group();
-
     const colors = [0x087bff, 0x00dfff, 0x6040ff, 0x1688ff];
 
     for (let i = 0; i < 4; i++) {
@@ -1093,8 +1084,9 @@ else if (id === "05") {
 }
 
 
-
-
+// ========================================
+// AUTOMOTIVE COLLECTION
+// ========================================
 else if (id.startsWith("auto-")) {
 
     const scenes = {
@@ -1121,6 +1113,7 @@ else if (id.startsWith("auto-")) {
             roughness: 0.18
         })
     );
+
     floor.rotation.x = -Math.PI / 2;
     floor.position.y = -0.12;
     environment.add(floor);
@@ -1134,6 +1127,7 @@ else if (id.startsWith("auto-")) {
             roughness: 0.2
         })
     );
+
     platform.position.y = 0;
     environment.add(platform);
 
@@ -1141,6 +1135,7 @@ else if (id.startsWith("auto-")) {
         new THREE.TorusGeometry(3.65, 0.035, 10, 120),
         new THREE.MeshBasicMaterial({ color: config.light })
     );
+
     platformRing.rotation.x = Math.PI / 2;
     platformRing.position.y = 0.08;
     environment.add(platformRing);
@@ -1170,10 +1165,9 @@ else if (id.startsWith("auto-")) {
     for (let i = 0; i < 5; i++) {
         const lightBar = new THREE.Mesh(
             new THREE.BoxGeometry(0.12, 0.04, 5),
-            new THREE.MeshBasicMaterial({
-                color: config.light
-            })
+            new THREE.MeshBasicMaterial({ color: config.light })
         );
+
         lightBar.position.set(-4 + i * 2, 5, -2);
         environment.add(lightBar);
     }
@@ -1191,6 +1185,7 @@ else if (id.startsWith("auto-")) {
     const topLight = new THREE.SpotLight(
         0xffffff, 100, 18, Math.PI / 4, 0.5
     );
+
     topLight.position.set(0, 8, 1);
     scene.add(topLight);
 
@@ -1201,7 +1196,7 @@ else if (id.startsWith("auto-")) {
             environment.rotation.y = Math.sin(t * 0.12) * 0.035;
             vehicle.group.rotation.y = Math.sin(t * 0.25) * 0.08;
 
-            vehicle.wheels.forEach((wheel, i) => {
+            vehicle.wheels.forEach(wheel => {
                 wheel.rotation.x = t * 0.8;
             });
 
@@ -1210,6 +1205,7 @@ else if (id.startsWith("auto-")) {
     });
 }
 }
+
 
 /* ========================================
    OPEN PREVIEW
