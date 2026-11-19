@@ -464,20 +464,84 @@ if (id === "15") {
     }
 
 
+   
     // 11 — LIGHT RAYS
     else if (id === "11") {
-        for (let i = 0; i < 22; i++) {
-            const ray = addMesh(scene,
-                new THREE.CylinderGeometry(0.015, 0.13, 12, 8),
-                color,
-                { glow: 1, transparent: true, opacity: 0.6 }
+
+        // Haces de luz principales
+        for (let i = 0; i < 18; i++) {
+
+            const ray = new THREE.Mesh(
+                new THREE.CylinderGeometry(
+                    0.015,
+                    random(0.12, 0.3),
+                    random(7, 12),
+                    12,
+                    1,
+                    true
+                ),
+                new THREE.MeshBasicMaterial({
+                    color: i % 2 ? 0x1688ff : 0x00dfff,
+                    transparent: true,
+                    opacity: random(0.08, 0.2),
+                    side: THREE.DoubleSide,
+                    depthWrite: false
+                })
             );
 
-            ray.position.set(random(-5, 5), random(-2, 2), random(-3, 1));
+            ray.position.set(
+                random(-7, 7),
+                random(-1, 2),
+                random(-5, 1)
+            );
+
             ray.rotation.z = random(-0.5, 0.5);
+            ray.rotation.x = random(-0.3, 0.3);
+
+            scene.add(ray);
+
+            currentObjects.push({
+                update: t => {
+                    ray.rotation.z += 0.0005;
+                    ray.material.opacity =
+                        0.1 + Math.sin(t * 1.2 + i) * 0.06;
+                }
+            });
         }
-        addParticles(scene, white, 500);
+
+        // Luz central ambiental
+        const centralLight = new THREE.PointLight(
+            0x1688ff, 45, 20
+        );
+
+        centralLight.position.set(0, 2, 1);
+        scene.add(centralLight);
+
+        // Destellos
+        const glow = new THREE.Mesh(
+            new THREE.SphereGeometry(0.5, 32, 32),
+            new THREE.MeshBasicMaterial({
+                color: 0x1688ff,
+                transparent: true,
+                opacity: 0.12
+            })
+        );
+
+        glow.position.set(0, 1, -3);
+        scene.add(glow);
+
+        currentObjects.push({
+            update: t => {
+                glow.scale.setScalar(
+                    1 + Math.sin(t * 1.5) * 0.15
+                );
+            }
+        });
+
+        // Partículas suspendidas
+        addParticles(scene, 0x9bdcff, 900, 13);
     }
+
 
     // 12 — DIGITAL TERRAIN
     else if (id === "12") {
