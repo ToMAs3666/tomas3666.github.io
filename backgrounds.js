@@ -618,25 +618,118 @@ if (id === "15") {
     }
 
 
+   
     // 09 — LIQUID MOTION
     else if (id === "09") {
-        for (let i = 0; i < 9; i++) {
-            const sphere = addMesh(scene,
-                new THREE.SphereGeometry(random(0.45, 1), 32, 32),
-                i % 2 ? purple : color,
-                { glow: 0.8, roughness: 0.12 }
+
+        const liquidGroup = new THREE.Group();
+
+        const colors = [
+            0x087bff,
+            0x00dfff,
+            0x6040ff,
+            0x1688ff
+        ];
+
+        // Formas de metal líquido
+        for (let i = 0; i < 4; i++) {
+
+            const geometry = new THREE.TorusKnotGeometry(
+                random(0.9, 1.5),
+                random(0.12, 0.22),
+                180,
+                24,
+                random(2, 5),
+                random(3, 7)
             );
 
-            sphere.position.set(random(-4, 4), random(-2, 2), random(-2, 2));
-
-            currentObjects.push({
-                update: t => {
-                    sphere.position.y += Math.sin(t + i) * 0.002;
-                    sphere.rotation.y += 0.003;
-                }
+            const material = new THREE.MeshPhysicalMaterial({
+                color: colors[i],
+                metalness: 0.85,
+                roughness: 0.12,
+                clearcoat: 1,
+                clearcoatRoughness: 0.05,
+                transparent: true,
+                opacity: 0.78
             });
+
+            const liquid = new THREE.Mesh(
+                geometry,
+                material
+            );
+
+            liquid.position.set(
+                random(-2.5, 2.5),
+                random(-1.5, 1.5),
+                random(-2, 1)
+            );
+
+            liquid.scale.setScalar(random(0.65, 1.1));
+
+            liquidGroup.add(liquid);
+
+            liquid.userData.speed = random(0.15, 0.4);
+            liquid.userData.offset = random(0, Math.PI * 2);
         }
+
+        scene.add(liquidGroup);
+
+        // Núcleo luminoso
+        const core = new THREE.Mesh(
+            new THREE.SphereGeometry(0.75, 48, 48),
+            new THREE.MeshBasicMaterial({
+                color: 0x087bff,
+                transparent: true,
+                opacity: 0.12
+            })
+        );
+
+        scene.add(core);
+
+        // Iluminación
+        const blueLight = new THREE.PointLight(
+            0x087bff, 55, 18
+        );
+
+        blueLight.position.set(-3, 3, 3);
+        scene.add(blueLight);
+
+        const cyanLight = new THREE.PointLight(
+            0x00dfff, 40, 18
+        );
+
+        cyanLight.position.set(3, -2, 2);
+        scene.add(cyanLight);
+
+        // Animación fluida
+        currentObjects.push({
+            update: t => {
+
+                liquidGroup.rotation.y = t * 0.12;
+                liquidGroup.rotation.x =
+                    Math.sin(t * 0.25) * 0.12;
+
+                liquidGroup.children.forEach(liquid => {
+
+                    const speed = liquid.userData.speed;
+                    const offset = liquid.userData.offset;
+
+                    liquid.rotation.x =
+                        t * speed + offset;
+
+                    liquid.rotation.z =
+                        Math.sin(t * 0.35 + offset) * 0.4;
+                });
+
+                core.scale.setScalar(
+                    1 + Math.sin(t * 1.3) * 0.12
+                );
+            }
+        });
+
+        addParticles(scene, 0x55cfff, 450, 12);
     }
+
 
     // 10 — ORBIT
     else if (id === "10") {
